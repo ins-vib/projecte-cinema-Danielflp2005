@@ -68,4 +68,18 @@ public class Cinema {
         return address;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Cinema{");
+        sb.append("id=").append(id);
+        sb.append(", cinemaName=").append(cinemaName);
+        sb.append(", address=").append(address);
+        sb.append(", city=").append(city);
+        sb.append(", postalCode=").append(postalCode);
+        sb.append('}');
+        return sb.toString();
+    }
+
+
 }

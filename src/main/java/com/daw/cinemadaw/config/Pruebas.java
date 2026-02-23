@@ -8,8 +8,10 @@ import org.springframework.stereotype.Component;
 
 import com.daw.cinemadaw.domain.cinema.Cinema;
 import com.daw.cinemadaw.domain.cinema.Room;
+import com.daw.cinemadaw.domain.cinema.Seat;
 import com.daw.cinemadaw.repository.CinemaRepository;
 import com.daw.cinemadaw.repository.RoomRepository;
+import com.daw.cinemadaw.repository.SeatRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -19,10 +21,12 @@ public class Pruebas implements CommandLineRunner {
 
     private CinemaRepository cinemaRepository;
     private RoomRepository roomRepository;
+    private SeatRepository seatRepository;
 
-    public Pruebas(CinemaRepository cinemaRepository, RoomRepository roomRepository) {
+    public Pruebas(CinemaRepository cinemaRepository, RoomRepository roomRepository, SeatRepository seatRepository) {
         this.cinemaRepository = cinemaRepository;
         this.roomRepository = roomRepository;
+        this.seatRepository = seatRepository;
     }
 
     @Override
@@ -56,10 +60,25 @@ public class Pruebas implements CommandLineRunner {
             System.out.println("No encontrado");
         }
 
-        //     List<Cinema> lista = cinemaRepository.findAll();
-        //     for (Cinema cinema : lista) {
-        //         System.out.println(cinema);
-        //     }
+        List<Room> lista = roomRepository.findAll();
+        for (Room rooms : lista) {
+            System.out.println(rooms);
+
+            int capacidad = rooms.getCapacity();
+            int asientosPorFila = 10;
+
+            int totalfilas = capacidad / asientosPorFila;
+            for (int fila = 1; fila <= totalfilas; fila++) {
+                for (int numero = 1; numero <= asientosPorFila; numero++) {
+
+                    Seat seat = new Seat(false, "F" + fila, numero, numero, fila);
+                    seat.setRoom(rooms);
+                    seatRepository.save(seat);
+                }
+
+            }
+        }
+
         //     Optional<Cinema> optionalCinema = cinemaRepository.findById(4L);
         //     if (optionalCinema.isPresent()) {
         //         Cinema cinema = optionalCinema.get();

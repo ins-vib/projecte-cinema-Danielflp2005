@@ -1,11 +1,16 @@
 package com.daw.cinemadaw.domain.cinema;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Room {
@@ -22,6 +27,9 @@ public class Room {
     @ManyToOne
     Cinema cinema;
 
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Seat> seat = new ArrayList<>();
+
     public Room() {
     }
 
@@ -33,7 +41,6 @@ public class Room {
     public Long getId() {
         return id;
     }
-
 
     public String getName() {
         return name;
@@ -59,13 +66,17 @@ public class Room {
         this.cinema = cinema;
     }
 
+    public List<Seat> getSeat() {
+        return seat;
+    }
+
+    public void setSeat(List<Seat> seat) {
+        this.seat = seat;
+    }
+
     @Override
     public String toString() {
         return "Room [id=" + id + ", name=" + name + ", capacity=" + capacity + "]";
     }
-
-
-
-    
 
 }

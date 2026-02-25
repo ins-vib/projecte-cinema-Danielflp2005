@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.daw.cinemadaw.domain.cinema.Cinema;
 import com.daw.cinemadaw.domain.cinema.Room;
 import com.daw.cinemadaw.domain.cinema.Seat;
+import com.daw.cinemadaw.domain.cinema.SeatType;
 import com.daw.cinemadaw.repository.CinemaRepository;
 import com.daw.cinemadaw.repository.RoomRepository;
 import com.daw.cinemadaw.repository.SeatRepository;
@@ -29,6 +30,7 @@ public class Pruebas implements CommandLineRunner {
         this.seatRepository = seatRepository;
     }
 
+    @Transactional
     @Override
     public void run(String... args) throws Exception {
 
@@ -46,8 +48,13 @@ public class Pruebas implements CommandLineRunner {
         Room room2 = new Room(70, "Sala 3");
         room2.setCinema(cinema1);
         roomRepository.save(room2);
+        // System.out.println(room2.getCinema().getCinemaName());
 
-        System.out.println(room2.getCinema().getCinemaName());
+        Cinema cine3D = new Cinema("Jaume", "Cine 3D", "Tarragona", "43003");
+        Room room3D1 = new Room(500, "Sala 3D 1");
+        room3D1.setCinema(cine3D);
+        cine3D.getRooms().add(room3D1);
+        cinemaRepository.save(cine3D);
 
         Optional<Cinema> optionalCinema = cinemaRepository.findById(1L);
         if (optionalCinema.isPresent()) {
@@ -60,24 +67,14 @@ public class Pruebas implements CommandLineRunner {
             System.out.println("No encontrado");
         }
 
-        List<Room> lista = roomRepository.findAll();
-        for (Room rooms : lista) {
-            System.out.println(rooms);
-
-            int capacidad = rooms.getCapacity();
-            int asientosPorFila = 10;
-
-            int totalfilas = capacidad / asientosPorFila;
-            for (int fila = 1; fila <= totalfilas; fila++) {
-                for (int numero = 1; numero <= asientosPorFila; numero++) {
-
-                    Seat seat = new Seat(false, "F" + fila, numero, numero, fila);
-                    seat.setRoom(rooms);
-                    seatRepository.save(seat);
-                }
-
-            }
-        }
+        Cinema cineIMAX = new Cinema("Gavarras, 46", "IMAX CINE", "Gavarras", "23432");
+        Room roomIMAX1 = new Room(200, "Sala IMAX 1");
+        roomIMAX1.setCinema(cineIMAX);
+        Room roomIMAX2 = new Room(200, "Sala IMAX 1");
+        roomIMAX2.setCinema(cineIMAX);
+        cineIMAX.getRooms().add(roomIMAX1);
+        cineIMAX.getRooms().add(roomIMAX2);
+        cinemaRepository.save(cineIMAX);
 
         //     Optional<Cinema> optionalCinema = cinemaRepository.findById(4L);
         //     if (optionalCinema.isPresent()) {
@@ -97,6 +94,42 @@ public class Pruebas implements CommandLineRunner {
         //     for (Cinema cinema : lista3) {
         //         System.out.println(cinema);
         //     }
+        
+        Optional<Cinema> optionalC = cinemaRepository.findById(1L);
+        if (optionalC.isPresent()) {
+            Cinema c = optionalC.get();
+            System.out.println(c);
+
+            List<Room> salas = c.getRooms();
+            for (Room r : salas) {
+                System.out.println(r);
+                List<Seat> sillas = r.getSeat();
+                for (Seat s : sillas) {
+                    System.out.println(s);
+                }
+            }
+
+            List<Room> lista = roomRepository.findAll();
+            for (Room rooms : lista) {
+                System.out.println(rooms);
+
+                int capacidad = rooms.getCapacity();
+                int asientosPorFila = 10;
+
+                
+                for (int i = 0; i < capacidad; i++) {
+
+                     int fila = i / asientosPorFila;
+                     int numero = i % asientosPorFila;
+
+                        Seat seat = new Seat(true, "F" + fila, numero, numero, fila, SeatType.Standard);
+                        seat.setRoom(rooms);
+                        seatRepository.save(seat);
+                    
+
+                }
+            }
+        }
     }
 
 }

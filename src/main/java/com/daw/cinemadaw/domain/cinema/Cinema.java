@@ -3,6 +3,7 @@ package com.daw.cinemadaw.domain.cinema;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,7 +27,7 @@ public class Cinema {
     @Column
     private String postalCode;
 
-    @OneToMany(mappedBy = "cinema")
+    @OneToMany(mappedBy = "cinema", cascade=CascadeType.ALL, orphanRemoval= true)
     List<Room> rooms = new ArrayList<>();
 
     public Cinema() {

@@ -36,12 +36,14 @@ public class Seat {
     public Seat() {
     }
 
-    public Seat(boolean estado, String seatrow, int seatNumber, int x, int y) {
+    public Seat(boolean estado, String seatrow, int seatNumber, int x, int y, SeatType type) {
+        
         this.estado = estado;
         this.seatrow = seatrow;
         this.seatNumber = seatNumber;
         this.x = x;
         this.y = y;
+        this.type = type;
     }
 
     public Long getId() {
@@ -102,6 +104,11 @@ public class Seat {
 
     public void setRoom(Room room) {
         this.room = room;
+    }
+
+    @Override
+    public String toString() {
+        return "Seat [id=" + id + ", seatrow=" + seatrow + "]";
     }
 
 }

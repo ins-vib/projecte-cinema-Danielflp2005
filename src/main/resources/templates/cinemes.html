@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{/css/cinema.css}" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Lista de Cines</h1>
+
+      <div class="cinema-card" th:each="cinema : ${Lista}">
+        <h3 th:text="${cinema.cinemaName}">Nombre</h3>
+        <p th:text="${cinema.city}">Ciudad</p>
+      </div>
+    </div>
+  </body>
+</html>

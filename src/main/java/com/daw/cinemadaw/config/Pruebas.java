@@ -94,7 +94,25 @@ public class Pruebas implements CommandLineRunner {
         //     for (Cinema cinema : lista3) {
         //         System.out.println(cinema);
         //     }
-        
+        List<Room> lista = roomRepository.findAll();
+        for (Room rooms : lista) {
+            System.out.println(rooms);
+
+            int capacidad = rooms.getCapacity();
+            int asientosPorFila = 10;
+
+            for (int i = 0; i < capacidad; i++) {
+
+                int fila = i / asientosPorFila;
+                int numero = i % asientosPorFila;
+
+                Seat seat = new Seat(true, "F" + fila, numero, numero, fila, SeatType.Standard);
+                seat.setRoom(rooms);
+                seatRepository.save(seat);
+
+            }
+        }
+
         Optional<Cinema> optionalC = cinemaRepository.findById(1L);
         if (optionalC.isPresent()) {
             Cinema c = optionalC.get();
@@ -108,28 +126,8 @@ public class Pruebas implements CommandLineRunner {
                     System.out.println(s);
                 }
             }
-
-            List<Room> lista = roomRepository.findAll();
-            for (Room rooms : lista) {
-                System.out.println(rooms);
-
-                int capacidad = rooms.getCapacity();
-                int asientosPorFila = 10;
-
-                
-                for (int i = 0; i < capacidad; i++) {
-
-                     int fila = i / asientosPorFila;
-                     int numero = i % asientosPorFila;
-
-                        Seat seat = new Seat(true, "F" + fila, numero, numero, fila, SeatType.Standard);
-                        seat.setRoom(rooms);
-                        seatRepository.save(seat);
-                    
-
-                }
-            }
         }
+
     }
 
 }

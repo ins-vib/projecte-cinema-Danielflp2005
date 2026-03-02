@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Detalles del Cine</title>
-    <link rel="stylesheet" th:href="@{/css/details.css}" />
+    <link rel="stylesheet" th:href="@{/css/detail.css}" />
   </head>
   <body>
     <div class="container">
@@ -23,9 +23,17 @@
         </div>
 
         <div class="actions">
-          <a class="btn-back" th:href="@{/cinemas}">Volver</a>
+          <a class="btn-back" th:href="@{/cinemes}">Volver</a>
         </div>
       </div>
     </div>
+
+    <h1>Salas</h1>
+    <ul>
+      <li
+        th:each="room: ${cinema.rooms}"
+        th:text="${room.name} + ' Capacidad: ' + ${room.capacity}"
+      ></li>
+    </ul>
   </body>
 </html>

@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+body {
+  background-color: #0f172a;
+  color: #f8fafc;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+form {
+  background: #1e293b;
+  padding: 40px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px; /* Ancho fijo para control total */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+legend {
+  color: #f59e0b;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 25px;
+  text-align: center;
+  width: 100%;
+  display: block;
+}
+
+/* Hacemos que los labels e inputs ocupen el 100% para que sean simétricos */
+label {
+  display: block;
+  color: #94a3b8;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  letter-spacing: 0.5px;
+}
+
+input[type="text"] {
+  width: 100%; /* Ocupa todo el ancho del form */
+  padding: 12px;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  color: white;
+  box-sizing: border-box; /* Fundamental para que el padding no lo ensanche */
+  margin-bottom: 5px; /* Espacio extra */
+}
+
+input[type="text"]:focus {
+  border-color: #f59e0b;
+  outline: none;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  background: #f59e0b;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  margin-top: 15px;
+}
+
+button:hover {
+  background: #d97706;
+}
+
+/* Limpiamos los br para que no metan saltos extraños si el CSS ya da el espacio */
+br {
+  display: none;
+}

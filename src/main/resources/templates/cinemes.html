@@ -10,7 +10,7 @@
     <div class="container">
       <div class="table-header">
         <h1>Lista de Cines</h1>
-        <input type="text" placeholder="Buscar cine..." class="search-input" />
+        <a th:href="@{/cinemes/create}">Añadir Nuevo Cine</a>
       </div>
 
       <table>
@@ -31,6 +31,12 @@
                 th:href="@{/cinema/{id}(id=${cinema.id})}"
               >
                 Ver detalles
+              </a>
+              <a
+                class="btn-secondary"
+                th:href="@{/cinema/delete/{id}(id=${cinema.id})}"
+              >
+                Borrar cine
               </a>
             </td>
           </tr>

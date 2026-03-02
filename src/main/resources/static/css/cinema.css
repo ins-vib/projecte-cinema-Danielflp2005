@@ -1,153 +1,146 @@
-/* Reset */
+/* Importar fuente moderna */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+:root {
+  --bg-color: #0f172a;
+  --card-bg: #1e293b;
+  --accent-color: #f59e0b;      /* Dorado detalles */
+  --danger-color: #ef4444;      /* Rojo para borrar */
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --table-hover: #2d3748;
+}
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    font-family: 'Inter', 'Segoe UI', sans-serif;
-    background-color: #f1f5f9;
-    color: #1e293b;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  background-image: radial-gradient(circle at bottom left, #1e1b4b, #0f172a);
+  color: var(--text-primary);
+  min-height: 100vh;
+  padding: 40px 20px;
 }
-
-/* ===== TOPBAR ===== */
-
-.topbar {
-    background: #0f172a;
-    padding: 18px 40px;
-    color: white;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-.topbar-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.topbar h2 {
-    font-weight: 500;
-    font-size: 1.2rem;
-}
-
-/* ===== CONTENEDOR ===== */
 
 .container {
-    max-width: 1100px;
-    margin: 50px auto;
-    padding: 0 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  background: var(--card-bg);
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Encabezado tabla */
+/* Encabezado y Buscador */
 .table-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 h1 {
-    font-size: 1.8rem;
-    font-weight: 600;
+  font-size: 1.8rem;
+  color: var(--accent-color);
+  font-weight: 700;
 }
 
-/* Buscador */
 .search-input {
-    padding: 8px 14px;
-    border-radius: 8px;
-    border: 1px solid #cbd5e1;
-    outline: none;
-    transition: 0.2s;
+  background: #0f172a;
+  border: 1px solid #334155;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  outline: none;
+  width: 250px;
+  transition: border-color 0.3s;
 }
 
 .search-input:focus {
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+  border-color: var(--accent-color);
 }
 
-/* ===== TABLA ===== */
-
+/* Estilos de la Tabla */
 table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
 }
 
-thead {
-    background: #1e293b;
-    color: white;
+thead th {
+  padding: 15px;
+  border-bottom: 2px solid #334155;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
 }
 
-th {
-    text-align: left;
-    padding: 16px;
-    font-weight: 500;
-    font-size: 0.9rem;
-    letter-spacing: 0.5px;
-}
-
-td {
-    padding: 14px 16px;
-    border-bottom: 1px solid #e2e8f0;
-    font-size: 0.95rem;
+tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background 0.2s;
 }
 
 tbody tr:hover {
-    background-color: #f8fafc;
-    transition: 0.2s ease;
+  background-color: var(--table-hover);
 }
 
-tbody tr:last-child td {
-    border-bottom: none;
+td {
+  padding: 18px 15px;
+  font-size: 0.95rem;
 }
 
-/* ===== BOTONES ===== */
-
-.btn-primary {
-    background: #2563eb;
-    border: none;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: 0.2s;
-}
-
-.btn-primary:hover {
-    background: #1d4ed8;
-    transform: translateY(-2px);
-}
-
+/* Botones de Acción */
 .btn-secondary {
-    text-decoration: none;
-    background: #0ea5e9;
-    color: white;
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    transition: 0.2s;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.3s;
+  display: inline-block;
+  margin-right: 8px;
 }
 
-.btn-secondary:hover {
-    background: #0284c7;
+/* Botón Ver detalles (Dorado) */
+.btn-secondary:first-child {
+  color: var(--accent-color);
+  border: 1px solid var(--accent-color);
 }
 
-/* ===== RESPONSIVE ===== */
+.btn-secondary:first-child:hover {
+  background: var(--accent-color);
+  color: #000;
+}
 
-@media (max-width: 768px) {
-    .table-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-    }
+/* Botón Borrar (Rojo) */
+.btn-secondary:last-child {
+  color: var(--danger-color);
+  border: 1px solid var(--danger-color);
+}
 
-    .topbar-content {
-        flex-direction: column;
-        gap: 10px;
-    }
+.btn-secondary:last-child:hover {
+  background: var(--danger-color);
+  color: white;
+}
+
+/* Responsivo para móviles */
+@media (max-width: 600px) {
+  .table-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .search-input {
+    width: 100%;
+  }
+  td, th {
+    padding: 10px;
+  }
 }

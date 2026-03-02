@@ -1,103 +1,124 @@
-/* Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+:root {
+  --bg-color: #0f172a;
+  --card-bg: #1e293b;
+  --accent-color: #f59e0b;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --room-bg: rgba(255, 255, 255, 0.03);
 }
 
-/* Fondo general */
 body {
-    font-family: 'Inter', 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    color: #1e293b;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  background-image: radial-gradient(circle at top right, #1e1b4b, #0f172a);
+  color: var(--text-primary);
+  margin: 0;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* Contenedor */
 .container {
-    width: 100%;
-    max-width: 600px;
-    padding: 20px;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 50px;
 }
 
-/* Tarjeta principal */
+/* Tarjeta Principal */
 .card {
-    background: #ffffff;
-    padding: 40px;
-    border-radius: 16px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-    animation: fadeIn 0.4s ease-in-out;
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  text-align: center;
 }
 
-/* Título */
-.card h1 {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 25px;
-    border-bottom: 2px solid #e2e8f0;
-    padding-bottom: 10px;
+h1 {
+  color: var(--accent-color);
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  letter-spacing: -1px;
 }
 
-/* Información */
+.info {
+  text-align: left;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+}
+
 .info p {
-    font-size: 1rem;
-    margin-bottom: 15px;
-    display: flex;
-    justify-content: space-between;
+  margin: 10px 0;
+  font-size: 1.05rem;
 }
 
 .info strong {
-    color: #475569;
+  color: var(--text-secondary);
+  font-weight: 400;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  margin-right: 10px;
 }
 
-/* Botón */
-.actions {
-    margin-top: 30px;
-}
-
+/* Botón Volver */
 .btn-back {
-    display: inline-block;
-    padding: 10px 18px;
-    background: #2563eb;
-    color: white;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: 0.2s ease;
+  display: inline-block;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s;
+  border-bottom: 1px solid transparent;
 }
 
 .btn-back:hover {
-    background: #1d4ed8;
-    transform: translateY(-2px);
+  color: var(--accent-color);
+  border-bottom: 1px solid var(--accent-color);
 }
 
-/* Animación suave */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* SECCIÓN DE SALAS */
+h1 + ul { /* Estilo para la lista después del H1 */
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px;
+  width: 100%;
+  max-width: 800px;
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-    .card {
-        padding: 25px;
-    }
+h2, h1:nth-of-type(2) { /* Estilo para el título "Salas" */
+  margin-top: 40px;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-secondary);
+}
 
-    .card h1 {
-        font-size: 1.6rem;
-    }
+li {
+  list-style: none;
+  background: var(--room-bg);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 15px 20px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
 
-    .info p {
-        flex-direction: column;
-        gap: 5px;
-    }
+li:hover {
+  background: rgba(245, 158, 11, 0.05);
+  border-color: rgba(245, 158, 11, 0.3);
+  transform: scale(1.02);
+}
+
+/* Estilo para resaltar la capacidad dentro del LI */
+li::after {
+  content: "💺";
+  margin-left: 10px;
+  opacity: 0.5;
 }

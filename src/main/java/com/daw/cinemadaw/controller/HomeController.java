@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.daw.cinemadaw.domain.cinema.Cinema;
 import com.daw.cinemadaw.repository.CinemaRepository;
@@ -16,7 +17,7 @@ public class HomeController {
 
     private CinemaRepository cinemaRepository;
 
-    public HomeController(CinemaRepository cinemaRepository){
+    public HomeController(CinemaRepository cinemaRepository) {
         this.cinemaRepository = cinemaRepository;
     }
 
@@ -29,15 +30,15 @@ public class HomeController {
     public String cinemes(Model model) {
 
         List<Cinema> cines = cinemaRepository.findAll();
-        model.addAttribute("Lista",cines);
+        model.addAttribute("Lista", cines);
         return "cinemes";
     }
 
     @GetMapping("/cinema/{id}")
-    public String detall(@PathVariable Long id, Model model){
+    public String detall(@PathVariable Long id, Model model) {
 
         Optional<Cinema> optional = cinemaRepository.findById(id);
-        if(optional.isPresent()){
+        if (optional.isPresent()) {
             Cinema cinema = optional.get();
             model.addAttribute("cinema", cinema);
             return "detail-cinema";
@@ -46,13 +47,26 @@ public class HomeController {
         return "redirect:/";
     }
 
-    @GetMapping("/cinema/{id}")
-    public String delete(@PathVariable Long id, Model model){
+    @GetMapping("/cinema/delete/{id}")
+    public String delete(@PathVariable Long id, Model model) {
 
         Optional<Cinema> optional = cinemaRepository.findById(id);
-        if(optional.isPresent()){
+        if (optional.isPresent()) {
             Cinema cinema = optional.get();
+            cinemaRepository.delete(cinema);
         }
+
+        return "redirect:/cinemes";
+    }
+
+    @GetMapping("/cinemes/create")
+    public String newCinema() {
+        return "cinema-create";
+    }
+
+    @PostMapping("/cinemes/new")
+    public String altaCinema() {
+        return "redirect:/cinemes";
     }
 
 }

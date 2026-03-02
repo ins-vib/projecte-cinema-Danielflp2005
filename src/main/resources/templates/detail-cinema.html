@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Detalles del Cine</title>
+    <link rel="stylesheet" th:href="@{/css/details.css}" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <h1 th:text="${cinema.cinemaName}">Nombre</h1>
+
+        <div class="info">
+          <p>
+            <strong>Ciudad:</strong>
+            <span th:text="${cinema.city}"></span>
+          </p>
+
+          <p>
+            <strong>Dierccion:</strong>
+            <span th:text="${cinema.address}"></span>
+          </p>
+        </div>
+
+        <div class="actions">
+          <a class="btn-back" th:href="@{/cinemas}">Volver</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

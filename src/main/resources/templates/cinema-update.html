@@ -7,8 +7,11 @@
     <title>Document</title>
   </head>
   <body>
-    <form th:action="@{/cinemes/new}" th:object="${cinema}" method="post">
-      <legend>Nuevo cine</legend>
+    <form th:action="@{/cinemes/editar}" th:object="${cinema}" method="post">
+      <legend>Editar Cine</legend>
+
+   
+      <input type="hidden" th:field="*{id}" /> 
 
       <label for="nombre">Name:</label>
       <input type="text" th:field="*{cinemaName}" /><br /><br />

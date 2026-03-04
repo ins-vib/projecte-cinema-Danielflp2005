@@ -1,0 +1,106 @@
+class Cinema {
+
+    - id : Long
+    - cinemaName : String
+    - address : String
+    - city : String
+    - postalCode : String
+    - rooms : List<Room>
+
+    + Cinema()
+    + Cinema(address : String, cinemaName : String, city : String, postalCode : String)
+
+    + getId() : Long
+    + setId(id : Long)
+
+    + getCinemaName() : String
+    + setCinemaName(cinemaName : String)
+
+    + getAddress() : String
+    + setAddress(address : String)
+
+    + getCity() : String
+    + setCity(city : String)
+
+    + getPostalCode() : String
+    + setPostalCode(postalCode : String)
+
+    + getRooms() : List<Room>
+    + setRooms(rooms : List<Room>)
+
+    + toString() : String
+}
+
+
+class Room {
+
+    - id : Long
+    - name : String
+    - capacity : int
+    - cinema : Cinema
+    - seat : List<Seat>
+
+    + Room()
+    + Room(capacity : int, name : String)
+
+    + getId() : Long
+
+    + getName() : String
+    + setName(name : String)
+
+    + getCapacity() : int
+    + setCapacity(capacity : int)
+
+    + getCinema() : Cinema
+    + setCinema(cinema : Cinema)
+
+    + getSeat() : List<Seat>
+    + setSeat(seat : List<Seat>)
+
+    + toString() : String
+}
+
+
+class Seat {
+
+    - id : Long
+    - seatrow : String
+    - seatNumber : int
+    - type : SeatType
+    - x : int
+    - y : int
+    - estado : boolean
+    - room : Room
+
+    + Seat()
+    + Seat(estado : boolean, seatrow : String, seatNumber : int, x : int, y : int, type : SeatType)
+
+    + getId() : Long
+
+    + getSeatrow() : String
+    + setSeatrow(seatrow : String)
+
+    + getSeatNumber() : int
+    + setSeatNumber(seatNumber : int)
+
+    + getType() : SeatType
+    + setType(type : SeatType)
+
+    + getX() : int
+    + setX(x : int)
+
+    + getY() : int
+    + setY(y : int)
+
+    + isEstado() : boolean
+    + setEstado(estado : boolean)
+
+    + getRoom() : Room
+    + setRoom(room : Room)
+
+    + toString() : String
+}
+
+
+Cinema "1" -------- "0..*" Room
+Room   "1" -------- "0..*" Seat

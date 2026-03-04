@@ -27,7 +27,7 @@ public class Cinema {
     @Column
     private String postalCode;
 
-    @OneToMany(mappedBy = "cinema", cascade=CascadeType.ALL, orphanRemoval= true)
+    @OneToMany(mappedBy = "cinema", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Room> rooms = new ArrayList<>();
 
     public Cinema() {
@@ -66,6 +66,10 @@ public class Cinema {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setAddress(String address) {

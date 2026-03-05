@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{/css/cinema-create.css}" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form th:action="@{/movie/editar}" th:object="${movie}" method="post">
+      <legend>Editar Pelicula</legend>
+
+   
+      <input type="hidden" th:field="*{id}" /> 
+
+      <label for="nombre">Title:</label>
+      <input type="text" th:field="*{title}" /><br /><br />
+      <label for="nombre">Duration:</label>
+      <input type="text" th:field="*{min}" /><br /><br />
+      <label for="nombre">Gender:</label>
+      <input type="text" th:field="*{gener}" /><br /><br />
+      <label for="nombre">Description:</label>
+      <input type="text" th:field="*{descripcion}" /><br /><br />
+      <label for="nombre">Date:</label>
+      <input type="date" th:field="*{date}" /><br /><br />
+
+      <button type="submit">Guardar</button>
+    </form>
+  </body>
+</html>

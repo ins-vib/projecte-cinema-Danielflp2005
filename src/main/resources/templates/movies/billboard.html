@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{/css/cinema.css}" />
+    <title>Gestión de Peliculas</title>
+  </head>
+  <body>
+<div class="table-header">
+  <h1>Lista de Peliculas</h1>
+  <a th:href="@{/movie/create}">Añadir Nueva Pelicula</a>
+  <a class="btn-primary" th:href="@{/}">Volver al Home</a>
+</div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Génereo</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="movie : ${Lista}">
+            <td th:text="${movie.title}"></td>
+            <td th:text="${movie.gener}"></td>
+            <td>
+              <a
+                class="btn-secondary"
+                th:href="@{/movie/{id}(id=${movie.id})}"
+              >
+                Ver detalles
+              </a>
+              <a
+                class="btn-secondary"
+                th:href="@{/movie/delete/{id}(id=${movie.id})}"
+              >
+                Borrar Pelicula
+              </a>
+              <a
+                class="btn-secondary"
+                th:href="@{/movie/edit/{id}(id=${movie.id})}"
+                >Editar Pelicula</a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

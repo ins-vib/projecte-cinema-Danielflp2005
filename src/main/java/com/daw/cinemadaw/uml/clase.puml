@@ -104,3 +104,34 @@ class Seat {
 
 Cinema "1" -------- "0..*" Room
 Room   "1" -------- "0..*" Seat
+
+
+
+
+
+
+
+
+
+
+@startuml
+
+left to right direction
+
+actor Admin
+actor Gestor
+actor Client
+
+rectangle "Cinema App"{
+
+   Admin -- (Gestionar Cinemes)
+   Admin -- (Gestionar Salas)
+   Admin -- (Gestionar Asientos)
+   
+   Gestor -- (Gestionar Screeings)
+   Gestor -- (Gestionar Peliculas)
+   
+
+}
+
+@enduml

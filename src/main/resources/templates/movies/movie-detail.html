@@ -1,0 +1,114 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:text="${movie.title} + ' — Lumière'">Película — Lumière</title>
+    <link rel="stylesheet" th:href="@{/css/movie-detalles.css}" />
+  </head>
+  <body>
+    <!-- ═══ HERO ═══ -->
+    <section class="hero">
+<div class="hero-bg" 
+     th:style="'background-image: url(/images/dune2.webp)'">
+</div>
+      <div class="hero-overlay"></div>
+
+      <!-- Nav -->
+      <nav class="hero-nav">
+        <a th:href="@{/}" class="nav-logo">LUMIÈRE<span>/ CINE</span></a>
+        <a th:href="@{/movies}" class="btn-back">← Cartelera</a>
+      </nav>
+
+      <!-- Main content left -->
+      <div class="hero-content">
+        <div class="movie-genre-tags">
+          <span class="genre-tag" th:text="${movie.gener}">Género</span>
+        </div>
+
+        <h1 class="movie-title" th:text="${movie.title}">Título</h1>
+
+        <p class="movie-desc" th:text="${movie.descripcion}">Descripción.</p>
+
+        <div class="hero-actions">
+          <a
+            th:href="@{/movies/{id}/seats(id=${movie.id})}"
+            class="btn-tickets"
+          >
+            <span>Comprar entradas</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Meta pills top right -->
+      <div class="hero-meta">
+        <div class="meta-row">
+          <span class="meta-key">Género</span>
+          <span class="meta-pill" th:text="${movie.gener}">—</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">Duración</span>
+          <span class="meta-pill" th:text="${movie.min} + ' min'">— min</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">Estreno</span>
+          <span
+            class="meta-pill"
+            th:text="${#temporals.format(movie.date, 'dd MMM yyyy')}"
+            >—</span
+          >
+        </div>
+      </div>
+
+      <div class="scroll-hint">Más info</div>
+    </section>
+
+    <!-- ═══ INFO SECTION ═══ -->
+    <section class="info-section">
+      <div class="info-inner">
+        <!-- Synopsis -->
+        <div class="synopsis-block">
+          <div class="section-eyebrow">Sinopsis</div>
+          <h2 class="section-title">Sobre la película</h2>
+          <p class="synopsis-text" th:text="${movie.descripcion}">
+            Descripción completa.
+          </p>
+        </div>
+
+        <!-- Sidebar data -->
+        <div class="movie-sidebar">
+          <div class="sidebar-item">
+            <span class="sidebar-key">Título</span>
+            <span class="sidebar-val" th:text="${movie.title}">—</span>
+          </div>
+
+          <div class="sidebar-item">
+            <span class="sidebar-key">Género</span>
+            <span class="sidebar-val" th:text="${movie.gener}">—</span>
+          </div>
+
+          <div class="sidebar-item">
+            <span class="sidebar-key">Duración</span>
+            <span class="sidebar-val" th:text="${movie.min} + ' min'">—</span>
+          </div>
+
+          <div class="sidebar-item">
+            <span class="sidebar-key">Estreno</span>
+            <span
+              class="sidebar-val"
+              th:text="${#temporals.format(movie.date, 'dd / MM / yyyy')}"
+              >—</span
+            >
+          </div>
+
+          <a
+            th:href="@{/movies/{id}/seats(id=${movie.id})}"
+            class="sidebar-cta"
+          >
+            Seleccionar asiento →
+          </a>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

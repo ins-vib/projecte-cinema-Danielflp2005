@@ -2,6 +2,8 @@ package com.daw.cinemadaw.domain.cinema;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,15 +17,16 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(nullable=false, length = 200)
     private String title;
-    @Column
+    @Column(name = "duration_minutes", nullable= false)
     private int min;
-    @Column
+    @Column(length=50)
     private String gener;
-    @Column
+    @Column(columnDefinition="TEXT")
     private String descripcion;
-    @Column
+    @Column(name="release_date")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate date = LocalDate.now();
     @Column
     private String posterUrl;
@@ -98,6 +101,14 @@ public class Movie {
         sb.append(", date=").append(date);
         sb.append('}');
         return sb.toString();
+    }
+
+    public String getPosterUrl() {
+        return posterUrl;
+    }
+
+    public void setPosterUrl(String posterUrl) {
+        this.posterUrl = posterUrl;
     }
 
 

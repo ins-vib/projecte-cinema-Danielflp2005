@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.daw.cinemadaw.domain.cinema.Cinema;
 import com.daw.cinemadaw.domain.cinema.Movie;
 import com.daw.cinemadaw.repository.MovieRepository;
 
@@ -79,13 +78,13 @@ public class MovieController {
             return "/movies/movie-update";
         }
 
-        return "redirect:/billboard";
+        return "redirect:/movies/billboard";
     }
 
     @PostMapping("/movie/editar")
     public String editPelicula(@ModelAttribute Movie movie) {
         movieRepository.save(movie);
-        return "redirect:/billboard";
+        return "redirect:/movies/billboard";
     }
 
 }

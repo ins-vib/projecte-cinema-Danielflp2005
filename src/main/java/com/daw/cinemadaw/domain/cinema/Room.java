@@ -79,4 +79,8 @@ public class Room {
         return "Room [id=" + id + ", name=" + name + ", capacity=" + capacity + "]";
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 }

@@ -264,3 +264,4 @@ a[href*="edit"].btn-secondary:hover   { color: var(--gold2); border-color: rgba(
   .table-header h1 { flex: none; width: 100%; }
   table { display: block; overflow-x: auto; }
 }
+

@@ -5,9 +5,11 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import org.springframework.stereotype.Service;
+
 import com.daw.cinemadaw.domain.cinema.News;
 
-//@Service
+@Service
 public class NewsService {
 
     public ArrayList<News> getNews() throws FileNotFoundException {

@@ -1,0 +1,69 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:text="${room.name} + ' — Lumière'">Detalle de Sala</title>
+    <link rel="stylesheet" th:href="@{/css/room-detail.css}" />
+  </head>
+  <body>
+    <div class="page">
+
+      <header class="page-header">
+        <a class="btn-back" th:href="@{/cinema/{id}(id=${room.cinema.id})}">← Volver</a>
+        <span class="page-label">// SALA</span>
+      </header>
+
+      
+      <!-- Tarjeta principal de la sala -->
+      <div class="room-card">
+        <div class="room-card__eyebrow">Ficha de la sala</div>
+        <h1 class="room-card__name" th:text="${room.name}">Nombre de la Sala</h1>
+
+        <div class="room-card__info">
+          <div class="info-item">
+            <span class="info-item__label">Capacidad</span>
+            <div class="info-item__big">
+              <span class="info-item__big-num" th:text="${room.capacity}">0</span>
+              <span class="info-item__big-label">butacas</span>
+            </div>
+          </div>
+          <div class="info-item" th:if="${room.cinema != null}">
+            <span class="info-item__label">Cine</span>
+            <span class="info-item__value" th:text="${room.cinema.cinemaName}">—</span>
+          </div>
+          <div class="info-item" th:if="${room.cinema != null}">
+            <span class="info-item__label">Ciudad</span>
+            <span class="info-item__value" th:text="${room.cinema.city}">—</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección de asientos -->
+      <div class="seats-section">
+        <div class="seats-section__header">
+          <span class="seats-section__eyebrow">// ASIENTOS</span>
+          <h2 class="seats-section__title">Asientos</h2>
+          <span class="seats-section__count"
+            th:text="${#lists.size(room.seat)} + ' asientos'">0 asientos</span>
+        </div>
+
+        <!-- Si no hay asientos -->
+        <div class="seats-empty" th:if="${#lists.isEmpty(room.seat)}">
+          <span class="seats-empty__icon">□</span>
+          <p class="seats-empty__text">No hay asientos registrados en esta sala</p>
+        </div>
+
+        <!-- Lista de asientos -->
+        <ul class="seats-list" th:if="${!#lists.isEmpty(room.seat)}">
+          <li class="seat-item" th:each="seat, stat : ${room.seat}">
+            <span class="seat-item__num" th:text="${stat.count}">1</span>
+            <span class="seat-item__label">Asiento</span>
+            <span class="seat-item__id" th:text="${seat.id}">—</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </body>
+</html>

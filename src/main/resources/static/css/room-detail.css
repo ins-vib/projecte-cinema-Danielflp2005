@@ -1,0 +1,359 @@
+/* ============================================================
+   LUMIÈRE — room-detail.css
+   Detalle de Sala
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Mono:wght@300;400&display=swap');
+
+:root {
+  --bg:       #080808;
+  --gold:     #c9a84c;
+  --gold2:    #e8c97a;
+  --gold-dim: rgba(201,168,76,0.12);
+  --red:      #8b1a1a;
+  --text:     #e8e0d0;
+  --muted:    #6b6257;
+  --muted2:   #4a4540;
+  --border:   rgba(201,168,76,0.15);
+  --border2:  rgba(232,224,208,0.07);
+  --glass:    rgba(8,8,8,0.55);
+  --ease:     0.25s ease;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ── Body ───────────────────────────────────────────────────── */
+body {
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(8,8,8,0.78), rgba(8,8,8,0.78)),
+    url('/images/cinema-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: 'Cormorant Garamond', serif;
+  min-height: 100vh;
+  padding: 2.5rem 2rem 5rem;
+}
+
+/* ── Page wrapper ───────────────────────────────────────────── */
+.page {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ── Page header ────────────────────────────────────────────── */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  animation: fadeUp 0.5s ease both;
+}
+
+.page-header::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0;
+  width: 40px; height: 2px;
+  background: var(--gold);
+}
+
+.page-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.4em;
+  color: var(--muted2);
+}
+
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--gold);
+  border: 1px solid var(--border);
+  padding: 0.5rem 1.1rem;
+  border-radius: 2px;
+  background: transparent;
+  position: relative;
+  overflow: hidden;
+  transition: color var(--ease), border-color var(--ease);
+}
+
+.btn-back::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--gold-dim);
+  transform: translateX(-100%);
+  transition: transform var(--ease);
+}
+
+.btn-back:hover { color: var(--gold2); border-color: rgba(201,168,76,.4); }
+.btn-back:hover::before { transform: translateX(0); }
+
+/* ── Room card ──────────────────────────────────────────────── */
+.room-card {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 2.5rem 3rem;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  position: relative;
+  animation: fadeUp 0.5s 0.1s ease both;
+}
+
+.room-card::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: 2.5rem;
+  width: 50px; height: 2px;
+  background: var(--gold);
+}
+
+.room-card__eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.6rem;
+}
+
+.room-card__name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  letter-spacing: 0.05em;
+  line-height: 1;
+  color: var(--text);
+  margin-bottom: 2rem;
+}
+
+.room-card__info {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.info-item__label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted2);
+}
+
+.info-item__value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--text);
+}
+
+/* Capacidad grande destacada */
+.info-item__big {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.info-item__big-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3.5rem;
+  color: var(--gold);
+  letter-spacing: 0.03em;
+  line-height: 1;
+}
+
+.info-item__big-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ── Seats section ──────────────────────────────────────────── */
+.seats-section {
+  animation: fadeUp 0.5s 0.2s ease both;
+}
+
+.seats-section__header {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0;
+  position: relative;
+  flex-wrap: wrap;
+}
+
+.seats-section__header::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0;
+  width: 35px; height: 2px;
+  background: var(--gold);
+}
+
+.seats-section__eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.35em;
+  color: var(--muted2);
+}
+
+.seats-section__title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  letter-spacing: 0.08em;
+  color: var(--text);
+  flex: 1;
+}
+
+.seats-section__count {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+/* Estado vacío */
+.seats-empty {
+  border: 1px solid var(--border);
+  border-top: none;
+  background: var(--glass);
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  backdrop-filter: blur(8px);
+}
+
+.seats-empty__icon {
+  font-size: 2.5rem;
+  color: var(--muted2);
+  line-height: 1;
+}
+
+.seats-empty__text {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted2);
+  text-align: center;
+}
+
+/* Lista de asientos */
+.seats-list {
+  list-style: none;
+  border: 1px solid var(--border);
+  border-top: none;
+  background: var(--glass);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.seat-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1.4rem;
+  border-bottom: 1px solid var(--border2);
+  transition: background var(--ease);
+  position: relative;
+  animation: rowIn 0.4s ease both;
+}
+
+.seat-item:nth-child(1)  { animation-delay: 0.25s; }
+.seat-item:nth-child(2)  { animation-delay: 0.28s; }
+.seat-item:nth-child(3)  { animation-delay: 0.31s; }
+.seat-item:nth-child(4)  { animation-delay: 0.34s; }
+.seat-item:nth-child(n+5){ animation-delay: 0.37s; }
+
+.seat-item:last-child { border-bottom: none; }
+
+.seat-item::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 2px; background: var(--gold);
+  transform: scaleY(0);
+  transition: transform var(--ease);
+  transform-origin: center;
+}
+
+.seat-item:hover { background: rgba(26,26,26,0.5); }
+.seat-item:hover::before { transform: scaleY(1); }
+
+.seat-item__num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+  min-width: 1.5rem;
+  opacity: 0.5;
+}
+
+.seat-item__label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted2);
+}
+
+.seat-item__id {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  flex: 1;
+}
+
+/* ── Animations ─────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes rowIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Misc ───────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--muted2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+::selection { background: rgba(201,168,76,.2); color: var(--gold2); }
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  body { padding: 1.5rem 1rem 4rem; }
+  .room-card { padding: 1.5rem; }
+  .room-card__info { gap: 1.5rem; }
+  .info-item__big-num { font-size: 2.5rem; }
+}

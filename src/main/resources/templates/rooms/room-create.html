@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" th:href="@{/css/cinema-create.css}" />
+  <title>Document</title>
+</head>
+
+<body>
+  <form th:action="@{/room/new}" th:object="${room}" method="post">
+    <legend>Nueva sala</legend>
+
+    <input type="hidden" th:field="*{cinema.id}">
+    <label for="nombre">Name:</label>
+    <input type="text" th:field="*{name}" /><br /><br />
+    <label for="nombre">Capacity:</label>
+    <input type="number" th:field="*{capacity}" /><br /><br />
+    <button type="submit">Guardar</button>
+  </form>
+</body>
+
+</html>

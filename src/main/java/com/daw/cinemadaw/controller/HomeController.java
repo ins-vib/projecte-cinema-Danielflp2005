@@ -8,22 +8,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.daw.cinemadaw.domain.cinema.News;
-import com.daw.cinemadaw.repository.CinemaRepository;
 import com.daw.cinemadaw.service.NewsService;
 
 @Controller
 public class HomeController {
 
-    private CinemaRepository cinemaRepository;
+    private NewsService newsService;
 
-    public HomeController(CinemaRepository cinemaRepository) {
-        this.cinemaRepository = cinemaRepository;
+    public HomeController(NewsService newsService) {
+        this.newsService = newsService;
     }
 
     @GetMapping("/")
     public String home(Model model) {
 
-        NewsService newsService = new NewsService();
         ArrayList<News> lista = new ArrayList<>();
 
         try {

@@ -27,7 +27,7 @@ public class CinemaController {
 
         List<Cinema> cines = cinemaRepository.findAll();
         model.addAttribute("Lista", cines);
-        return "cinemes";
+        return "/cinemas/cinemes";
     }
 
     @GetMapping("/cinema/{id}")
@@ -37,7 +37,7 @@ public class CinemaController {
         if (optional.isPresent()) {
             Cinema cinema = optional.get();
             model.addAttribute("cinema", cinema);
-            return "detail-cinema";
+            return "/cinemas/detail-cinema";
         }
 
         return "redirect:/";
@@ -60,7 +60,7 @@ public class CinemaController {
         Cinema cinema = new Cinema();
         cinema.setCity("Tarragona");
         model.addAttribute("cinema", cinema);
-        return "cinema-create";
+        return "/cinemas/cinema-create";
     }
 
     @PostMapping("/cinemes/new")
@@ -76,7 +76,7 @@ public class CinemaController {
         if (optional.isPresent()) {
             Cinema cinema = optional.get();
             model.addAttribute("cinema", cinema);
-            return "cinema-update";
+            return "/cinemas/cinema-update";
         }
 
         return "redirect:/cinemes";

@@ -23,7 +23,7 @@ public class MovieController {
     }
 
     @GetMapping("movies/billboard")
-    public String cinemes(Model model) {
+    public String movies(Model model) {
 
         List<Movie> movies = movieRepository.findAll();
         model.addAttribute("Lista", movies);

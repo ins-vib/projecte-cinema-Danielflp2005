@@ -40,28 +40,28 @@
       </div>
 
       <!-- Sección de asientos -->
-      <div class="seats-section">
+      <!-- <div class="seats-section">
         <div class="seats-section__header">
           <span class="seats-section__eyebrow">// ASIENTOS</span>
           <h2 class="seats-section__title">Asientos</h2>
           <span class="seats-section__count"
             th:text="${#lists.size(room.seat)} + ' asientos'">0 asientos</span>
-        </div>
+        </div> -->
 
         <!-- Si no hay asientos -->
-        <div class="seats-empty" th:if="${#lists.isEmpty(room.seat)}">
+        <!-- <div class="seats-empty" th:if="${#lists.isEmpty(room.seat)}">
           <span class="seats-empty__icon">□</span>
           <p class="seats-empty__text">No hay asientos registrados en esta sala</p>
-        </div>
+        </div> -->
 
         <!-- Lista de asientos -->
-        <ul class="seats-list" th:if="${!#lists.isEmpty(room.seat)}">
+        <!-- <ul class="seats-list" th:if="${!#lists.isEmpty(room.seat)}">
           <li class="seat-item" th:each="seat, stat : ${room.seat}">
             <span class="seat-item__num" th:text="${stat.count}">1</span>
             <span class="seat-item__label">Asiento</span>
             <span class="seat-item__id" th:text="${seat.id}">—</span>
           </li>
-        </ul>
+        </ul> -->
       </div>
 
     </div>

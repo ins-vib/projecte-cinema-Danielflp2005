@@ -9,6 +9,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Movie {
@@ -17,17 +22,31 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable=false, length = 200)
+    @NotBlank(message = "El título es obligatorio")
+    @Size(min = 2, max = 200, message = "El título ha de tener entre 2 y 200 caracteres")
+    @Column(nullable = false, length = 200)
     private String title;
-    @Column(name = "duration_minutes", nullable= false)
+
+    @Min(value = 1, message = "La duración debe ser al menos 1 minuto")
+    @Max(value = 999, message = "La duración no puede superar 999 minutos")
+    @Column(name = "duration_minutes", nullable = false)
     private int min;
-    @Column(length=50)
+
+    @NotBlank(message = "El género es obligatorio")
+    @Size(min = 2, max = 50, message = "El género ha de tener entre 2 y 50 caracteres")
+    @Column(length = 50)
     private String gener;
-    @Column(columnDefinition="TEXT")
+
+    @NotBlank(message = "La descripción es obligatoria")
+    @Size(min = 2, max = 1000, message = "La descripción ha de tener entre 2 y 1000 caracteres")
+    @Column(columnDefinition = "TEXT")
     private String descripcion;
-    @Column(name="release_date")
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+
+    @NotNull(message = "La fecha de estreno es obligatoria")
+    @Column(name = "release_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date = LocalDate.now();
+
     @Column
     private String posterUrl;
 
@@ -110,6 +129,5 @@ public class Movie {
     public void setPosterUrl(String posterUrl) {
         this.posterUrl = posterUrl;
     }
-
 
 }

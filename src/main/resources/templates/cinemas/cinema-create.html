@@ -1,25 +1,40 @@
 <!doctype html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" th:href="@{/css/cinema-create.css}" />
-    <title>Document</title>
+    <title>Nuevo Cine</title>
   </head>
   <body>
     <form th:action="@{/cinemes/new}" th:object="${cinema}" method="post">
       <legend>Nuevo cine</legend>
 
-      <label for="nombre">Name:</label>
-      <input type="text" th:field="*{cinemaName}" /><br /><br />
-      <label for="nombre">Address:</label>
-      <input type="text" th:field="*{address}" /><br /><br />
-      <label for="nombre">City:</label>
-      <input type="text" th:field="*{city}" /><br /><br />
-      <label for="nombre">Postal Code:</label>
-      <input type="text" th:field="*{postalCode}" /><br /><br />
+      <div class="field-group">
+        <label>Name:</label>
+        <input type="text" th:field="*{cinemaName}" />
+        <div class="field-error" th:if="${#fields.hasErrors('cinemaName')}" th:errors="*{cinemaName}"></div>
+      </div>
 
-      <button type="submit">Guardar</button>
+      <div class="field-group">
+        <label>Address:</label>
+        <input type="text" th:field="*{address}" />
+        <div class="field-error" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></div>
+      </div>
+
+      <div class="field-group">
+        <label>City:</label>
+        <input type="text" th:field="*{city}" />
+        <div class="field-error" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></div>
+      </div>
+
+      <div class="field-group">
+        <label>Postal Code:</label>
+        <input type="text" th:field="*{postalCode}" />
+        <div class="field-error" th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></div>
+      </div>
+
+      <button type="submit"><span>Guardar</span></button>
     </form>
   </body>
 </html>

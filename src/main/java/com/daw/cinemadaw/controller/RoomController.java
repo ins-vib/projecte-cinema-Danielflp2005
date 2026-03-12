@@ -35,6 +35,8 @@ public class RoomController {
         return "/rooms/room-create";
     }
 
+    private static final int CELL_SIZE = 46;
+
     @GetMapping("/room/edit/{id}")
     public String editRoom(@PathVariable Long id, Model model) {
         Optional<Room> optional = roomRepository.findById(id);
@@ -46,24 +48,24 @@ public class RoomController {
         return "redirect:/cinemes";
     }
 
-@PostMapping("/room/editar")
-public String editPelicula(@ModelAttribute Room room) {
-    Long cinemaid = room.getCinema().getId();
-    Long roomId = room.getId();
+    @PostMapping("/room/editar")
+    public String editPelicula(@ModelAttribute Room room) {
+        Long cinemaid = room.getCinema().getId();
+        Long roomId = room.getId();
 
-    Optional<Cinema> cinema = cinemaRepository.findById(cinemaid);
-    Optional<Room> existingRoom = roomRepository.findById(roomId);
+        Optional<Cinema> cinema = cinemaRepository.findById(cinemaid);
+        Optional<Room> existingRoom = roomRepository.findById(roomId);
 
-    if (existingRoom.isPresent() && cinema.isPresent()) {
-        Room roomToUpdate = existingRoom.get();
-        roomToUpdate.setName(room.getName());
-        roomToUpdate.setCapacity(room.getCapacity());
-        roomToUpdate.setCinema(cinema.get());
-        roomRepository.save(roomToUpdate);
+        if (existingRoom.isPresent() && cinema.isPresent()) {
+            Room roomToUpdate = existingRoom.get();
+            roomToUpdate.setName(room.getName());
+            roomToUpdate.setCapacity(room.getCapacity());
+            roomToUpdate.setCinema(cinema.get());
+            roomRepository.save(roomToUpdate);
+        }
+
+        return "redirect:/cinema/" + cinemaid;
     }
-
-    return "redirect:/cinema/" + cinemaid;
-}
 
     @GetMapping("/room/delete/{id}")
     public String delete(@PathVariable Long id, Model model) {

@@ -350,3 +350,37 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 input[type="date"]::-webkit-calendar-picker-indicator:hover {
   opacity: 1;
 }
+/* ── Añadir al final de cinema-create.css ── */
+
+/* Field group — envuelve label + input + error */
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.6rem;
+}
+
+.field-group label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color var(--transition);
+}
+
+.field-group:focus-within label {
+  color: var(--gold);
+}
+
+/* Mensaje de error */
+.field-error {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.82rem;
+  font-style: italic;
+  color: #c0392b;
+  padding-left: 0.2rem;
+  border-left: 2px solid rgba(192, 57, 43, 0.5);
+  padding-left: 0.6rem;
+  margin-top: 0.1rem;
+}

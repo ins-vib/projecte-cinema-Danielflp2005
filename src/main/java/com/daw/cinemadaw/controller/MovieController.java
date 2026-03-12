@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.daw.cinemadaw.domain.cinema.Movie;
 import com.daw.cinemadaw.repository.MovieRepository;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class MovieController {
@@ -63,7 +66,12 @@ public class MovieController {
     }
 
     @PostMapping("/movie/new")
-    public String altaPelicula(@ModelAttribute Movie movie) {
+    public String altaPelicula(@Valid @ModelAttribute Movie movie, BindingResult result) {
+        
+        if(result.hasErrors()){
+            return "movies/movies-create";
+        }
+
         movieRepository.save(movie);
         return "redirect:/movies/billboard";
     }
@@ -82,7 +90,11 @@ public class MovieController {
     }
 
     @PostMapping("/movie/editar")
-    public String editPelicula(@ModelAttribute Movie movie) {
+    public String editPelicula(@Valid  @ModelAttribute Movie movie, BindingResult result) {
+       
+       if(result.hasErrors()){
+        return "movies/movie-update";
+       }
         movieRepository.save(movie);
         return "redirect:/movies/billboard";
     }

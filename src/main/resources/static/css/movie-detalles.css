@@ -69,6 +69,67 @@ body {
   animation: fadeDown 0.6s ease both;
 }
 
+/* Nav — dos botones */
+.hero-nav__links {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* Footer */
+.movie-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 3rem;
+  border-top: 1px solid rgba(201,168,76,0.1);
+  background: rgba(8,8,8,0.85);
+  backdrop-filter: blur(10px);
+}
+
+.movie-footer__logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.3em;
+  color: #c9a84c;
+  text-decoration: none;
+}
+
+.movie-footer__logo span {
+  font-size: 0.5em;
+  letter-spacing: 0.2em;
+  color: rgba(232,224,208,0.3);
+  margin-left: 0.4rem;
+  font-family: 'DM Mono', monospace;
+}
+
+.movie-footer__copy {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(232,224,208,0.2);
+}
+
+.movie-footer__nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.movie-footer__nav a {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(232,224,208,0.4);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.movie-footer__nav a:hover {
+  color: #c9a84c;
+}
+
 .nav-logo {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1.8rem; letter-spacing: 0.35em;

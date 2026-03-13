@@ -11,6 +11,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Room {
@@ -19,9 +23,14 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @NotBlank(message = "El nombre de la sala es obligatorio")
+    @Size(min = 2, max = 100, message = "El nombre debe tener entre 2 y 100 caracteres")
+    @Column(nullable = false, length = 100)
     private String name;
-    @Column
+    
+    @Min(value = 1, message = "La capacidad debe ser al menos 1 asiento")
+    @Max(value = 1000, message = "La capacidad no puede superar 1000 asientos")
+    @Column(nullable = false)
     private int capacity;
 
     @ManyToOne

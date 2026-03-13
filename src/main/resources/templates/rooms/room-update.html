@@ -15,10 +15,12 @@
     <input type="hidden" th:field="*{cinema.id}">
     <label>Name:</label>
     <input type="text" th:field="*{name}" /><br /><br />
+    <div class="field-error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
     <label>Capacity:</label>
     <input type="number" th:field="*{capacity}" /><br /><br />
+    <div class="field-error" th:if="${#fields.hasErrors('capacity')}" th:errors="*{capacity}"></div>
     <button type="submit">Guardar</button>
   </form>
 </body>
-
+  
 </html>

@@ -69,7 +69,7 @@ public class MovieController {
     public String altaPelicula(@Valid @ModelAttribute Movie movie, BindingResult result) {
         
         if(result.hasErrors()){
-            return "movies/movies-create";
+            return "movies/movie-create";
         }
 
         movieRepository.save(movie);

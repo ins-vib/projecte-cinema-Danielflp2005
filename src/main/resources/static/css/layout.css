@@ -1,0 +1,175 @@
+/* ============================================================
+   LUMIÈRE — layout.css
+   Header, Nav y Footer globales
+   ============================================================ */
+
+   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Mono:wght@300;400&display=swap');
+
+   :root {
+     --bg:       #080808;
+     --gold:     #c9a84c;
+     --gold2:    #e8c97a;
+     --gold-dim: rgba(201,168,76,0.10);
+     --red:      #8b1a1a;
+     --text:     #e8e0d0;
+     --muted:    rgba(232,224,208,0.5);
+     --muted2:   rgba(232,224,208,0.22);
+     --border:   rgba(201,168,76,0.18);
+     --border2:  rgba(232,224,208,0.06);
+     --ease:     0.3s cubic-bezier(0.4,0,0.2,1);
+   }
+   
+   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+   
+   body {
+     background-color: var(--bg);
+     background-image:
+       linear-gradient(rgba(8,8,8,0.78), rgba(8,8,8,0.78)),
+       url('/images/cinema-bg.png');
+     background-size: cover;
+     background-position: center;
+     background-attachment: fixed;
+     color: var(--text);
+     font-family: 'Cormorant Garamond', serif;
+     min-height: 100vh;
+   }
+   
+   /* Grain */
+   body::before {
+     content: '';
+     position: fixed; inset: 0;
+     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+     pointer-events: none; z-index: 0; opacity: 0.45;
+   }
+   
+   /* ── Wrapper del fragment ── */
+   body > div {
+     display: flex;
+     flex-direction: column;
+     min-height: 100vh;
+   }
+   
+   /* ══════════════════════════════════════════
+      HEADER
+   ══════════════════════════════════════════ */
+   .l-header {
+     flex-shrink: 0;
+     position: relative; z-index: 10;
+     display: flex; align-items: center; justify-content: space-between;
+     padding: 0.7rem 3rem;
+     border-bottom: 1px solid rgba(201,168,76,0.12);
+     background: rgba(8,8,8,0.6);
+     backdrop-filter: blur(10px);
+     -webkit-backdrop-filter: blur(10px);
+   }
+   
+   .l-logo {
+     font-family: 'Bebas Neue', sans-serif;
+     font-size: 1.3rem; letter-spacing: 0.35em;
+     color: var(--gold); cursor: default; line-height: 1;
+   }
+   
+   .l-logo a {
+     color: inherit; text-decoration: none;
+   }
+   
+   .l-logo::after {
+     content: '/ CINE';
+     font-size: 0.45em; letter-spacing: 0.25em;
+     color: var(--muted2); margin-left: 0.6rem;
+     font-family: 'DM Mono', monospace;
+     vertical-align: middle;
+   }
+   
+   /* ── Nav ── */
+   .l-nav {
+     display: flex; align-items: center; gap: 0.4rem;
+   }
+   
+   .l-nav a {
+     font-family: 'DM Mono', monospace; font-size: 0.62rem;
+     letter-spacing: 0.18em; text-transform: uppercase;
+     text-decoration: none; color: var(--muted);
+     padding: 0.45rem 1rem;
+     border: 1px solid transparent;
+     position: relative;
+     transition: color var(--ease), border-color var(--ease), background var(--ease);
+   }
+   
+   .l-nav a::after {
+     content: '';
+     position: absolute; bottom: 0; left: 1rem; right: 1rem;
+     height: 1px; background: var(--gold);
+     transform: scaleX(0);
+     transition: transform var(--ease);
+   }
+   
+   .l-nav a:hover { color: var(--text); }
+   .l-nav a:hover::after { transform: scaleX(1); }
+   
+   .l-nav a:last-child {
+     border-color: var(--border);
+     color: var(--text);
+   }
+   .l-nav a:last-child::after { display: none; }
+   .l-nav a:last-child:hover {
+     border-color: var(--gold);
+     color: var(--gold);
+     background: var(--gold-dim);
+   }
+   
+   /* ══════════════════════════════════════════
+      MAIN
+   ══════════════════════════════════════════ */
+   .l-main {
+     position: relative; z-index: 1;
+     flex: 0 0 auto;
+   }
+   
+   /* ══════════════════════════════════════════
+      FOOTER
+   ══════════════════════════════════════════ */
+   .l-footer {
+     flex-shrink: 0;
+     margin-top: auto;
+     position: relative; z-index: 10;
+     padding: 0.5rem 3rem;
+     border-top: 1px solid rgba(201,168,76,0.08);
+     background: rgba(8,8,8,0.6);
+     backdrop-filter: blur(10px);
+     -webkit-backdrop-filter: blur(10px);
+     display: flex; align-items: center; justify-content: space-between;
+   }
+   
+   .l-footer p {
+     font-family: 'DM Mono', monospace; font-size: 0.55rem;
+     letter-spacing: 0.25em; text-transform: uppercase;
+     color: rgba(232,224,208,0.2);
+   }
+   .l-footer p::before { content: '© '; }
+   
+   .l-footer::after {
+     content: 'Todos los derechos reservados';
+     font-family: 'Cormorant Garamond', serif;
+     font-size: 0.75rem; font-style: italic;
+     color: rgba(232,224,208,0.12);
+   }
+   
+   /* ══════════════════════════════════════════
+      Scrollbar + Selection
+   ══════════════════════════════════════════ */
+   ::-webkit-scrollbar { width: 5px; }
+   ::-webkit-scrollbar-track { background: var(--bg); }
+   ::-webkit-scrollbar-thumb { background: #2a2520; border-radius: 3px; }
+   ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+   ::selection { background: rgba(201,168,76,0.2); color: var(--gold2); }
+   
+   /* ══════════════════════════════════════════
+      Responsive
+   ══════════════════════════════════════════ */
+   @media (max-width: 768px) {
+     .l-header { padding: 0.7rem 1.5rem; flex-direction: column; gap: 1rem; }
+     .l-logo::after { display: none; }
+     .l-footer { padding: 0.5rem 1.5rem; flex-direction: column; gap: 0.5rem; }
+     .l-footer::after { display: none; }
+   }

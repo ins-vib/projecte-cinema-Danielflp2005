@@ -5,67 +5,73 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title th:text="${cinema.cinemaName} + ' — Lumière'">Detalles del Cine</title>
+  <link rel="stylesheet" th:href="@{/css/layout.css}" />
   <link rel="stylesheet" th:href="@{/css/detail.css}" />
 </head>
 
 <body>
-  <div class="page">
-    <header class="page-header">
-      <a class="btn-back" th:href="@{/cinemes}">← Volver</a>
-      <span class="page-label">// DETALLE</span>
-    </header>
 
-    <div class="cinema-card">
-      <div class="cinema-card__eyebrow">Ficha del cine</div>
-      <h1 class="cinema-card__name" th:text="${cinema.cinemaName}">Nombre del Cine</h1>
+  <div th:replace="~{layout :: layout(~{::content})}">
+    <div th:fragment="content">
 
-      <div class="cinema-card__info">
-        <div class="info-item">
-          <span class="info-item__label">Ciudad</span>
-          <span class="info-item__value" th:text="${cinema.city}">—</span>
-        </div>
-        <div class="info-item">
-          <span class="info-item__label">Dirección</span>
-          <span class="info-item__value" th:text="${cinema.address}">—</span>
-        </div>
-        <div class="info-item">
-          <span class="info-item__label">Codigo Postal</span>
-          <span class="info-item__value" th:text="${cinema.postalCode}">—</span>
-        </div>
-      </div>
-    </div>
+      <div class="page">
+        <header class="page-header">
+          <a class="btn-back" th:href="@{/cinemes}">← Volver</a>
+          <span class="page-label">// DETALLE</span>
+        </header>
 
-    <div class="rooms-section">
-      <div class="rooms-section__header">
-        <span class="rooms-section__eyebrow">// INSTALACIONES</span>
-        <h2 class="rooms-section__title">Salas</h2>
-        <span class="rooms-section__count" th:text="${#lists.size(cinema.rooms)} + ' salas'">0 salas</span>
-        <a class="btn-add-room" th:href="@{/room/create/{id}(id=${cinema.id})}">
-          <span>+ Nueva sala</span>
-        </a>
-      </div>
+        <div class="cinema-card">
+          <div class="cinema-card__eyebrow">Ficha del cine</div>
+          <h1 class="cinema-card__name" th:text="${cinema.cinemaName}">Nombre del Cine</h1>
 
-      <ul class="rooms-list">
-        <li class="room-item" th:each="room, stat : ${cinema.rooms}">
-          <span class="room-item__num" th:text="${stat.index + 1}">1</span>
-          <span class="room-item__name" th:text="${room.name}">Sala</span>
-          <span class="room-item__sep">·</span>
-          <span class="room-item__capacity">
-            <span class="room-item__capacity-num" th:text="${room.capacity}">0</span>
-            <span class="room-item__capacity-label">butacas</span>
-          </span>
-          <!-- Acciones CRUD -->
-          <div class="room-item__actions">
-            <a class="room-btn room-btn--edit" th:href="@{/room/{id}(id=${room.id})}">Ver detalles</a>
-            <a class="room-btn room-btn--edit" th:href="@{/room/edit/{id}(id=${room.id})}">Editar</a>
-            <a class="room-btn room-btn--delete" th:href="@{/room/delete/{id}(id=${room.id})}">Eliminar</a>
-
+          <div class="cinema-card__info">
+            <div class="info-item">
+              <span class="info-item__label">Ciudad</span>
+              <span class="info-item__value" th:text="${cinema.city}">—</span>
+            </div>
+            <div class="info-item">
+              <span class="info-item__label">Dirección</span>
+              <span class="info-item__value" th:text="${cinema.address}">—</span>
+            </div>
+            <div class="info-item">
+              <span class="info-item__label">Codigo Postal</span>
+              <span class="info-item__value" th:text="${cinema.postalCode}">—</span>
+            </div>
           </div>
-        </li>
-      </ul>
+        </div>
+
+        <div class="rooms-section">
+          <div class="rooms-section__header">
+            <span class="rooms-section__eyebrow">// INSTALACIONES</span>
+            <h2 class="rooms-section__title">Salas</h2>
+            <span class="rooms-section__count" th:text="${#lists.size(cinema.rooms)} + ' salas'">0 salas</span>
+            <a class="btn-add-room" th:href="@{/room/create/{id}(id=${cinema.id})}">
+              <span>+ Nueva sala</span>
+            </a>
+          </div>
+
+          <ul class="rooms-list">
+            <li class="room-item" th:each="room, stat : ${cinema.rooms}">
+              <span class="room-item__num" th:text="${stat.index + 1}">1</span>
+              <span class="room-item__name" th:text="${room.name}">Sala</span>
+              <span class="room-item__sep">·</span>
+              <span class="room-item__capacity">
+                <span class="room-item__capacity-num" th:text="${room.capacity}">0</span>
+                <span class="room-item__capacity-label">butacas</span>
+              </span>
+              <div class="room-item__actions">
+                <a class="room-btn room-btn--edit" th:href="@{/room/{id}(id=${room.id})}">Ver detalles</a>
+                <a class="room-btn room-btn--edit" th:href="@{/room/edit/{id}(id=${room.id})}">Editar</a>
+                <a class="room-btn room-btn--delete" th:href="@{/room/delete/{id}(id=${room.id})}">Eliminar</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
     </div>
-
   </div>
-</body>
 
+</body>
 </html>

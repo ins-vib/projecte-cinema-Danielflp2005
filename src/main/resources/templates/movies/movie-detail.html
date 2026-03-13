@@ -11,14 +11,16 @@
 <body>
   <!-- ═══ HERO ═══ -->
   <section class="hero">
-    <div class="hero-bg" th:style="'background-image: url(/images/' + ${movie.posterUrl} + ')'">
-    </div>
+    <div class="hero-bg" th:style="'background-image: url(/images/' + ${movie.posterUrl} + ')'"></div>
     <div class="hero-overlay"></div>
 
     <!-- Nav -->
     <nav class="hero-nav">
       <a th:href="@{/}" class="nav-logo">LUMIÈRE<span>/ CINE</span></a>
-      <a th:href="@{/movies/billboard}" class="btn-back">← Cartelera</a>
+      <div class="hero-nav__links">
+        <a th:href="@{/}" class="btn-back">← Inicio</a>
+        <a th:href="@{/movies/billboard}" class="btn-back">← Cartelera</a>
+      </div>
     </nav>
 
     <!-- Main content left -->
@@ -26,11 +28,8 @@
       <div class="movie-genre-tags">
         <span class="genre-tag" th:text="${movie.gener}">Género</span>
       </div>
-
       <h1 class="movie-title" th:text="${movie.title}">Título</h1>
-
       <p class="movie-desc" th:text="${movie.descripcion}">Descripción.</p>
-
       <div class="hero-actions">
         <a th:href="@{/movies/{id}/seats(id=${movie.id})}" class="btn-tickets">
           <span>Comprar entradas</span>
@@ -60,43 +59,46 @@
   <!-- ═══ INFO SECTION ═══ -->
   <section class="info-section">
     <div class="info-inner">
-      <!-- Synopsis -->
       <div class="synopsis-block">
         <div class="section-eyebrow">Sinopsis</div>
         <h2 class="section-title">Sobre la película</h2>
-        <p class="synopsis-text" th:text="${movie.descripcion}">
-          Descripción completa.
-        </p>
+        <p class="synopsis-text" th:text="${movie.descripcion}">Descripción completa.</p>
       </div>
 
-      <!-- Sidebar data -->
       <div class="movie-sidebar">
         <div class="sidebar-item">
           <span class="sidebar-key">Título</span>
           <span class="sidebar-val" th:text="${movie.title}">—</span>
         </div>
-
         <div class="sidebar-item">
           <span class="sidebar-key">Género</span>
           <span class="sidebar-val" th:text="${movie.gener}">—</span>
         </div>
-
         <div class="sidebar-item">
           <span class="sidebar-key">Duración</span>
           <span class="sidebar-val" th:text="${movie.min} + ' min'">—</span>
         </div>
-
         <div class="sidebar-item">
           <span class="sidebar-key">Estreno</span>
           <span class="sidebar-val" th:text="${#temporals.format(movie.date, 'dd / MM / yyyy')}">—</span>
         </div>
-
         <a th:href="@{/movies/{id}/seats(id=${movie.id})}" class="sidebar-cta">
           Seleccionar asiento →
         </a>
       </div>
     </div>
   </section>
-</body>
 
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="movie-footer">
+    <a th:href="@{/}" class="movie-footer__logo">LUMIÈRE<span>/ CINE</span></a>
+    <p class="movie-footer__copy">© DAW1 2026</p>
+    <nav class="movie-footer__nav">
+      <a th:href="@{/}">Inicio</a>
+      <a th:href="@{/movies/billboard}">Cartelera</a>
+      <a th:href="@{/cinemes}">Cines</a>
+    </nav>
+  </footer>
+
+</body>
 </html>

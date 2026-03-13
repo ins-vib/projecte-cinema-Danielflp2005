@@ -1,52 +1,45 @@
 <!doctype html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestión de Películas — Lumière</title>
+    <link rel="stylesheet" th:href="@{/css/layout.css}" />
     <link rel="stylesheet" th:href="@{/css/cinema.css}" />
-    <title>Gestión de Peliculas</title>
   </head>
   <body>
-<div class="table-header">
-  <h1>Lista de Peliculas</h1>
-  <a th:href="@{/movie/create}">Añadir Nueva Pelicula</a>
-  <a class="btn-primary" th:href="@{/}">Volver al Home</a>
-</div>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Génereo</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="movie : ${Lista}">
-            <td th:text="${movie.title}"></td>
-            <td th:text="${movie.gener}"></td>
-            <td>
-              <a
-                class="btn-secondary"
-                th:href="@{/movie/{id}(id=${movie.id})}"
-              >
-                Ver detalles
-              </a>
-              <a
-                class="btn-secondary"
-                th:href="@{/movie/delete/{id}(id=${movie.id})}"
-              >
-                Borrar Pelicula
-              </a>
-              <a
-                class="btn-secondary"
-                th:href="@{/movie/edit/{id}(id=${movie.id})}"
-                >Editar Pelicula</a
-              >
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div th:replace="~{layout :: layout(~{::content})}">
+      <div th:fragment="content">
+
+        <div class="table-header">
+          <h1>Lista de Películas</h1>
+          <a class="btn-add" th:href="@{/movie/create}">Añadir Nueva Película</a>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Título</th>
+              <th>Género</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="movie : ${Lista}">
+              <td th:text="${movie.title}"></td>
+              <td th:text="${movie.gener}"></td>
+              <td>
+                <a class="btn-secondary" th:href="@{/movie/{id}(id=${movie.id})}">Ver detalles</a>
+                <a class="btn-secondary" th:href="@{/movie/edit/{id}(id=${movie.id})}">Editar</a>
+                <a class="btn-secondary btn-danger" th:href="@{/movie/delete/{id}(id=${movie.id})}" onclick="return confirm('¿Eliminar esta película?')">Borrar</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
     </div>
+
   </body>
 </html>

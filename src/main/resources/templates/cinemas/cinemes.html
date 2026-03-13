@@ -1,53 +1,45 @@
 <!doctype html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestión de Cines — Lumière</title>
+    <link rel="stylesheet" th:href="@{/css/layout.css}" />
     <link rel="stylesheet" th:href="@{/css/cinema.css}" />
-    <title>Gestión de Cines</title>
   </head>
   <body>
-<div class="table-header">
-  <h1>Lista de Cines</h1>
-  <a th:href="@{/cinemes/create}">Añadir Nuevo Cine</a>
-  <a class="btn-primary" th:href="@{/}">Volver al Home</a>
-</div>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Ciudad</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="cinema : ${Lista}">
-            <td th:text="${cinema.cinemaName}"></td>
-            <td th:text="${cinema.city}"></td>
-            <td>
-              <a
-                class="btn-secondary"
-                th:href="@{/cinema/{id}(id=${cinema.id})}"
-              >
-                Ver detalles
-              </a>
-              <a
-                class="btn-secondary"
-                th:href="@{/cinema/delete/{id}(id=${cinema.id})}"
-              >
-                Borrar cine
-              </a>
-              <a
-                class="btn-secondary"
-                th:href="@{/cinemes/edit/{id}(id=${cinema.id})}"
-                >Editar cine</a
-              >
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div th:replace="~{layout :: layout(~{::content})}">
+      <div th:fragment="content">
+
+        <div class="table-header">
+          <h1>Lista de Cines</h1>
+          <a class="btn-primary" th:href="@{/cinemes/create}">+ Añadir Nuevo Cine</a>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Ciudad</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="cinema : ${Lista}">
+              <td th:text="${cinema.cinemaName}"></td>
+              <td th:text="${cinema.city}"></td>
+              <td>
+                <a class="btn-secondary" th:href="@{/cinema/{id}(id=${cinema.id})}">Ver detalles</a>
+                <a class="btn-secondary" th:href="@{/cinemes/edit/{id}(id=${cinema.id})}">Editar</a>
+                <a class="btn-secondary btn-danger" th:href="@{/cinema/delete/{id}(id=${cinema.id})}" onclick="return confirm('¿Eliminar este cine?')">Borrar</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
     </div>
-    <a href=""></a>
+
   </body>
 </html>

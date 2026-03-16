@@ -384,3 +384,60 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
   padding-left: 0.6rem;
   margin-top: 0.1rem;
 }
+
+/* ── Añadir al final de cinema-create.css ── */
+
+/* Select */
+select {
+  display: block;
+  width: 100%;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  padding: 0.75rem 1rem;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a84c' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  transition: border-color var(--transition), background-color var(--transition);
+}
+
+select:hover {
+  border-color: rgba(201,168,76,0.28);
+  background-color: var(--bg4);
+}
+
+select:focus {
+  border-color: var(--border-focus);
+  background-color: var(--bg4);
+  box-shadow: 0 0 0 3px var(--gold-dim), 0 0 16px var(--gold-glow);
+}
+
+select option {
+  background: var(--bg3);
+  color: var(--text);
+}
+
+/* Checkbox */
+.field-group--checkbox {
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.field-group--checkbox label {
+  margin-bottom: 0;
+}
+
+input[type="checkbox"] {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--gold);
+  cursor: pointer;
+}

@@ -37,7 +37,7 @@ public class Seat {
     }
 
     public Seat(boolean estado, String seatrow, int seatNumber, int x, int y, SeatType type) {
-        
+
         this.estado = estado;
         this.seatrow = seatrow;
         this.seatNumber = seatNumber;
@@ -104,6 +104,10 @@ public class Seat {
 
     public void setRoom(Room room) {
         this.room = room;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override

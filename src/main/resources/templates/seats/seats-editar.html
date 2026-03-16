@@ -1,0 +1,63 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/layout.css}" />
+    <link rel="stylesheet" th:href="@{/css/cinema-create.css}" />
+    <title>Editar Asiento — Lumière</title>
+</head>
+
+<body>
+    <div th:replace="~{layout :: layout(~{::content})}">
+        <div th:fragment="content">
+
+            <form th:action="@{/seats/edit/{id}(id=${seat.room.id})}" th:object="${seat}" method="post">
+                <legend>Editar Asiento</legend>
+
+                <input type="hidden" name="id" th:value="${seat.id}">
+                <input type="hidden" name="room.id" th:value="${seat.room.id}">
+
+                <div class="field-group">
+                    <label>Fila:</label>
+                    <input type="text" th:field="*{seatrow}" />
+                </div>
+
+                <div class="field-group">
+                    <label>Número de Asiento:</label>
+                    <input type="number" th:field="*{seatNumber}" />
+                </div>
+
+                <div class="field-group">
+                    <label>Posición X:</label>
+                    <input type="number" th:field="*{x}" />
+                </div>
+
+                <div class="field-group">
+                    <label>Posición Y:</label>
+                    <input type="number" th:field="*{y}" />
+                </div>
+
+                <div class="field-group">
+                    <label>Tipo:</label>
+                    <select th:field="*{type}">
+                        <option value="Standard">Standard</option>
+                        <option value="Premium">Premium</option>
+                        <option value="Adapted">Adaptado</option>
+                    </select>
+                </div>
+
+                <div class="field-group field-group--checkbox">
+                    <label>Ocupado:</label>
+                    <input type="checkbox" th:field="*{estado}" />
+                </div>
+
+                <button type="submit"><span>Guardar</span></button>
+            </form>
+
+        </div>
+    </div>
+</body>
+
+</html>

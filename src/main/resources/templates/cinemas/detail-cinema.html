@@ -53,25 +53,25 @@
           <ul class="rooms-list">
             <li class="room-item" th:each="room, stat : ${cinema.rooms}">
               <span class="room-item__num" th:text="${stat.index + 1}">1</span>
-              <span class="room-item__name" th:text="${room.name}">Sala</span>
+              <span class="room-item__name" th:text="${#lists.size(room.seat)}">Sala</span>
               <span class="room-item__sep">·</span>
               <span class="room-item__capacity">
-                <span class="room-item__capacity-num" th:text="${room.capacity}">0</span>
+                <span class="room-item__capacity-num" th:text="${#lists.size(room.seat)}">0</span>
                 <span class="room-item__capacity-label">butacas</span>
               </span>
               <div class="room-item__actions">
                 <a class="room-btn room-btn--edit" th:href="@{/room/{id}(id=${room.id})}">Ver detalles</a>
                 <a class="room-btn room-btn--edit" th:href="@{/room/edit/{id}(id=${room.id})}">Editar</a>
+                <a class="room-btn room-btn--edit" th:href="@{/seats/room/{id}(id=${room.id})}">Ver butacas</a>
                 <a class="room-btn room-btn--delete" th:href="@{/room/delete/{id}(id=${room.id})}">Eliminar</a>
               </div>
             </li>
           </ul>
         </div>
-
       </div>
-
     </div>
   </div>
 
 </body>
+
 </html>

@@ -76,24 +76,6 @@ public class Pruebas implements CommandLineRunner {
         cineIMAX.getRooms().add(roomIMAX2);
         cinemaRepository.save(cineIMAX);
 
-        //     Optional<Cinema> optionalCinema = cinemaRepository.findById(4L);
-        //     if (optionalCinema.isPresent()) {
-        //         Cinema cinema = optionalCinema.get();
-        //         System.out.println(cinema);
-        //         cinema.setCity("Reus");
-        //         cinemaRepository.save(cinema);
-        //     } else {
-        //         System.out.println("No encontrado");
-        //     }
-        //     List<Cinema> lista2 = cinemaRepository.findByCity("Tarragona");
-        //     for (Cinema cinema : lista2) {
-        //         System.out.println(cinema);
-        //     }
-        //     cinemaRepository.delete(lista2.get(0));
-        //     List<Cinema> lista3 = cinemaRepository.findAll();
-        //     for (Cinema cinema : lista3) {
-        //         System.out.println(cinema);
-        //     }
         List<Room> lista = roomRepository.findAll();
         for (Room rooms : lista) {
             System.out.println(rooms);

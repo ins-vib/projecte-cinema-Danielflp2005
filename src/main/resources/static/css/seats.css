@@ -79,3 +79,33 @@
   .legend-dot--free    { background: rgba(201,168,76,0.5); }
   .legend-dot--ocupado { background: rgba(139,26,26,0.7); }
   .legend-dot--premium { background: rgba(201,168,76,0.9); }
+
+  .btn-back {
+    display: inline-flex;
+    align-items: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: rgba(232,224,208,0.4);
+    padding: 0.45rem 0.8rem;
+    border: 1px solid rgba(232,224,208,0.1);
+    border-radius: 2px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+    flex-shrink: 0;
+  }
+  
+  .btn-back:hover {
+    color: #c9a84c;
+    border-color: rgba(201,168,76,0.4);
+  }
+
+  .table-header > .btn-back::before {
+    content: '' !important;
+    display: none;
+  }
+  
+  .table-header > .btn-back::after {
+    display: none;
+  }

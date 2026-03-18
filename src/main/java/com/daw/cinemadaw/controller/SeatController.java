@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.daw.cinemadaw.domain.cinema.Room;
 import com.daw.cinemadaw.domain.cinema.Seat;
+import com.daw.cinemadaw.domain.cinema.SeatType;
 import com.daw.cinemadaw.repository.RoomRepository;
 import com.daw.cinemadaw.repository.SeatRepository;
 
@@ -26,23 +27,27 @@ public class SeatController {
     }
 
     // ── Rutas específicas primero ──────────────────────────────
-
     @GetMapping("/seats/new/{id}")
     public String createSeats(@PathVariable Long id, Model model) {
         Seat seat = new Seat();
         seat.setRoom(roomRepository.findById(id).get());
         model.addAttribute("seat", seat);
+        model.addAttribute("types", SeatType.values());
         return "seats/seats-create";
     }
 
     @GetMapping("/seats/edit/{id}")
     public String editSeat(@PathVariable Long id, Model model) {
         Optional<Seat> optional = seatRepository.findById(id);
-        if (optional.isPresent()) {
-            model.addAttribute("seat", optional.get());
-            return "seats/seats-editar";
+
+        if (optional.isEmpty()) {
+            return "redirect:/";
         }
-        return "redirect:/";
+        model.addAttribute("seat", optional.get());
+        model.addAttribute("types", SeatType.values());
+
+        return "seats/seats-editar";
+
     }
 
     @GetMapping("/seats/delete/{id}")
@@ -78,7 +83,6 @@ public class SeatController {
     }
 
     // ── Ruta genérica al final ─────────────────────────────────
-
     @GetMapping("/seats/room/{id}")
     public String seats(@PathVariable Long id, Model model) {
         Optional<Room> optional = roomRepository.findById(id);
@@ -88,5 +92,15 @@ public class SeatController {
         }
         return "redirect:/";
     }
+
+    @GetMapping("/seats/detail/{id}")
+    public String seatDetail(@PathVariable Long id, Model model) {
+        Optional<Seat> optional = seatRepository.findById(id);
+        if (optional.isPresent()) {
+            model.addAttribute("seat", optional.get());
+            return "seats/seats-detail";
+        }
+        return "redirect:/";
+    }   
 
 }

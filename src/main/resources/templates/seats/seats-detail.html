@@ -1,0 +1,82 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title th:text="'Asiento ' + ${seat.seatrow} + ${seat.seatNumber} + ' — Lumière'">Asiento — Lumière</title>
+  <link rel="stylesheet" th:href="@{/css/layout.css}" />
+  <link rel="stylesheet" th:href="@{/css/seat-detail.css}" />
+</head>
+
+<body>
+
+  <div th:replace="~{layout :: layout(~{::content})}">
+    <div th:fragment="content">
+
+      <div class="page">
+
+        <header class="page-header">
+          <a class="btn-back" th:href="@{/seats/room/{id}(id=${seat.room.id})}">← Volver</a>
+          <span class="page-label">// ASIENTO</span>
+        </header>
+
+        <div class="seat-card">
+          <div class="seat-card__eyebrow">Detalle del asiento</div>
+
+          <div class="seat-card__number">
+            <span class="seat-card__row" th:text="${seat.seatrow}">A</span>
+            <span class="seat-card__num" th:text="${seat.seatNumber}">1</span>
+          </div>
+
+          <div class="seat-card__badge" th:text="${seat.type}">Standard</div>
+
+          <div class="seat-card__info">
+
+            <div class="info-item">
+              <span class="info-item__label">Sala</span>
+              <span class="info-item__value" th:text="${seat.room.name}">—</span>
+            </div>
+
+            <div class="info-item">
+              <span class="info-item__label">Fila</span>
+              <span class="info-item__value" th:text="${seat.seatrow}">—</span>
+            </div>
+
+            <div class="info-item">
+              <span class="info-item__label">Número</span>
+              <span class="info-item__value" th:text="${seat.seatNumber}">—</span>
+            </div>
+
+            <div class="info-item">
+              <span class="info-item__label">Tipo</span>
+              <span class="info-item__value" th:text="${seat.type}">—</span>
+            </div>
+
+            <div class="info-item">
+              <span class="info-item__label">Posición</span>
+              <span class="info-item__value" th:text="${seat.x} + ' , ' + ${seat.y}">—</span>
+            </div>
+
+            <div class="info-item">
+              <span class="info-item__label">Estado</span>
+              <span th:text="${seat.estado} ? 'Ocupado' : 'Libre'"
+                th:class="${seat.estado} ? 'info-item__value info-item__value--ocupado' : 'info-item__value info-item__value--libre'">—</span>
+            </div>
+
+          </div>
+
+          <div class="seat-card__actions">
+            <a class="seat-btn seat-btn--edit" th:href="@{/seats/edit/{id}(id=${seat.id})}">Editar asiento</a>
+            <a class="seat-btn seat-btn--delete" th:href="@{/seats/delete/{id}(id=${seat.id})}">Eliminar</a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

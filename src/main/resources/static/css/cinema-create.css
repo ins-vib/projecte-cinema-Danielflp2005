@@ -260,7 +260,7 @@ button[type="submit"]::before {
   background: var(--red2);
   transform: translateX(-100%);
   transition: transform var(--transition);
-  z-index: 0;
+  z-index: 1;
 }
 
 button[type="submit"] span {
@@ -440,4 +440,13 @@ input[type="checkbox"] {
   height: 1.1rem;
   accent-color: var(--gold);
   cursor: pointer;
+}
+
+button[type="submit"] span {
+  position: relative;
+  z-index: 1;
+}
+
+button[type="submit"]::before {
+  content: '' !important;
 }

@@ -19,7 +19,7 @@
     <label for="nombre">Capacity:</label>
     <input type="number" th:field="*{capacity}" /><br /><br />
     <div class="field-error" th:if="${#fields.hasErrors('capacity')}" th:errors="*{capacity}"></div>
-    <button type="submit">Guardar</button>
+    <button type="submit"><span>Guardar</span></button>
   </form>
 </body>
 

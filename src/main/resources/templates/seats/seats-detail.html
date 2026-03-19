@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title th:text="'Asiento ' + ${seat.seatrow} + ${seat.seatNumber} + ' — Lumière'">Asiento — Lumière</title>
   <link rel="stylesheet" th:href="@{/css/layout.css}" />
-  <link rel="stylesheet" th:href="@{/css/seat-detail.css}" />
+  <link rel="stylesheet" th:href="@{/css/seats-detail.css}" />
 </head>
 
 <body>
@@ -60,10 +60,8 @@
 
             <div class="info-item">
               <span class="info-item__label">Estado</span>
-              <span th:text="${seat.estado} ? 'Ocupado' : 'Libre'"
-                th:class="${seat.estado} ? 'info-item__value info-item__value--ocupado' : 'info-item__value info-item__value--libre'">—</span>
+              <span class="info-item__value" th:text="${seat.estado} ? 'Ocupado' : 'Libre'">—</span>
             </div>
-
           </div>
 
           <div class="seat-card__actions">

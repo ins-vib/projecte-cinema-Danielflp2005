@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.daw.cinemadaw.domain.cinema.Cinema;
 import com.daw.cinemadaw.domain.cinema.Room;
+import com.daw.cinemadaw.domain.cinema.Seat;
+import com.daw.cinemadaw.domain.cinema.SeatType;
 import com.daw.cinemadaw.repository.CinemaRepository;
 import com.daw.cinemadaw.repository.RoomRepository;
+import com.daw.cinemadaw.repository.SeatRepository;
 
 import jakarta.validation.Valid;
 
@@ -22,10 +25,12 @@ public class RoomController {
 
     private RoomRepository roomRepository;
     private CinemaRepository cinemaRepository;
+    private SeatRepository seatRepository;
 
-    public RoomController(RoomRepository roomRepository, CinemaRepository cinemaRepository) {
+    public RoomController(RoomRepository roomRepository, CinemaRepository cinemaRepository, SeatRepository seatRepository) {
         this.roomRepository = roomRepository;
         this.cinemaRepository = cinemaRepository;
+        this.seatRepository = seatRepository;
     }
 
     @GetMapping("/room/create/{cinemaId}")
@@ -53,7 +58,7 @@ public class RoomController {
 
     @PostMapping("/room/editar")
     public String editPelicula(@Valid @ModelAttribute Room room, BindingResult result) {
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             return "rooms/room-update";
         }
         Long cinemaid = room.getCinema().getId();
@@ -87,7 +92,7 @@ public class RoomController {
 
     @PostMapping("/room/new")
     public String altaPelicula(@Valid @ModelAttribute Room room, BindingResult result) {
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             return "rooms/room-create";
         }
         Long cinemaid = room.getCinema().getId();
@@ -96,6 +101,21 @@ public class RoomController {
             room.setCinema(cinema.get());
         }
         roomRepository.save(room);
+
+        // Generar asientos automáticamente según capacidad
+        int cols = 10;
+        for (int i = 0; i < room.getCapacity(); i++) {
+            Seat seat = new Seat();
+            seat.setSeatNumber(i + 1);
+            seat.setSeatrow(String.valueOf((char) ('A' + i / cols)));
+            seat.setX(i % cols);
+            seat.setY(i / cols);
+            seat.setType(SeatType.Standard);
+            seat.setEstado(false);
+            seat.setRoom(room);
+            seatRepository.save(seat);
+        }
+
         return "redirect:/cinema/" + cinemaid;
     }
 

@@ -1,0 +1,79 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title th:text="${screening.movie.title} + ' — Sesión — Lumière'">Sesión — Lumière</title>
+  <link rel="stylesheet" th:href="@{/css/layout.css}" />
+  <link rel="stylesheet" th:href="@{/css/screenings.css}" />
+  <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
+</head>
+<body>
+
+  <div th:replace="~{layout :: layout(~{::content})}">
+    <div th:fragment="content">
+
+      <div class="page">
+
+        <header class="page-header">
+          <a class="btn-back" th:href="@{/screenings}">← Volver</a>
+          <span class="page-label">// SESIÓN</span>
+        </header>
+
+        <div class="screening-detail">
+
+          <div class="screening-detail__poster"
+            th:style="'background-image: url(/images/' + ${screening.movie.posterUrl} + ')'">
+            <div class="screening-detail__poster-overlay"></div>
+          </div>
+
+          <div class="screening-detail__content">
+            <div class="screening-detail__eyebrow">Sesión programada</div>
+            <h1 class="screening-detail__title" th:text="${screening.movie.title}">Película</h1>
+
+            <div class="screening-detail__datetime">
+              <span class="screening-detail__date"
+                th:text="${#temporals.format(screening.screeningDateTime, 'EEEE dd MMMM yyyy')}">—</span>
+              <span class="screening-detail__time"
+                th:text="${#temporals.format(screening.screeningDateTime, 'HH:mm')}">—</span>
+            </div>
+
+            <div class="screening-detail__info">
+              <div class="sd-item">
+                <span class="sd-item__label">Sala</span>
+                <span class="sd-item__value" th:text="${screening.room.name}">—</span>
+              </div>
+              <div class="sd-item">
+                <span class="sd-item__label">Cine</span>
+                <span class="sd-item__value" th:text="${screening.room.cinema.cinemaName}">—</span>
+              </div>
+              <div class="sd-item">
+                <span class="sd-item__label">Precio</span>
+                <span class="sd-item__value sd-item__value--price" th:text="${screening.precio} + ' €'">—</span>
+              </div>
+              <div class="sd-item">
+                <span class="sd-item__label">Duración</span>
+                <span class="sd-item__value" th:text="${screening.movie.min} + ' min'">—</span>
+              </div>
+              <div class="sd-item">
+                <span class="sd-item__label">Género</span>
+                <span class="sd-item__value" th:text="${screening.movie.gener}">—</span>
+              </div>
+            </div>
+
+            <div class="screening-detail__actions">
+              <a class="sc-btn sc-btn--edit" th:href="@{/screening/edit/{id}(id=${screening.id})}">Editar sesión</a>
+              <a class="sc-btn sc-btn--delete" th:href="@{/screening/delete/{id}(id=${screening.id})}"
+                onclick="return confirm('¿Eliminar esta sesión?')">Eliminar</a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

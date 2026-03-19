@@ -1,0 +1,60 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nueva Sesión — Lumière</title>
+  <link rel="stylesheet" th:href="@{/css/layout.css}" />
+  <link rel="stylesheet" th:href="@{/css/cinema-create.css}" />
+  <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
+</head>
+<body>
+
+  <div th:replace="~{layout :: layout(~{::content})}">
+    <div th:fragment="content">
+
+      <form th:action="@{/screening/new}" th:object="${screening}" method="post">
+        <legend>Nueva Sesión</legend>
+
+        <!-- Película -->
+        <div class="field-group">
+          <label>Película</label>
+          <select name="movie.id">
+            <option value="" disabled selected>Selecciona una película</option>
+            <option th:each="movie : ${movies}"
+                    th:value="${movie.id}"
+                    th:text="${movie.title}">Película</option>
+          </select>
+        </div>
+
+        <!-- Sala -->
+        <div class="field-group">
+          <label>Sala</label>
+          <select name="room.id">
+            <option value="" disabled selected>Selecciona una sala</option>
+            <option th:each="room : ${rooms}"
+                    th:value="${room.id}"
+                    th:text="${room.name} + ' — ' + ${room.cinema.cinemaName}">Sala</option>
+          </select>
+        </div>
+
+        <!-- Fecha y hora -->
+        <div class="field-group">
+          <label>Fecha y hora</label>
+          <input type="datetime-local" th:field="*{screeningDateTime}" />
+        </div>
+
+        <!-- Precio -->
+        <div class="field-group">
+          <label>Precio (€)</label>
+          <input type="number" step="0.50" min="0" th:field="*{precio}" />
+        </div>
+
+        <button type="submit"><span>Programar sesión</span></button>
+      </form>
+
+    </div>
+  </div>
+
+</body>
+</html>

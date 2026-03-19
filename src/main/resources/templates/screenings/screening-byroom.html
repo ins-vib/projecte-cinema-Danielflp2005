@@ -1,0 +1,67 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title th:text="${room.name} + ' — Sesiones — Lumière'">Sesiones — Lumière</title>
+  <link rel="stylesheet" th:href="@{/css/layout.css}" />
+  <link rel="stylesheet" th:href="@{/css/screenings.css}" />
+  <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
+</head>
+<body>
+
+  <div th:replace="~{layout :: layout(~{::content})}">
+    <div th:fragment="content">
+
+      <div class="screenings-header">
+        <div class="screenings-header__text">
+          <span class="eyebrow">// SALA · <span th:text="${room.cinema.cinemaName}">Cine</span></span>
+          <h1 th:text="${room.name}">Sala</h1>
+        </div>
+        <div class="screenings-header__actions">
+          <a class="sc-btn sc-btn--detail" th:href="@{/cinema/{id}(id=${room.cinema.id})}">← Volver</a>
+        </div>
+      </div>
+
+      <!-- Lista de sesiones -->
+      <div class="screenings-grid" th:if="${not #lists.isEmpty(screenings)}">
+        <div class="screening-card" th:each="screening : ${screenings}">
+
+          <div class="screening-card__date">
+            <span class="screening-card__day"
+              th:text="${#temporals.format(screening.screeningDateTime, 'dd')}">01</span>
+            <span class="screening-card__month"
+              th:text="${#temporals.format(screening.screeningDateTime, 'MMM')}">ENE</span>
+          </div>
+
+          <div class="screening-card__info">
+            <div class="screening-card__movie" th:text="${screening.movie.title}">Película</div>
+            <div class="screening-card__meta">
+              <span class="screening-card__time"
+                th:text="${#temporals.format(screening.screeningDateTime, 'HH:mm')}">20:00</span>
+              <span class="screening-card__sep">·</span>
+              <span class="screening-card__price" th:text="${screening.precio} + ' €'">0 €</span>
+              <span class="screening-card__sep">·</span>
+              <span th:text="${screening.movie.min} + ' min'">— min</span>
+            </div>
+          </div>
+
+          <div class="screening-card__actions">
+            <a class="sc-btn sc-btn--edit" th:href="@{/screening/detail/{id}(id=${screening.id})}">Ver detalles</a>
+            <a class="sc-btn sc-btn--edit" th:href="@{/screening/edit/{id}(id=${screening.id})}">Editar</a>
+            <a class="sc-btn sc-btn--delete" th:href="@{/screening/delete/{id}(id=${screening.id})}"
+              onclick="return confirm('¿Eliminar esta sesión?')">Borrar</a>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="screenings-empty" th:if="${#lists.isEmpty(screenings)}">
+        <p>No hay sesiones programadas para esta sala</p>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

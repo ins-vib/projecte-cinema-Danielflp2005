@@ -4,15 +4,19 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.daw.cinemadaw.domain.cinema.Cinema;
 import com.daw.cinemadaw.domain.cinema.Room;
 import com.daw.cinemadaw.domain.cinema.Seat;
 import com.daw.cinemadaw.domain.cinema.SeatType;
+import com.daw.cinemadaw.domain.cinema.User.Role;
+import com.daw.cinemadaw.domain.cinema.User.User;
 import com.daw.cinemadaw.repository.CinemaRepository;
 import com.daw.cinemadaw.repository.RoomRepository;
 import com.daw.cinemadaw.repository.SeatRepository;
+import com.daw.cinemadaw.repository.UserRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -24,15 +28,34 @@ public class Pruebas implements CommandLineRunner {
     private RoomRepository roomRepository;
     private SeatRepository seatRepository;
 
-    public Pruebas(CinemaRepository cinemaRepository, RoomRepository roomRepository, SeatRepository seatRepository) {
+    private UserRepository userRepository;
+    BCryptPasswordEncoder encoder;
+
+
+
+    public Pruebas(CinemaRepository cinemaRepository, BCryptPasswordEncoder encoder, RoomRepository roomRepository, SeatRepository seatRepository, UserRepository userRepository) {
         this.cinemaRepository = cinemaRepository;
+        this.encoder = encoder;
         this.roomRepository = roomRepository;
         this.seatRepository = seatRepository;
+        this.userRepository = userRepository;
     }
 
     @Transactional
     @Override
     public void run(String... args) throws Exception {
+
+        User admin = new User();
+        admin.setUsername("admin");
+        admin.setPassword(encoder.encode("1234"));
+        admin.setRole(Role.ADMIN);
+        userRepository.save(admin);
+
+        User client = new User();
+        client.setUsername("client");
+        client.setPassword(encoder.encode("1234"));
+        client.setRole(Role.CLIENT);
+        userRepository.save(client);
 
         Cinema cinema1 = new Cinema("Jaume", "Yelmo", "Tarragona", "43003");
         cinemaRepository.save(cinema1);

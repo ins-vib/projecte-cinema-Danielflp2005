@@ -1,0 +1,328 @@
+/* ============================================================
+   LUMIÈRE — login.css
+   ============================================================ */
+
+   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Mono:wght@300;400&display=swap');
+
+   :root {
+     --bg:       #080808;
+     --bg2:      #0f0f0f;
+     --bg3:      #141414;
+     --gold:     #c9a84c;
+     --gold2:    #e8c97a;
+     --gold-dim: rgba(201,168,76,0.08);
+     --gold-glow:rgba(201,168,76,0.18);
+     --red:      #8b1a1a;
+     --red2:     #c0392b;
+     --text:     #e8e0d0;
+     --muted:    rgba(232,224,208,0.4);
+     --border:   rgba(201,168,76,0.15);
+     --ease:     0.3s cubic-bezier(0.4,0,0.2,1);
+   }
+   
+   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+   
+   html, body {
+     height: 100%;
+   }
+   
+   body {
+     background-color: var(--bg);
+     background-image:
+       radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,168,76,0.05) 0%, transparent 60%),
+       radial-gradient(ellipse 60% 50% at 100% 100%, rgba(139,26,26,0.08) 0%, transparent 55%);
+     color: var(--text);
+     font-family: 'Cormorant Garamond', serif;
+     min-height: 100vh;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     overflow: hidden;
+     position: relative;
+   }
+   
+   /* ── Grain ───────────────────────────────────────────────────── */
+   .grain {
+     position: fixed; inset: 0;
+     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+     pointer-events: none; z-index: 0; opacity: 0.5;
+   }
+   
+   /* ── Film strips ─────────────────────────────────────────────── */
+   .film-strip {
+     position: fixed;
+     top: 0; bottom: 0;
+     width: 48px;
+     background: rgba(201,168,76,0.03);
+     border: 1px solid rgba(201,168,76,0.07);
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     padding: 1rem 0;
+     gap: 1.2rem;
+     z-index: 1;
+   }
+   
+   .film-strip--left  { left: 0; }
+   .film-strip--right { right: 0; }
+   
+   .film-hole {
+     width: 20px; height: 14px;
+     border: 1px solid rgba(201,168,76,0.15);
+     border-radius: 2px;
+     background: rgba(201,168,76,0.03);
+     flex-shrink: 0;
+   }
+   
+   /* ── Wrapper ─────────────────────────────────────────────────── */
+   .login-wrapper {
+     position: relative; z-index: 2;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     gap: 2rem;
+     width: 100%;
+     max-width: 420px;
+     padding: 2rem 1rem;
+     animation: fadeUp 0.7s cubic-bezier(0.4,0,0.2,1) both;
+   }
+   
+   @keyframes fadeUp {
+     from { opacity: 0; transform: translateY(24px); }
+     to   { opacity: 1; transform: translateY(0); }
+   }
+   
+   /* ── Logo ────────────────────────────────────────────────────── */
+   .login-logo {
+     display: flex;
+     align-items: baseline;
+     gap: 0.5rem;
+     margin-bottom: 0.5rem;
+   }
+   
+   .login-logo__text {
+     font-family: 'Bebas Neue', sans-serif;
+     font-size: 2.8rem;
+     letter-spacing: 0.35em;
+     color: var(--gold);
+     line-height: 1;
+   }
+   
+   .login-logo__sub {
+     font-family: 'DM Mono', monospace;
+     font-size: 0.6rem;
+     letter-spacing: 0.3em;
+     color: rgba(201,168,76,0.35);
+   }
+   
+   /* ── Card ────────────────────────────────────────────────────── */
+   .login-card {
+     width: 100%;
+     background: var(--bg2);
+     border: 1px solid var(--border);
+     border-radius: 2px;
+     padding: 2.5rem 2.5rem 2rem;
+     position: relative;
+     box-shadow:
+       0 0 0 1px rgba(0,0,0,0.5),
+       0 32px 80px rgba(0,0,0,0.7),
+       inset 0 1px 0 rgba(201,168,76,0.06);
+   }
+   
+   /* Gold top bar */
+   .login-card::before {
+     content: '';
+     position: absolute;
+     top: -1px; left: 2.5rem;
+     width: 50px; height: 2px;
+     background: var(--gold);
+   }
+   
+   /* Subtle corner accent */
+   .login-card::after {
+     content: '';
+     position: absolute;
+     bottom: -1px; right: 2.5rem;
+     width: 30px; height: 1px;
+     background: rgba(139,26,26,0.6);
+   }
+   
+   .login-card__eyebrow {
+     font-family: 'DM Mono', monospace;
+     font-size: 0.55rem;
+     letter-spacing: 0.45em;
+     text-transform: uppercase;
+     color: rgba(201,168,76,0.5);
+     margin-bottom: 0.5rem;
+   }
+   
+   .login-card__title {
+     font-family: 'Bebas Neue', sans-serif;
+     font-size: 2.4rem;
+     letter-spacing: 0.06em;
+     color: var(--text);
+     line-height: 1;
+     margin-bottom: 0.4rem;
+   }
+   
+   .login-card__subtitle {
+     font-family: 'Cormorant Garamond', serif;
+     font-size: 0.95rem;
+     font-style: italic;
+     color: var(--muted);
+     margin-bottom: 2rem;
+     padding-bottom: 1.5rem;
+     border-bottom: 1px solid rgba(232,224,208,0.06);
+   }
+   
+   /* ── Error ───────────────────────────────────────────────────── */
+   .login-error {
+     display: flex;
+     align-items: center;
+     gap: 0.5rem;
+     background: rgba(139,26,26,0.12);
+     border: 1px solid rgba(192,57,43,0.3);
+     border-radius: 2px;
+     padding: 0.7rem 1rem;
+     margin-bottom: 1.5rem;
+     font-family: 'DM Mono', monospace;
+     font-size: 0.62rem;
+     letter-spacing: 0.05em;
+     color: #e05c5c;
+   }
+   
+   /* ── Form ────────────────────────────────────────────────────── */
+   .login-form {
+     display: flex;
+     flex-direction: column;
+     gap: 1.4rem;
+   }
+   
+   /* ── Field ───────────────────────────────────────────────────── */
+   .login-field {
+     display: flex;
+     flex-direction: column;
+     gap: 0.5rem;
+   }
+   
+   .login-field__label {
+     font-family: 'DM Mono', monospace;
+     font-size: 0.58rem;
+     letter-spacing: 0.3em;
+     text-transform: uppercase;
+     color: var(--muted);
+     transition: color var(--ease);
+   }
+   
+   .login-field:focus-within .login-field__label {
+     color: var(--gold);
+   }
+   
+   .login-field__input {
+     background: var(--bg3);
+     border: 1px solid var(--border);
+     border-radius: 2px;
+     color: var(--text);
+     font-family: 'Cormorant Garamond', serif;
+     font-size: 1.1rem;
+     padding: 0.75rem 1rem;
+     outline: none;
+     width: 100%;
+     transition: border-color var(--ease), box-shadow var(--ease), background var(--ease);
+     -webkit-appearance: none;
+   }
+   
+   .login-field__input::placeholder {
+     color: rgba(232,224,208,0.18);
+     font-style: italic;
+   }
+   
+   .login-field__input:hover {
+     border-color: rgba(201,168,76,0.28);
+     background: var(--bg3);
+   }
+   
+   .login-field__input:focus {
+     border-color: rgba(201,168,76,0.55);
+     background: #161616;
+     box-shadow: 0 0 0 3px var(--gold-dim), 0 0 20px var(--gold-glow);
+   }
+   
+   /* ── Button ──────────────────────────────────────────────────── */
+   .login-btn {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     width: 100%;
+     margin-top: 0.5rem;
+     padding: 1rem 1.5rem;
+     background: var(--red);
+     color: var(--text);
+     border: 1px solid transparent;
+     border-radius: 2px;
+     cursor: pointer;
+     position: relative;
+     overflow: hidden;
+     transition: border-color var(--ease), box-shadow var(--ease);
+   }
+   
+   .login-btn::before {
+     content: '';
+     position: absolute; inset: 0;
+     background: var(--red2);
+     transform: translateX(-100%);
+     transition: transform var(--ease);
+     z-index: 0;
+   }
+   
+   .login-btn:hover { 
+     border-color: rgba(192,57,43,0.5);
+     box-shadow: 0 4px 24px rgba(139,26,26,0.4);
+   }
+   
+   .login-btn:hover::before { transform: translateX(0); }
+   
+   .login-btn__text {
+     font-family: 'DM Mono', monospace;
+     font-size: 0.7rem;
+     letter-spacing: 0.25em;
+     text-transform: uppercase;
+     position: relative; z-index: 1;
+   }
+   
+   .login-btn__arrow {
+     font-size: 1rem;
+     position: relative; z-index: 1;
+     transition: transform var(--ease);
+   }
+   
+   .login-btn:hover .login-btn__arrow {
+     transform: translateX(4px);
+   }
+   
+   /* ── Footer ──────────────────────────────────────────────────── */
+   .login-footer__link {
+     font-family: 'DM Mono', monospace;
+     font-size: 0.58rem;
+     letter-spacing: 0.2em;
+     text-transform: uppercase;
+     text-decoration: none;
+     color: rgba(232,224,208,0.2);
+     transition: color var(--ease);
+   }
+   
+   .login-footer__link:hover { color: var(--gold); }
+   
+   /* ── Scrollbar ───────────────────────────────────────────────── */
+   ::-webkit-scrollbar { width: 5px; }
+   ::-webkit-scrollbar-track { background: var(--bg); }
+   ::-webkit-scrollbar-thumb { background: #2a2520; border-radius: 3px; }
+   ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+   ::selection { background: rgba(201,168,76,0.2); color: var(--gold2); }
+   
+   /* ── Responsive ──────────────────────────────────────────────── */
+   @media (max-width: 560px) {
+     .film-strip { display: none; }
+     .login-card { padding: 2rem 1.5rem; }
+     .login-logo__text { font-size: 2.2rem; }
+   }

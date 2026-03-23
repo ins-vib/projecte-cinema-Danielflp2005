@@ -34,4 +34,23 @@ public class HomeController {
         return "home";
     }
 
+    // Mostra la pàgina de login
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    // Pàgina d'admin
+    @GetMapping("/admin")
+    public String admin() {
+        return "admin/home";
+    }
+
+    // Pàgina de client
+    @GetMapping("/client")
+    public String client(Model model) {
+
+        return "client/home";
+    }
+
 }

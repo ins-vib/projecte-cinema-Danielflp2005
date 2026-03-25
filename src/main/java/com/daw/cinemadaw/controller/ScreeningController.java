@@ -32,8 +32,7 @@ public class ScreeningController {
         this.roomRepository = roomRepository;
     }
 
-    // ── Públicas ───────────────────────────────────────────────
-    @GetMapping("/screenings")
+    @GetMapping("/admin/screenings")
     public String listMovies(Model model) {
         List<Movie> movies = screeningRepository.findAll()
                 .stream()
@@ -44,39 +43,38 @@ public class ScreeningController {
         return "admin/screenings/screenings";
     }
 
-    @GetMapping("/screenings/movie/{id}")
+    @GetMapping("/admin/screenings/movie/{id}")
     public String byMovie(@PathVariable Long id, Model model) {
         Optional<Movie> movie = movieRepository.findById(id);
-        if (movie.isEmpty()) return "redirect:/screenings";
+        if (movie.isEmpty()) return "redirect:/admin/screenings";
         List<Screening> screenings = screeningRepository.findByMovie(movie.get());
         model.addAttribute("movie", movie.get());
         model.addAttribute("screenings", screenings);
         return "admin/screenings/screenings-bymovies";
     }
 
-    @GetMapping("/screenings/room/{id}")
+    @GetMapping("/admin/screenings/room/{id}")
     public String byRoom(@PathVariable Long id, Model model) {
         Optional<Room> room = roomRepository.findById(id);
-        if (room.isEmpty()) return "redirect:/screenings";
+        if (room.isEmpty()) return "redirect:/admin/screenings";
         List<Screening> screenings = screeningRepository.findByRoom(room.get());
         model.addAttribute("room", room.get());
         model.addAttribute("screenings", screenings);
         return "admin/screenings/screening-byroom";
     }
 
-    @GetMapping("/screening/detail/{id}")
+    @GetMapping("/admin/screening/detail/{id}")
     public String detail(@PathVariable Long id, Model model) {
         Optional<Screening> optional = screeningRepository.findById(id);
-        if (optional.isEmpty()) return "redirect:/screenings";
+        if (optional.isEmpty()) return "redirect:/admin/screenings";
         model.addAttribute("screening", optional.get());
         return "admin/screenings/screening-details";
     }
 
-    // ── Admin ──────────────────────────────────────────────────
     @GetMapping("/admin/screening/create/{movieId}")
     public String createForm(@PathVariable Long movieId, Model model) {
         Optional<Movie> movie = movieRepository.findById(movieId);
-        if (movie.isEmpty()) return "redirect:/movies/billboard";
+        if (movie.isEmpty()) return "redirect:/admin/movies/billboard";
         Screening screening = new Screening();
         screening.setMovie(movie.get());
         model.addAttribute("screening", screening);
@@ -102,7 +100,7 @@ public class ScreeningController {
         movie.ifPresent(screening::setMovie);
         room.ifPresent(screening::setRoom);
         screeningRepository.save(screening);
-        return "redirect:/screenings/movie/" + movieId;
+        return "redirect:/admin/screenings/movie/" + movieId;
     }
 
     @PostMapping("/admin/screening/new")
@@ -112,13 +110,13 @@ public class ScreeningController {
         movie.ifPresent(screening::setMovie);
         room.ifPresent(screening::setRoom);
         screeningRepository.save(screening);
-        return "redirect:/screenings";
+        return "redirect:/admin/screenings";
     }
 
     @GetMapping("/admin/screening/edit/{id}")
     public String editForm(@PathVariable Long id, Model model) {
         Optional<Screening> optional = screeningRepository.findById(id);
-        if (optional.isEmpty()) return "redirect:/screenings";
+        if (optional.isEmpty()) return "redirect:/admin/screenings";
         model.addAttribute("screening", optional.get());
         model.addAttribute("rooms", roomRepository.findAll());
         model.addAttribute("movies", movieRepository.findAll());
@@ -132,7 +130,7 @@ public class ScreeningController {
         movie.ifPresent(screening::setMovie);
         room.ifPresent(screening::setRoom);
         screeningRepository.save(screening);
-        return "redirect:/screenings";
+        return "redirect:/admin/screenings";
     }
 
     @GetMapping("/admin/screening/delete/{id}")
@@ -140,6 +138,6 @@ public class ScreeningController {
         Optional<Screening> optional = screeningRepository.findById(id);
         Long movieId = optional.map(s -> s.getMovie().getId()).orElse(null);
         screeningRepository.deleteById(id);
-        return movieId != null ? "redirect:/screenings/movie/" + movieId : "redirect:/screenings";
+        return movieId != null ? "redirect:/admin/screenings/movie/" + movieId : "redirect:/admin/screenings";
     }
 }

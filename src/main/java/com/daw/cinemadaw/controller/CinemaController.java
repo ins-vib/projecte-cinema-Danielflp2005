@@ -25,32 +25,30 @@ public class CinemaController {
         this.cinemaRepository = cinemaRepository;
     }
 
-    // ── Públicas ───────────────────────────────────────────────
-    @GetMapping("/cinemes")
+    @GetMapping("/admin/cinemes")
     public String cinemes(Model model) {
         List<Cinema> cines = cinemaRepository.findAll();
         model.addAttribute("Lista", cines);
         return "admin/cinemas/cinemes";
     }
 
-    @GetMapping("/cinema/{id}")
+    @GetMapping("/admin/cinema/{id}")
     public String detall(@PathVariable Long id, Model model) {
         Optional<Cinema> optional = cinemaRepository.findById(id);
         if (optional.isPresent()) {
             model.addAttribute("cinema", optional.get());
             return "admin/cinemas/detail-cinema";
         }
-        return "redirect:/";
+        return "redirect:/admin/cinemes";
     }
 
-    // ── Admin ──────────────────────────────────────────────────
     @GetMapping("/admin/cinema/delete/{id}")
     public String delete(@PathVariable Long id) {
         Optional<Cinema> optional = cinemaRepository.findById(id);
         if (optional.isPresent()) {
             cinemaRepository.delete(optional.get());
         }
-        return "redirect:/cinemes";
+        return "redirect:/admin/cinemes";
     }
 
     @GetMapping("/admin/cinemes/create")
@@ -67,7 +65,7 @@ public class CinemaController {
             return "admin/cinemas/cinema-create";
         }
         cinemaRepository.save(cinema);
-        return "redirect:/cinemes";
+        return "redirect:/admin/cinemes";
     }
 
     @GetMapping("/admin/cinemes/edit/{id}")
@@ -77,7 +75,7 @@ public class CinemaController {
             model.addAttribute("cinema", optional.get());
             return "admin/cinemas/cinema-update";
         }
-        return "redirect:/cinemes";
+        return "redirect:/admin/cinemes";
     }
 
     @PostMapping("/admin/cinemes/editar")
@@ -86,6 +84,6 @@ public class CinemaController {
             return "admin/cinemas/cinema-update";
         }
         cinemaRepository.save(cinema);
-        return "redirect:/cinemes";
+        return "redirect:/admin/cinemes";
     }
 }

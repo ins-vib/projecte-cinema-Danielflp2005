@@ -34,18 +34,16 @@ public class RoomController {
         this.seatRepository = seatRepository;
     }
 
-    // ── Públicas ───────────────────────────────────────────────
-    @GetMapping("/room/{id}")
+    @GetMapping("/admin/room/{id}")
     public String detall(@PathVariable Long id, Model model) {
         Optional<Room> optional = roomRepository.findById(id);
         if (optional.isEmpty()) {
-            return "redirect:/cinemes";
+            return "redirect:/admin/cinemes";
         }
         model.addAttribute("room", optional.get());
         return "admin/rooms/room-detail";
     }
 
-    // ── Admin ──────────────────────────────────────────────────
     @GetMapping("/admin/room/create/{cinemaId}")
     public String newRoom(@PathVariable Long cinemaId, Model model) {
         Room room = new Room();
@@ -63,7 +61,7 @@ public class RoomController {
             model.addAttribute("room", optional.get());
             return "admin/rooms/room-update";
         }
-        return "redirect:/cinemes";
+        return "redirect:/admin/cinemes";
     }
 
     @PostMapping("/admin/room/editar")
@@ -84,7 +82,7 @@ public class RoomController {
             roomToUpdate.setCinema(cinema.get());
             roomRepository.save(roomToUpdate);
         }
-        return "redirect:/cinema/" + cinemaid;
+        return "redirect:/admin/cinema/" + cinemaid;
     }
 
     @GetMapping("/admin/room/delete/{id}")
@@ -94,9 +92,9 @@ public class RoomController {
             Room room = optional.get();
             Long cinemaid = room.getCinema().getId();
             roomRepository.delete(room);
-            return "redirect:/cinema/" + cinemaid;
+            return "redirect:/admin/cinema/" + cinemaid;
         }
-        return "redirect:/cinemes";
+        return "redirect:/admin/cinemes";
     }
 
     @PostMapping("/admin/room/new")
@@ -123,6 +121,6 @@ public class RoomController {
             seat.setRoom(room);
             seatRepository.save(seat);
         }
-        return "redirect:/cinema/" + cinemaid;
+        return "redirect:/admin/cinema/" + cinemaid;
     }
 }

@@ -26,28 +26,26 @@ public class SeatController {
         this.roomRepository = roomRepository;
     }
 
-    // ── Públicas ───────────────────────────────────────────────
-    @GetMapping("/seats/room/{id}")
+    @GetMapping("/admin/seats/room/{id}")
     public String seats(@PathVariable Long id, Model model) {
         Optional<Room> optional = roomRepository.findById(id);
         if (optional.isPresent()) {
             model.addAttribute("room", optional.get());
             return "admin/seats/seats";
         }
-        return "redirect:/";
+        return "redirect:/admin/cinemes";
     }
 
-    @GetMapping("/seats/detail/{id}")
+    @GetMapping("/admin/seats/detail/{id}")
     public String seatDetail(@PathVariable Long id, Model model) {
         Optional<Seat> optional = seatRepository.findById(id);
         if (optional.isPresent()) {
             model.addAttribute("seat", optional.get());
             return "admin/seats/seats-detail";
         }
-        return "redirect:/";
+        return "redirect:/admin/cinemes";
     }
 
-    // ── Admin ──────────────────────────────────────────────────
     @GetMapping("/admin/seats/new/{id}")
     public String createSeats(@PathVariable Long id, Model model) {
         Seat seat = new Seat();
@@ -61,7 +59,7 @@ public class SeatController {
     public String editSeat(@PathVariable Long id, Model model) {
         Optional<Seat> optional = seatRepository.findById(id);
         if (optional.isEmpty()) {
-            return "redirect:/";
+            return "redirect:/admin/cinemes";
         }
         model.addAttribute("seat", optional.get());
         model.addAttribute("types", SeatType.values());
@@ -74,9 +72,9 @@ public class SeatController {
         if (optional.isPresent()) {
             Seat seat = optional.get();
             seatRepository.delete(seat);
-            return "redirect:/seats/room/" + seat.getRoom().getId();
+            return "redirect:/admin/seats/room/" + seat.getRoom().getId();
         }
-        return "redirect:/";
+        return "redirect:/admin/cinemes";
     }
 
     @PostMapping("/admin/seats/new/{id}")
@@ -86,7 +84,7 @@ public class SeatController {
             seat.setRoom(room.get());
         }
         seatRepository.save(seat);
-        return "redirect:/seats/room/" + id;
+        return "redirect:/admin/seats/room/" + id;
     }
 
     @PostMapping("/admin/seats/edit/{id}")
@@ -97,6 +95,6 @@ public class SeatController {
             seat.setRoom(room.get());
         }
         seatRepository.save(seat);
-        return "redirect:/seats/room/" + roomId;
+        return "redirect:/admin/seats/room/" + roomId;
     }
 }

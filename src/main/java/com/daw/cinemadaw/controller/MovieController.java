@@ -25,32 +25,30 @@ public class MovieController {
         this.movieRepository = movieRepository;
     }
 
-    // ── Públicas ───────────────────────────────────────────────
-    @GetMapping("/movies/billboard")
+    @GetMapping("/admin/movies/billboard")
     public String movies(Model model) {
         List<Movie> movies = movieRepository.findAll();
         model.addAttribute("Lista", movies);
         return "admin/movies/billboard";
     }
 
-    @GetMapping("/movie/{id}")
+    @GetMapping("/admin/movie/{id}")
     public String detall(@PathVariable Long id, Model model) {
         Optional<Movie> optional = movieRepository.findById(id);
         if (optional.isPresent()) {
             model.addAttribute("movie", optional.get());
             return "admin/movies/movie-detail";
         }
-        return "redirect:/";
+        return "redirect:/admin/movies/billboard";
     }
 
-    // ── Admin ──────────────────────────────────────────────────
     @GetMapping("/admin/movie/delete/{id}")
     public String delete(@PathVariable Long id) {
         Optional<Movie> optional = movieRepository.findById(id);
         if (optional.isPresent()) {
             movieRepository.delete(optional.get());
         }
-        return "redirect:/movies/billboard";
+        return "redirect:/admin/movies/billboard";
     }
 
     @GetMapping("/admin/movie/create")
@@ -65,7 +63,7 @@ public class MovieController {
             return "admin/movies/movie-create";
         }
         movieRepository.save(movie);
-        return "redirect:/movies/billboard";
+        return "redirect:/admin/movies/billboard";
     }
 
     @GetMapping("/admin/movie/edit/{id}")
@@ -75,7 +73,7 @@ public class MovieController {
             model.addAttribute("movie", optional.get());
             return "admin/movies/movie-update";
         }
-        return "redirect:/movies/billboard";
+        return "redirect:/admin/movies/billboard";
     }
 
     @PostMapping("/admin/movie/editar")
@@ -84,6 +82,6 @@ public class MovieController {
             return "admin/movies/movie-update";
         }
         movieRepository.save(movie);
-        return "redirect:/movies/billboard";
+        return "redirect:/admin/movies/billboard";
     }
 }

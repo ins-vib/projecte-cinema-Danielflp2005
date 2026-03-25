@@ -17,7 +17,7 @@
 
       <div class="page">
         <header class="page-header">
-          <a class="btn-back" th:href="@{/cinemes}">← Volver</a>
+          <a class="btn-back" th:href="@{/admin/cinemes}">← Volver</a>
           <span class="page-label">// DETALLE</span>
         </header>
 
@@ -61,10 +61,10 @@
                 <span class="room-item__capacity-label">butacas</span>
               </span>
               <div class="room-item__actions">
-                <a class="room-btn room-btn--edit" th:href="@{/room/{id}(id=${room.id})}">Ver detalles</a>
+                <a class="room-btn room-btn--edit" th:href="@{/admin/room/{id}(id=${room.id})}">Ver detalles</a>
                 <a class="room-btn room-btn--edit" th:href="@{/admin/room/edit/{id}(id=${room.id})}">Editar</a>
-                <a class="room-btn room-btn--edit" th:href="@{/screenings/room/{id}(id=${room.id})}">Ver sesiones</a>
-                <a class="room-btn room-btn--edit" th:href="@{/seats/room/{id}(id=${room.id})}">Ver butacas</a>
+                <a class="room-btn room-btn--edit" th:href="@{/admin/screenings/room/{id}(id=${room.id})}">Ver sesiones</a>
+                <a class="room-btn room-btn--edit" th:href="@{/admin/seats/room/{id}(id=${room.id})}">Ver butacas</a>
                 <a class="room-btn room-btn--delete" th:href="@{/admin/room/delete/{id}(id=${room.id})}">Eliminar</a>
               </div>
             </li>

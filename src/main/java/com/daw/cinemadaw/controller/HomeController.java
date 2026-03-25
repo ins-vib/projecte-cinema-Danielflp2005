@@ -31,7 +31,7 @@ public class HomeController {
         }
 
         model.addAttribute("lista", lista);
-        return "home";
+        return "landing";
     }
 
     // Mostra la pàgina de login

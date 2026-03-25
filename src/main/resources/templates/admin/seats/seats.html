@@ -13,14 +13,14 @@
 
 <body>
 
-  <div th:replace="~{layout :: layout(~{::content})}">
+  <div th:replace="~{layoutadmin :: layoutadmin(~{::content})}">
     <div th:fragment="content">
 
       
       <div class="table-header">
         <h1 th:text="${room.name}">Sala</h1>
         <a class="btn-back" th:href="@{/cinema/{id}(id=${room.cinema.id})}">← Volver</a>
-        <a class="btn-add" th:href="@{/seats/new/{id}(id=${room.id})}">Crear asiento</a>
+        <a class="btn-add" th:href="@{/admin/seats/new/{id}(id=${room.id})}">Crear asiento</a>
       </div>
 
       <table>
@@ -43,8 +43,8 @@
             <td th:text="${seat.estado} ? 'Ocupado' : 'Libre'"></td>
             <td>
               <a class="btn-secondary" th:href="@{/seats/detail/{id}(id=${seat.id})}">Ver Detalles</a>
-              <a class="btn-secondary" th:href="@{/seats/edit/{id}(id=${seat.id})}">Editar</a>
-              <a class="btn-secondary btn-danger" th:href="@{/seats/delete/{id}(id=${seat.id})}">Borrar</a>
+              <a class="btn-secondary" th:href="@{/admin/seats/edit/{id}(id=${seat.id})}">Editar</a>
+              <a class="btn-secondary btn-danger" th:href="@{/admin/seats/delete/{id}(id=${seat.id})}">Borrar</a>
             </td>
           </tr>
         </tbody>
@@ -54,7 +54,7 @@
       <div class="seats-map">
         <svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
           <g th:each="seat : ${room.seat}">
-            <a th:href="@{/seats/edit/{id}(id=${seat.id})}">
+            <a th:href="@{/admin/seats/edit/{id}(id=${seat.id})}">
               <svg class="seat" viewBox="0 0 491.5 491.5" width="30" height="30" th:x="${seat.x * 80}"
                 th:y="${seat.y * 40}" xmlns="http://www.w3.org/2000/svg">
                 <path d="M449.149,216.2v-99c0-64.7-53.4-117.2-119.1-117.2h-168.4

@@ -25,15 +25,14 @@ public class SecurityConfig {
         // Configuració d'autoritzacions
         .authorizeHttpRequests(auth -> auth
 
-            // Accés públic
             .requestMatchers("/h2-console/**").permitAll()
-            .requestMatchers("/login", "/css/**").permitAll()
-
-            // Rutes protegides per rol
+            .requestMatchers("/login", "/logout").permitAll()
+            .requestMatchers("/css/**", "/images/**", "/favicon.svg").permitAll()
+            .requestMatchers("/").permitAll()
+        
             .requestMatchers("/admin/**").hasRole("ADMIN")
             .requestMatchers("/client/**").hasAnyRole("CLIENT", "ADMIN")
-
-            // Qualsevol altra petició necessita autenticació
+        
             .anyRequest().authenticated()
         )
 

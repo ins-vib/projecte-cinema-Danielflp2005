@@ -12,7 +12,7 @@
 
 <body>
 
-  <div th:replace="~{layout :: layout(~{::content})}">
+  <div th:replace="~{layoutadmin :: layoutadmin(~{::content})}">
     <div th:fragment="content">
 
       <div class="page">
@@ -46,7 +46,7 @@
             <span class="rooms-section__eyebrow">// INSTALACIONES</span>
             <h2 class="rooms-section__title">Salas</h2>
             <span class="rooms-section__count" th:text="${#lists.size(cinema.rooms)} + ' salas'">0 salas</span>
-            <a class="btn-add-room" th:href="@{/room/create/{id}(id=${cinema.id})}">
+            <a class="btn-add-room" th:href="@{/admin/room/create{id}(id=${cinema.id})}">
               <span>+ Nueva sala</span>
             </a>
           </div>
@@ -62,10 +62,10 @@
               </span>
               <div class="room-item__actions">
                 <a class="room-btn room-btn--edit" th:href="@{/room/{id}(id=${room.id})}">Ver detalles</a>
-                <a class="room-btn room-btn--edit" th:href="@{/room/edit/{id}(id=${room.id})}">Editar</a>
+                <a class="room-btn room-btn--edit" th:href="@{/admin/room/edit/{id}(id=${room.id})}">Editar</a>
                 <a class="room-btn room-btn--edit" th:href="@{/screenings/room/{id}(id=${room.id})}">Ver sesiones</a>
                 <a class="room-btn room-btn--edit" th:href="@{/seats/room/{id}(id=${room.id})}">Ver butacas</a>
-                <a class="room-btn room-btn--delete" th:href="@{/room/delete/{id}(id=${room.id})}">Eliminar</a>
+                <a class="room-btn room-btn--delete" th:href="@{/admin/room/delete/{id}(id=${room.id})}">Eliminar</a>
               </div>
             </li>
           </ul>

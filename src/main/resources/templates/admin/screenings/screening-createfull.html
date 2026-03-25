@@ -10,10 +10,10 @@
 </head>
 <body>
 
-  <div th:replace="~{layout :: layout(~{::content})}">
+  <div th:replace="~{layoutadmin:: layoutadmin(~{::content})}">
     <div th:fragment="content">
 
-      <form th:action="@{/screening/new}" th:object="${screening}" method="post">
+      <form th:action="@{/admin/screening/new}" th:object="${screening}" method="post">
         <legend>Nueva Sesión</legend>
 
         <!-- Película -->

@@ -1,17 +1,94 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cinema DAW</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
 </head>
-
 <body>
-    <h1>Panell d'Administració</h1>
-    <p>Benvingut administrador</p>
 
-    <a href="/logout">Logout</a>
+  <!-- ══ HERO WRAPPER — todo el hero contenido aquí ══ -->
+  <div class="hero-wrapper">
+
+    <!-- Slideshow de fondo -->
+    <div class="bg-slideshow" id="bgSlideshow">
+      <div class="bg-slide active" style="background-image: url('/images/dune.webp')"></div>
+      <div class="bg-slide" style="background-image: url('/images/interestellar.webp')"></div>
+      <div class="bg-slide" style="background-image: url('/images/blade.webp')"></div>
+      <div class="bg-slide" style="background-image: url('/images/inception.webp')"></div>
+    </div>
+    <div class="bg-overlay"></div>
+
+    <!-- HEADER -->
+    <header>
+      <h1>Cinema</h1>
+      <nav>
+        <a href="/cinemes">Administrar Cines</a>
+        <a href="/movies/billboard">Aministrar Peliculas</a>
+        <a href="/screenings">Administrar Sesiones</a>
+        <a href="/">Logut</a>
+      </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+      <div class="section-eyebrow">Est. 2026 · Barcelona</div>
+      <h2>Vive la magia del Cinema</h2>
+      <p>Los mejores estrenos, la mejor exp</p>
+    </section>
+
+    <!-- Indicadores de slide -->
+    <div class="slide-indicators" id="slideIndicators">
+      <span class="indicator active"></span>
+      <span class="indicator"></span>
+      <span class="indicator"></span>
+      <span class="indicator"></span>
+    </div>
+
+  </div>
+  <!-- fin hero-wrapper -->
+
+  <!-- NEWS SECTION -->
+  <section class="news-section" th:if="${lista != null and !lista.isEmpty()}">
+    <div class="news-inner">
+      <div class="news-header">
+        <div class="news-eyebrow">// Actualidad</div>
+        <h3 class="news-title">Noticias</h3>
+      </div>
+      <div class="news-grid">
+        <article class="news-card" th:each="news : ${lista}">
+          <div class="news-card__content">
+            <h4 class="news-card__headline" th:text="${news.headline}">Titular</h4>
+            <p class="news-card__body" th:text="${news.body}">Cuerpo de la noticia.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>2026 Cinema Daw</p>
+  </footer>
+
+  <script>
+    const slides = document.querySelectorAll('.bg-slide');
+    const indicators = document.querySelectorAll('.indicator');
+    let current = 0;
+
+    function goTo(n) {
+      slides[current].classList.remove('active');
+      indicators[current].classList.remove('active');
+      current = (n + slides.length) % slides.length;
+      slides[current].classList.add('active');
+      indicators[current].classList.add('active');
+    }
+
+    setInterval(() => goTo(current + 1), 5000);
+    indicators.forEach((ind, i) => ind.addEventListener('click', () => goTo(i)));
+  </script>
+
 </body>
-
 </html>

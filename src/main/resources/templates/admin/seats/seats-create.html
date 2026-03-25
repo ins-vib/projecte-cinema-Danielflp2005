@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <form th:action="@{/seats/new/{id}(id=${seat.room.id})}" th:object="${seat}" method="post">
+    <form th:action="@{/admin/seats/new/{id}(id=${seat.room.id})}" th:object="${seat}" method="post">
         <legend>Crear Asiento</legend>
 
         <input type="hidden" name="id" th:value="${seat.id}">

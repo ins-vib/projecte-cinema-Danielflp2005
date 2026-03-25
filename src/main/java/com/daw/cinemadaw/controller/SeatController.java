@@ -26,69 +26,13 @@ public class SeatController {
         this.roomRepository = roomRepository;
     }
 
-    // ── Rutas específicas primero ──────────────────────────────
-    @GetMapping("/seats/new/{id}")
-    public String createSeats(@PathVariable Long id, Model model) {
-        Seat seat = new Seat();
-        seat.setRoom(roomRepository.findById(id).get());
-        model.addAttribute("seat", seat);
-        model.addAttribute("types", SeatType.values());
-        return "seats/seats-create";
-    }
-
-    @GetMapping("/seats/edit/{id}")
-    public String editSeat(@PathVariable Long id, Model model) {
-        Optional<Seat> optional = seatRepository.findById(id);
-
-        if (optional.isEmpty()) {
-            return "redirect:/";
-        }
-        model.addAttribute("seat", optional.get());
-        model.addAttribute("types", SeatType.values());
-
-        return "seats/seats-editar";
-
-    }
-
-    @GetMapping("/seats/delete/{id}")
-    public String deleteSeat(@PathVariable Long id, Model model) {
-        Optional<Seat> optional = seatRepository.findById(id);
-        if (optional.isPresent()) {
-            Seat seat = optional.get();
-            seatRepository.delete(seat);
-            return "redirect:/seats/room/" + seat.getRoom().getId();
-        }
-        return "redirect:/seats/room/" + id;
-    }
-
-    @PostMapping("/seats/new/{id}")
-    public String createSeat(@PathVariable Long id, @ModelAttribute Seat seat) {
-        Optional<Room> room = roomRepository.findById(id);
-        if (room.isPresent()) {
-            seat.setRoom(room.get());
-        }
-        seatRepository.save(seat);
-        return "redirect:/seats/room/" + id;
-    }
-
-    @PostMapping("/seats/edit/{id}")
-    public String editSeatPost(@PathVariable Long id, @ModelAttribute Seat seat) {
-        Long roomId = seat.getRoom().getId();
-        Optional<Room> room = roomRepository.findById(roomId);
-        if (room.isPresent()) {
-            seat.setRoom(room.get());
-        }
-        seatRepository.save(seat);
-        return "redirect:/seats/room/" + roomId;
-    }
-
-    // ── Ruta genérica al final ─────────────────────────────────
+    // ── Públicas ───────────────────────────────────────────────
     @GetMapping("/seats/room/{id}")
     public String seats(@PathVariable Long id, Model model) {
         Optional<Room> optional = roomRepository.findById(id);
         if (optional.isPresent()) {
             model.addAttribute("room", optional.get());
-            return "seats/seats";
+            return "admin/seats/seats";
         }
         return "redirect:/";
     }
@@ -98,9 +42,61 @@ public class SeatController {
         Optional<Seat> optional = seatRepository.findById(id);
         if (optional.isPresent()) {
             model.addAttribute("seat", optional.get());
-            return "seats/seats-detail";
+            return "admin/seats/seats-detail";
         }
         return "redirect:/";
-    }   
+    }
 
+    // ── Admin ──────────────────────────────────────────────────
+    @GetMapping("/admin/seats/new/{id}")
+    public String createSeats(@PathVariable Long id, Model model) {
+        Seat seat = new Seat();
+        seat.setRoom(roomRepository.findById(id).get());
+        model.addAttribute("seat", seat);
+        model.addAttribute("types", SeatType.values());
+        return "admin/seats/seats-create";
+    }
+
+    @GetMapping("/admin/seats/edit/{id}")
+    public String editSeat(@PathVariable Long id, Model model) {
+        Optional<Seat> optional = seatRepository.findById(id);
+        if (optional.isEmpty()) {
+            return "redirect:/";
+        }
+        model.addAttribute("seat", optional.get());
+        model.addAttribute("types", SeatType.values());
+        return "admin/seats/seats-editar";
+    }
+
+    @GetMapping("/admin/seats/delete/{id}")
+    public String deleteSeat(@PathVariable Long id) {
+        Optional<Seat> optional = seatRepository.findById(id);
+        if (optional.isPresent()) {
+            Seat seat = optional.get();
+            seatRepository.delete(seat);
+            return "redirect:/seats/room/" + seat.getRoom().getId();
+        }
+        return "redirect:/";
+    }
+
+    @PostMapping("/admin/seats/new/{id}")
+    public String createSeat(@PathVariable Long id, @ModelAttribute Seat seat) {
+        Optional<Room> room = roomRepository.findById(id);
+        if (room.isPresent()) {
+            seat.setRoom(room.get());
+        }
+        seatRepository.save(seat);
+        return "redirect:/seats/room/" + id;
+    }
+
+    @PostMapping("/admin/seats/edit/{id}")
+    public String editSeatPost(@PathVariable Long id, @ModelAttribute Seat seat) {
+        Long roomId = seat.getRoom().getId();
+        Optional<Room> room = roomRepository.findById(roomId);
+        if (room.isPresent()) {
+            seat.setRoom(room.get());
+        }
+        seatRepository.save(seat);
+        return "redirect:/seats/room/" + roomId;
+    }
 }

@@ -1,18 +1,16 @@
 <!doctype html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" th:href="@{/css/cinema-create.css}" />
     <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
-    <title>Document</title>
+    <title>Nuevo Cine</title>
   </head>
   <body>
-    <form th:action="@{/cinemes/editar}" th:object="${cinema}" method="post">
-      <legend>Editar Cine</legend>
+    <form th:action="@{/admin/cinemes/new}" th:object="${cinema}" method="post">
+      <legend>Nuevo cine</legend>
 
-      <input type="hidden" name="id" th:value="${cinema.id}">
-   
       <div class="field-group">
         <label>Name:</label>
         <input type="text" th:field="*{cinemaName}" />
@@ -37,7 +35,7 @@
         <div class="field-error" th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></div>
       </div>
 
-      <button type="submit">Guardar</button>
+      <button type="submit"><span>Guardar</span></button>
     </form>
   </body>
 </html>

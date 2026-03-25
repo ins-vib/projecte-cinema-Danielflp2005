@@ -25,78 +25,67 @@ public class CinemaController {
         this.cinemaRepository = cinemaRepository;
     }
 
+    // ── Públicas ───────────────────────────────────────────────
     @GetMapping("/cinemes")
     public String cinemes(Model model) {
-
         List<Cinema> cines = cinemaRepository.findAll();
         model.addAttribute("Lista", cines);
-        return "/cinemas/cinemes";
+        return "admin/cinemas/cinemes";
     }
 
     @GetMapping("/cinema/{id}")
     public String detall(@PathVariable Long id, Model model) {
-
         Optional<Cinema> optional = cinemaRepository.findById(id);
         if (optional.isPresent()) {
-            Cinema cinema = optional.get();
-            model.addAttribute("cinema", cinema);
-            return "/cinemas/detail-cinema";
+            model.addAttribute("cinema", optional.get());
+            return "admin/cinemas/detail-cinema";
         }
-
         return "redirect:/";
     }
 
-    @GetMapping("/cinema/delete/{id}")
-    public String delete(@PathVariable Long id, Model model) {
-
+    // ── Admin ──────────────────────────────────────────────────
+    @GetMapping("/admin/cinema/delete/{id}")
+    public String delete(@PathVariable Long id) {
         Optional<Cinema> optional = cinemaRepository.findById(id);
         if (optional.isPresent()) {
-            Cinema cinema = optional.get();
-            cinemaRepository.delete(cinema);
+            cinemaRepository.delete(optional.get());
         }
-
         return "redirect:/cinemes";
     }
 
-    @GetMapping("/cinemes/create")
+    @GetMapping("/admin/cinemes/create")
     public String newCinema(Model model) {
         Cinema cinema = new Cinema();
         cinema.setCity("Tarragona");
         model.addAttribute("cinema", cinema);
-        return "/cinemas/cinema-create";
+        return "admin/cinemas/cinema-create";
     }
 
-    @PostMapping("/cinemes/new")
+    @PostMapping("/admin/cinemes/new")
     public String altaCinema(@Valid @ModelAttribute Cinema cinema, BindingResult result) {
-
-        if(result.hasErrors()){
-            return "cinemas/cinema-create";
+        if (result.hasErrors()) {
+            return "admin/cinemas/cinema-create";
         }
         cinemaRepository.save(cinema);
         return "redirect:/cinemes";
     }
 
-    @GetMapping("/cinemes/edit/{id}")
+    @GetMapping("/admin/cinemes/edit/{id}")
     public String editCinema(@PathVariable Long id, Model model) {
-
         Optional<Cinema> optional = cinemaRepository.findById(id);
         if (optional.isPresent()) {
-            Cinema cinema = optional.get();
-            model.addAttribute("cinema", cinema);
-            return "/cinemas/cinema-update";
+            model.addAttribute("cinema", optional.get());
+            return "admin/cinemas/cinema-update";
         }
-
         return "redirect:/cinemes";
     }
 
-    @PostMapping("/cinemes/editar")
+    @PostMapping("/admin/cinemes/editar")
     public String editCinema(@Valid @ModelAttribute Cinema cinema, BindingResult result) {
-
-        if(result.hasErrors()){
-            return "cinemas/cinema-update";
+        if (result.hasErrors()) {
+            return "admin/cinemas/cinema-update";
         }
         cinemaRepository.save(cinema);
         return "redirect:/cinemes";
     }
-
 }

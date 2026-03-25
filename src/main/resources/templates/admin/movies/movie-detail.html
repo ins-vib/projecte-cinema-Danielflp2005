@@ -35,7 +35,7 @@
         <a th:href="@{/movies/{id}/seats(id=${movie.id})}" class="btn-tickets">
           <span>Comprar entradas</span>
         </a>
-        <a th:href="@{/screening/create/{id}(id=${movie.id})}" class="btn-schedule">
+        <a th:href="@{/admin/screening/create/{id}(id=${movie.id})}" class="btn-schedule">
           <span>Programar sesión</span>
         </a>
       </div>
@@ -86,7 +86,7 @@
           <span class="sidebar-key">Estreno</span>
           <span class="sidebar-val" th:text="${#temporals.format(movie.date, 'dd / MM / yyyy')}">—</span>
         </div>
-        <a th:href="@{/screening/create/{id}(id=${movie.id})}" class="sidebar-schedule">
+        <a th:href="@{/admin/screening/create/{id}(id=${movie.id})}" class="sidebar-schedule">
           Programar sesión →
         </a>
         <a th:href="@{/movies/{id}/seats(id=${movie.id})}" class="sidebar-cta">

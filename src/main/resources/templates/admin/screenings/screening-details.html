@@ -10,7 +10,7 @@
 </head>
 <body>
 
-  <div th:replace="~{layout :: layout(~{::content})}">
+  <div th:replace="~{layoutadmin :: layoutadmin(~{::content})}">
     <div th:fragment="content">
 
       <div class="page">
@@ -62,8 +62,8 @@
             </div>
 
             <div class="screening-detail__actions">
-              <a class="sc-btn sc-btn--edit" th:href="@{/screening/edit/{id}(id=${screening.id})}">Editar sesión</a>
-              <a class="sc-btn sc-btn--delete" th:href="@{/screening/delete/{id}(id=${screening.id})}"
+              <a class="sc-btn sc-btn--edit" th:href="@{/admin/admin/screening/edit/{id}(id=${screening.id})}">Editar sesión</a>
+              <a class="sc-btn sc-btn--delete" th:href="@{/admin/screening/delete/{id}(id=${screening.id})}"
                 onclick="return confirm('¿Eliminar esta sesión?')">Eliminar</a>
             </div>
           </div>

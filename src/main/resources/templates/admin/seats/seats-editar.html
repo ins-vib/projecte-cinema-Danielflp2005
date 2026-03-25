@@ -11,10 +11,10 @@
 </head>
 
 <body>
-    <div th:replace="~{layout :: layout(~{::content})}">
+    <div th:replace="~{layoutadmin :: layoutadmin(~{::content})}">
         <div th:fragment="content">
 
-            <form th:action="@{/seats/edit/{id}(id=${seat.room.id})}" th:object="${seat}" method="post">
+            <form th:action="@{/admin/seats/edit/{id}(id=${seat.room.id})}" th:object="${seat}" method="post">
                 <legend>Editar Asiento</legend>
 
                 <input type="hidden" name="id" th:value="${seat.id}">

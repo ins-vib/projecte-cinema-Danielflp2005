@@ -11,10 +11,10 @@
 </head>
 <body>
 
-  <div th:replace="~{layout :: layout(~{::content})}">
+  <div th:replace="~{layoutadmin :: layoutadmin(~{::content})}">
     <div th:fragment="content">
 
-      <form th:action="@{/screening/new/{id}(id=${screening.movie.id})}"
+      <form th:action="@{/admin/screening/new/{id}(id=${screening.movie.id})}"
             th:object="${screening}" method="post">
         <legend>Nueva Sesión</legend>
 

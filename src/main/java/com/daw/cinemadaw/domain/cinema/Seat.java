@@ -112,7 +112,7 @@ public class Seat {
 
     @Override
     public String toString() {
-        return "Seat [id=" + id + ", seatrow=" + seatrow + "]";
+        return "admin/Seat [id=" + id + ", seatrow=" + seatrow + "]";
     }
 
 }

@@ -85,7 +85,7 @@ public class Room {
 
     @Override
     public String toString() {
-        return "Room [id=" + id + ", name=" + name + ", capacity=" + capacity + "]";
+        return "admin/Room [id=" + id + ", name=" + name + ", capacity=" + capacity + "]";
     }
 
     public void setId(Long id) {

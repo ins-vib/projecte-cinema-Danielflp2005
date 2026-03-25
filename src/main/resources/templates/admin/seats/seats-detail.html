@@ -12,7 +12,7 @@
 
 <body>
 
-  <div th:replace="~{layout :: layout(~{::content})}">
+  <div th:replace="~{layoutadmin :: layoutadmin(~{::content})}">
     <div th:fragment="content">
 
       <div class="page">
@@ -66,8 +66,8 @@
           </div>
 
           <div class="seat-card__actions">
-            <a class="seat-btn seat-btn--edit" th:href="@{/seats/edit/{id}(id=${seat.id})}">Editar asiento</a>
-            <a class="seat-btn seat-btn--delete" th:href="@{/seats/delete/{id}(id=${seat.id})}">Eliminar</a>
+            <a class="seat-btn seat-btn--edit" th:href="@{/admin/seats/edit/{id}(id=${seat.id})}">Editar asiento</a>
+            <a class="seat-btn seat-btn--delete" th:href="@{/admin/seats/delete/{id}(id=${seat.id})}">Eliminar</a>
           </div>
 
         </div>

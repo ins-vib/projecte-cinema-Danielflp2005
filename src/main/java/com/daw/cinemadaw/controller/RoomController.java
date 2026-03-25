@@ -27,39 +27,49 @@ public class RoomController {
     private CinemaRepository cinemaRepository;
     private SeatRepository seatRepository;
 
-    public RoomController(RoomRepository roomRepository, CinemaRepository cinemaRepository, SeatRepository seatRepository) {
+    public RoomController(RoomRepository roomRepository, CinemaRepository cinemaRepository,
+            SeatRepository seatRepository) {
         this.roomRepository = roomRepository;
         this.cinemaRepository = cinemaRepository;
         this.seatRepository = seatRepository;
     }
 
-    @GetMapping("/room/create/{cinemaId}")
+    // ── Públicas ───────────────────────────────────────────────
+    @GetMapping("/room/{id}")
+    public String detall(@PathVariable Long id, Model model) {
+        Optional<Room> optional = roomRepository.findById(id);
+        if (optional.isEmpty()) {
+            return "redirect:/cinemes";
+        }
+        model.addAttribute("room", optional.get());
+        return "admin/rooms/room-detail";
+    }
+
+    // ── Admin ──────────────────────────────────────────────────
+    @GetMapping("/admin/room/create/{cinemaId}")
     public String newRoom(@PathVariable Long cinemaId, Model model) {
         Room room = new Room();
         Cinema cinema = new Cinema();
         cinema.setId(cinemaId);
         room.setCinema(cinema);
         model.addAttribute("room", room);
-        return "/rooms/room-create";
+        return "admin/rooms/room-create";
     }
 
-    private static final int CELL_SIZE = 46;
-
-    @GetMapping("/room/edit/{id}")
+    @GetMapping("/admin/room/edit/{id}")
     public String editRoom(@PathVariable Long id, Model model) {
         Optional<Room> optional = roomRepository.findById(id);
         if (optional.isPresent()) {
-            Room room = optional.get();
-            model.addAttribute("room", room);
-            return "/rooms/room-update";
+            model.addAttribute("room", optional.get());
+            return "admin/rooms/room-update";
         }
         return "redirect:/cinemes";
     }
 
-    @PostMapping("/room/editar")
-    public String editPelicula(@Valid @ModelAttribute Room room, BindingResult result) {
+    @PostMapping("/admin/room/editar")
+    public String editRoom(@Valid @ModelAttribute Room room, BindingResult result) {
         if (result.hasErrors()) {
-            return "rooms/room-update";
+            return "admin/rooms/room-update";
         }
         Long cinemaid = room.getCinema().getId();
         Long roomId = room.getId();
@@ -74,12 +84,11 @@ public class RoomController {
             roomToUpdate.setCinema(cinema.get());
             roomRepository.save(roomToUpdate);
         }
-
         return "redirect:/cinema/" + cinemaid;
     }
 
-    @GetMapping("/room/delete/{id}")
-    public String delete(@PathVariable Long id, Model model) {
+    @GetMapping("/admin/room/delete/{id}")
+    public String delete(@PathVariable Long id) {
         Optional<Room> optional = roomRepository.findById(id);
         if (optional.isPresent()) {
             Room room = optional.get();
@@ -90,10 +99,10 @@ public class RoomController {
         return "redirect:/cinemes";
     }
 
-    @PostMapping("/room/new")
-    public String altaPelicula(@Valid @ModelAttribute Room room, BindingResult result) {
+    @PostMapping("/admin/room/new")
+    public String altaRoom(@Valid @ModelAttribute Room room, BindingResult result) {
         if (result.hasErrors()) {
-            return "rooms/room-create";
+            return "admin/rooms/room-create";
         }
         Long cinemaid = room.getCinema().getId();
         Optional<Cinema> cinema = cinemaRepository.findById(cinemaid);
@@ -102,7 +111,6 @@ public class RoomController {
         }
         roomRepository.save(room);
 
-        // Generar asientos automáticamente según capacidad
         int cols = 10;
         for (int i = 0; i < room.getCapacity(); i++) {
             Seat seat = new Seat();
@@ -115,19 +123,6 @@ public class RoomController {
             seat.setRoom(room);
             seatRepository.save(seat);
         }
-
         return "redirect:/cinema/" + cinemaid;
     }
-
-    @GetMapping("/room/{id}")
-    public String detall(@PathVariable Long id, Model model) {
-        Optional<Room> optional = roomRepository.findById(id);
-        if (optional.isEmpty()) {
-            return "redirect:/cinemes";
-        }
-        Room room = optional.get();
-        model.addAttribute("room", room);
-        return "/rooms/room-detail";
-    }
-
 }

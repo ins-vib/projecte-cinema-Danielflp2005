@@ -10,7 +10,7 @@
 </head>
 <body>
 
-  <div th:replace="~{layout :: layout(~{::content})}">
+  <div th:replace="~{layoutadmin :: layoutadmin(~{::content})}">
     <div th:fragment="content">
 
       <div class="screenings-header">
@@ -18,7 +18,7 @@
           <span class="eyebrow">// PROGRAMACIÓN</span>
           <h1>Sesiones</h1>
         </div>
-        <a class="sc-btn sc-btn--edit" th:href="@{/screening/create}">+ Nueva sesión</a>
+        <a class="sc-btn sc-btn--edit" th:href="@{/admin/screening/create}">+ Nueva sesión</a>
       </div>
 
       <!-- Grid de películas con sesiones -->

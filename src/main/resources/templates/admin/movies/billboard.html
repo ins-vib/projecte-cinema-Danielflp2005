@@ -10,12 +10,12 @@
   </head>
   <body>
 
-    <div th:replace="~{layout :: layout(~{::content})}">
+    <div th:replace="~{layoutadmin :: layoutadmin(~{::content})}">
       <div th:fragment="content">
 
         <div class="table-header">
           <h1>Lista de Películas</h1>
-          <a class="btn-add" th:href="@{/movie/create}">Añadir Nueva Película</a>
+          <a class="btn-add" th:href="@{/admin/movie/create}">Añadir Nueva Película</a>
         </div>
 
         <table>
@@ -32,8 +32,8 @@
               <td th:text="${movie.gener}"></td>
               <td>
                 <a class="btn-secondary" th:href="@{/movie/{id}(id=${movie.id})}">Ver detalles</a>
-                <a class="btn-secondary" th:href="@{/movie/edit/{id}(id=${movie.id})}">Editar</a>
-                <a class="btn-secondary btn-danger" th:href="@{/movie/delete/{id}(id=${movie.id})}" onclick="return confirm('¿Eliminar esta película?')">Borrar</a>
+                <a class="btn-secondary" th:href="@{/admin/movie/edit/{id}(id=${movie.id})}">Editar</a>
+                <a class="btn-secondary btn-danger" th:href="@{/admin/movie/delete/{id}(id=${movie.id})}" onclick="return confirm('¿Eliminar esta película?')">Borrar</a>
               </td>
             </tr>
           </tbody>

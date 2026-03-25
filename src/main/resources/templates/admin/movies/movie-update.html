@@ -8,7 +8,7 @@
     <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
   </head>
   <body>
-    <form th:action="@{/movie/editar}" th:object="${movie}" method="post">
+    <form th:action="@{/admin/movie/editar}" th:object="${movie}" method="post">
       <legend>Editar Película</legend>
 
       <input type="hidden" name="id" th:value="${movie.id}">

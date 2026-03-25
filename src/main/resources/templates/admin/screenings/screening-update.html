@@ -11,10 +11,10 @@
 </head>
 <body>
 
-  <div th:replace="~{layout :: layout(~{::content})}">
+  <div th:replace="~{layoutadmin :: layoutadmin(~{::content})}">
     <div th:fragment="content">
 
-      <form th:action="@{/screening/edit}" th:object="${screening}" method="post">
+      <form th:action="@{/admin/screening/edit}" th:object="${screening}" method="post">
         <legend>Editar Sesión</legend>
 
         <input type="hidden" name="id" th:value="${screening.id}">

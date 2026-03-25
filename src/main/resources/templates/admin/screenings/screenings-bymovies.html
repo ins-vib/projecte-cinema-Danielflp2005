@@ -10,7 +10,7 @@
 </head>
 <body>
 
-  <div th:replace="~{layout :: layout(~{::content})}">
+  <div th:replace="~{layoutadmin:: layoutadmin(~{::content})}">
     <div th:fragment="content">
 
       <div class="screenings-header">
@@ -20,7 +20,7 @@
         </div>
         <div class="screenings-header__actions">
           <a class="sc-btn sc-btn--detail" th:href="@{/screenings}">← Volver</a>
-          <a class="sc-btn sc-btn--edit" th:href="@{/screening/create/{id}(id=${movie.id})}">+ Nueva sesión</a>
+          <a class="sc-btn sc-btn--edit" th:href="@{/admin/screening/create/{id}(id=${movie.id})}">+ Nueva sesión</a>
         </div>
       </div>
 
@@ -61,8 +61,8 @@
 
           <div class="screening-card__actions">
             <a class="sc-btn sc-btn--edit" th:href="@{/screening/detail/{id}(id=${screening.id})}">Ver detalles</a>
-            <a class="sc-btn sc-btn--edit" th:href="@{/screening/edit/{id}(id=${screening.id})}">Editar</a>
-            <a class="sc-btn sc-btn--delete" th:href="@{/screening/delete/{id}(id=${screening.id})}"
+            <a class="sc-btn sc-btn--edit" th:href="@{/admin/admin/screening/edit/{id}(id=${screening.id})}">Editar</a>
+            <a class="sc-btn sc-btn--delete" th:href="@{/admin/screening/delete/{id}(id=${screening.id})}"
               onclick="return confirm('¿Eliminar esta sesión?')">Borrar</a>
           </div>
 
@@ -71,7 +71,7 @@
 
       <div class="screenings-empty" th:if="${#lists.isEmpty(screenings)}">
         <p>No hay sesiones programadas para esta película</p>
-        <a class="sc-btn sc-btn--edit" th:href="@{/screening/create/{id}(id=${movie.id})}">+ Programar primera sesión</a>
+        <a class="sc-btn sc-btn--edit" th:href="@{/admin/screening/create/{id}(id=${movie.id})}">+ Programar primera sesión</a>
       </div>
 
     </div>

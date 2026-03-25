@@ -25,78 +25,65 @@ public class MovieController {
         this.movieRepository = movieRepository;
     }
 
-    @GetMapping("movies/billboard")
+    // ── Públicas ───────────────────────────────────────────────
+    @GetMapping("/movies/billboard")
     public String movies(Model model) {
-
         List<Movie> movies = movieRepository.findAll();
         model.addAttribute("Lista", movies);
-        return "movies/billboard";
+        return "admin/movies/billboard";
     }
 
     @GetMapping("/movie/{id}")
     public String detall(@PathVariable Long id, Model model) {
-
         Optional<Movie> optional = movieRepository.findById(id);
         if (optional.isPresent()) {
-            Movie movie = optional.get();
-            model.addAttribute("movie", movie);
-            return "/movies/movie-detail";
+            model.addAttribute("movie", optional.get());
+            return "admin/movies/movie-detail";
         }
-
         return "redirect:/";
     }
 
-    @GetMapping("/movie/delete/{id}")
-    public String delete(@PathVariable Long id, Model model) {
-
+    // ── Admin ──────────────────────────────────────────────────
+    @GetMapping("/admin/movie/delete/{id}")
+    public String delete(@PathVariable Long id) {
         Optional<Movie> optional = movieRepository.findById(id);
         if (optional.isPresent()) {
-            Movie movie = optional.get();
-            movieRepository.delete(movie);
+            movieRepository.delete(optional.get());
         }
-
         return "redirect:/movies/billboard";
     }
 
-    @GetMapping("/movie/create")
+    @GetMapping("/admin/movie/create")
     public String newMovie(Model model) {
-        Movie movie = new Movie();
-        model.addAttribute("movie", movie);
-        return "/movies/movie-create";
+        model.addAttribute("movie", new Movie());
+        return "admin/movies/movie-create";
     }
 
-    @PostMapping("/movie/new")
+    @PostMapping("/admin/movie/new")
     public String altaPelicula(@Valid @ModelAttribute Movie movie, BindingResult result) {
-        
-        if(result.hasErrors()){
-            return "movies/movie-create";
+        if (result.hasErrors()) {
+            return "admin/movies/movie-create";
         }
-
         movieRepository.save(movie);
         return "redirect:/movies/billboard";
     }
 
-    @GetMapping("/movie/edit/{id}")
+    @GetMapping("/admin/movie/edit/{id}")
     public String editPelicula(@PathVariable Long id, Model model) {
-
         Optional<Movie> optional = movieRepository.findById(id);
         if (optional.isPresent()) {
-            Movie movie = optional.get();
-            model.addAttribute("movie", movie);
-            return "/movies/movie-update";
+            model.addAttribute("movie", optional.get());
+            return "admin/movies/movie-update";
         }
-
         return "redirect:/movies/billboard";
     }
 
-    @PostMapping("/movie/editar")
-    public String editPelicula(@Valid  @ModelAttribute Movie movie, BindingResult result) {
-       
-       if(result.hasErrors()){
-        return "movies/movie-update";
-       }
+    @PostMapping("/admin/movie/editar")
+    public String editPelicula(@Valid @ModelAttribute Movie movie, BindingResult result) {
+        if (result.hasErrors()) {
+            return "admin/movies/movie-update";
+        }
         movieRepository.save(movie);
         return "redirect:/movies/billboard";
     }
-
 }

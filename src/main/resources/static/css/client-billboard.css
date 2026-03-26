@@ -1,0 +1,221 @@
+/* ============================================================
+   LUMIÈRE — client-billboard.css
+   Cartelera del cliente
+   ============================================================ */
+
+/* ── Hero strip ─────────────────────────────────────────────── */
+.billboard-hero {
+  padding: 4rem 3rem 2.5rem;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.billboard-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 3rem;
+  width: 50px; height: 2px;
+  background: var(--gold);
+}
+
+.billboard-hero__eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: rgba(201,168,76,0.6);
+  margin-bottom: 0.6rem;
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+
+.billboard-hero__title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  letter-spacing: 0.04em;
+  line-height: 0.95;
+  color: var(--text);
+  margin-bottom: 0.8rem;
+  animation: fadeUp 0.6s 0.2s ease both;
+}
+
+.billboard-hero__sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--muted);
+  animation: fadeUp 0.6s 0.3s ease both;
+}
+
+/* ── Grid de películas ──────────────────────────────────────── */
+.billboard-grid {
+  max-width: 1200px;
+  margin: 3rem auto 5rem;
+  padding: 0 3rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 1px;
+  background: var(--border2);
+}
+
+/* ── Movie card ─────────────────────────────────────────────── */
+.movie-card {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  overflow: hidden;
+  aspect-ratio: 2/3;
+  background: #0d0d0d;
+  cursor: pointer;
+}
+
+.movie-card__poster {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.movie-card:hover .movie-card__poster {
+  transform: scale(1.06);
+}
+
+.movie-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(8,8,8,0.97) 0%,
+    rgba(8,8,8,0.5) 45%,
+    rgba(8,8,8,0.15) 100%
+  );
+  transition: background 0.35s ease;
+}
+
+.movie-card:hover .movie-card__overlay {
+  background: linear-gradient(
+    to top,
+    rgba(8,8,8,1) 0%,
+    rgba(8,8,8,0.65) 50%,
+    rgba(8,8,8,0.3) 100%
+  );
+}
+
+/* Gold top accent on hover */
+.movie-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
+  z-index: 10;
+}
+
+.movie-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* Info block */
+.movie-card__info {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 1.4rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  z-index: 5;
+}
+
+.movie-card__genre {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.5rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(201,168,76,0.65);
+}
+
+.movie-card__title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.45rem;
+  letter-spacing: 0.04em;
+  line-height: 1.05;
+  color: var(--text);
+}
+
+.movie-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.5rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(232,224,208,0.3);
+  margin-top: 0.1rem;
+}
+
+.movie-card__sep { color: rgba(201,168,76,0.25); }
+
+.movie-card__cta {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(201,168,76,0.4);
+  margin-top: 0.4rem;
+  transition: color 0.3s ease;
+}
+
+.movie-card:hover .movie-card__cta {
+  color: var(--gold);
+}
+
+/* ── Empty state ────────────────────────────────────────────── */
+.billboard-empty {
+  max-width: 500px;
+  margin: 7rem auto;
+  text-align: center;
+  padding: 0 2rem;
+}
+
+.billboard-empty__icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 1.5rem;
+  opacity: 0.25;
+}
+
+.billboard-empty__title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  letter-spacing: 0.08em;
+  color: rgba(232,224,208,0.2);
+  margin-bottom: 0.5rem;
+}
+
+.billboard-empty__sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem;
+  font-style: italic;
+  color: rgba(232,224,208,0.15);
+  line-height: 1.7;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .billboard-hero { padding: 3rem 1.5rem 2rem; }
+  .billboard-hero::after { left: 1.5rem; }
+  .billboard-grid { padding: 0 1.5rem; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+}
+
+@media (max-width: 600px) {
+  .billboard-grid { grid-template-columns: repeat(2, 1fr); padding: 0 1rem; }
+  .billboard-hero { padding: 2.5rem 1rem 1.5rem; }
+  .billboard-hero::after { left: 1rem; }
+}

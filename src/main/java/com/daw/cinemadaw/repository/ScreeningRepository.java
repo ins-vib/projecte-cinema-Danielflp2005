@@ -11,4 +11,5 @@ import com.daw.cinemadaw.domain.cinema.Screening;
 public interface ScreeningRepository extends JpaRepository<Screening, Long> {
     List<Screening> findByMovie(Movie movie);
     List<Screening> findByRoom(Room room);
+    List<Screening> findByMovieIdOrderByScreeningDateTimeAsc(Long movieId);
 }

@@ -31,7 +31,7 @@
               <td th:text="${movie.title}"></td>
               <td th:text="${movie.gener}"></td>
               <td>
-                <a class="btn-secondary" th:href="@{/movie/{id}(id=${movie.id})}">Ver detalles</a>
+                <a class="btn-secondary" th:href="@{/admin/movie/{id}(id=${movie.id})}">Ver detalles</a>
                 <a class="btn-secondary" th:href="@{/admin/movie/edit/{id}(id=${movie.id})}">Editar</a>
                 <a class="btn-secondary btn-danger" th:href="@{/admin/movie/delete/{id}(id=${movie.id})}" onclick="return confirm('¿Eliminar esta película?')">Borrar</a>
               </td>

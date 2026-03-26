@@ -17,10 +17,10 @@
 
     <!-- Nav -->
     <nav class="hero-nav">
-      <a th:href="@{/}" class="nav-logo">LUMIÈRE<span>/ CINE</span></a>
+      <a th:href="@{/admin}" class="nav-logo">LUMIÈRE<span>/ CINE</span></a>
       <div class="hero-nav__links">
-        <a th:href="@{/}" class="btn-back">← Inicio</a>
-        <a th:href="@{/movies/billboard}" class="btn-back">← Cartelera</a>
+        <a th:href="@{/admin}" class="btn-back">← Inicio</a>
+        <a th:href="@{/admin/movies/billboard}" class="btn-back">← Cartelera</a>
       </div>
     </nav>
 
@@ -101,7 +101,7 @@
     <a th:href="@{/}" class="movie-footer__logo">LUMIÈRE<span>/ CINE</span></a>
     <p class="movie-footer__copy">© DAW1 2026</p>
     <nav class="movie-footer__nav">
-      <a th:href="@{/}">Inicio</a>
+      <a th:href="@{/admin}">Inicio</a>
       <a th:href="@{/admin/movies/billboard}">Cartelera</a>
       <a th:href="@{/admin/cinemes}">Cines</a>
     </nav>

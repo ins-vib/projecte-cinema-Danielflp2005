@@ -19,7 +19,7 @@
       
       <div class="table-header">
         <h1 th:text="${room.name}">Sala</h1>
-        <a class="btn-back" th:href="@{/cinema/{id}(id=${room.cinema.id})}">← Volver</a>
+        <a class="btn-back" th:href="@{/admin/cinema/{id}(id=${room.cinema.id})}">← Volver</a>
         <a class="btn-add" th:href="@{/admin/seats/new/{id}(id=${room.id})}">Crear asiento</a>
       </div>
 
@@ -42,7 +42,7 @@
             <td th:text="${seat.type}"></td>
             <td th:text="${seat.estado} ? 'Ocupado' : 'Libre'"></td>
             <td>
-              <a class="btn-secondary" th:href="@{/seats/detail/{id}(id=${seat.id})}">Ver Detalles</a>
+              <a class="btn-secondary" th:href="@{/admin/seats/detail/{id}(id=${seat.id})}">Ver Detalles</a>
               <a class="btn-secondary" th:href="@{/admin/seats/edit/{id}(id=${seat.id})}">Editar</a>
               <a class="btn-secondary btn-danger" th:href="@{/admin/seats/delete/{id}(id=${seat.id})}">Borrar</a>
             </td>

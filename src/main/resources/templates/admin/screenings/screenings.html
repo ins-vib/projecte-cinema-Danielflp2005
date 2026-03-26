@@ -24,7 +24,7 @@
       <!-- Grid de películas con sesiones -->
       <div class="movies-grid" th:if="${not #lists.isEmpty(movies)}">
         <a class="movie-screening-card" th:each="movie : ${movies}"
-          th:href="@{/screenings/movie/{id}(id=${movie.id})}">
+          th:href="@{/admin/screenings/movie/{id}(id=${movie.id})}">
 
           <div class="movie-screening-card__poster"
             th:style="'background-image: url(/images/' + ${movie.posterUrl} + ')'">

@@ -46,7 +46,7 @@
             <span class="rooms-section__eyebrow">// INSTALACIONES</span>
             <h2 class="rooms-section__title">Salas</h2>
             <span class="rooms-section__count" th:text="${#lists.size(cinema.rooms)} + ' salas'">0 salas</span>
-            <a class="btn-add-room" th:href="@{/admin/room/create{id}(id=${cinema.id})}">
+            <a class="btn-add-room" th:href="@{/admin/room/create/{id}(id=${cinema.id})}">
               <span>+ Nueva sala</span>
             </a>
           </div>

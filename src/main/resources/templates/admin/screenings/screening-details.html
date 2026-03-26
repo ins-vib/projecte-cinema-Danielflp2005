@@ -16,7 +16,7 @@
       <div class="page">
 
         <header class="page-header">
-          <a class="btn-back" th:href="@{/screenings}">← Volver</a>
+          <a class="btn-back" th:href="@{/admin/screenings}">← Volver</a>
           <span class="page-label">// SESIÓN</span>
         </header>
 
@@ -62,7 +62,7 @@
             </div>
 
             <div class="screening-detail__actions">
-              <a class="sc-btn sc-btn--edit" th:href="@{/admin/admin/screening/edit/{id}(id=${screening.id})}">Editar sesión</a>
+              <a class="sc-btn sc-btn--edit" th:href="@{/admin/screening/edit/{id}(id=${screening.id})}">Editar sesión</a>
               <a class="sc-btn sc-btn--delete" th:href="@{/admin/screening/delete/{id}(id=${screening.id})}"
                 onclick="return confirm('¿Eliminar esta sesión?')">Eliminar</a>
             </div>

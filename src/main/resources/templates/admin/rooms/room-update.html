@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <form th:action="@{/room/editar}" th:object="${room}" method="post">
+  <form th:action="@{/admin/room/editar}" th:object="${room}" method="post">
     <legend>Editar sala</legend>
     <input type="hidden" name="id" th:value="${room.id}">
     <input type="hidden" th:field="*{cinema.id}">

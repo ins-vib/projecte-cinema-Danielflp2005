@@ -19,7 +19,7 @@
           <h1 th:text="${movie.title}">Película</h1>
         </div>
         <div class="screenings-header__actions">
-          <a class="sc-btn sc-btn--detail" th:href="@{/screenings}">← Volver</a>
+          <a class="sc-btn sc-btn--detail" th:href="@{/admin/screenings}">← Volver</a>
           <a class="sc-btn sc-btn--edit" th:href="@{/admin/screening/create/{id}(id=${movie.id})}">+ Nueva sesión</a>
         </div>
       </div>
@@ -60,8 +60,8 @@
           </div>
 
           <div class="screening-card__actions">
-            <a class="sc-btn sc-btn--edit" th:href="@{/screening/detail/{id}(id=${screening.id})}">Ver detalles</a>
-            <a class="sc-btn sc-btn--edit" th:href="@{/admin/admin/screening/edit/{id}(id=${screening.id})}">Editar</a>
+            <a class="sc-btn sc-btn--edit" th:href="@{/admin/screening/detail/{id}(id=${screening.id})}">Ver detalles</a>
+            <a class="sc-btn sc-btn--edit" th:href="@{/admin/screening/edit/{id}(id=${screening.id})}">Editar</a>
             <a class="sc-btn sc-btn--delete" th:href="@{/admin/screening/delete/{id}(id=${screening.id})}"
               onclick="return confirm('¿Eliminar esta sesión?')">Borrar</a>
           </div>

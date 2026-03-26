@@ -1,0 +1,78 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title th:text="${movie.title} + ' — Sesiones'">Sesiones</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <link rel="stylesheet" th:href="@{/css/client-sessions.css}" />
+  <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h1>Lumière</h1>
+    <nav>
+      <a th:href="@{/client}">Inicio</a>
+      <a th:href="@{/client/billboard}">Cartelera</a>
+      <a th:href="@{/logout}">Salir</a>
+    </nav>
+  </header>
+
+  <!-- HERO PELÍCULA -->
+  <section class="sessions-hero"
+           th:style="'background-image: url(/images/' + ${movie.posterUrl} + ')'">
+    <div class="sessions-hero__overlay"></div>
+    <div class="sessions-hero__content">
+      <span class="sessions-hero__genre" th:text="${movie.gener}">Género</span>
+      <h2 class="sessions-hero__title" th:text="${movie.title}">Título</h2>
+      <div class="sessions-hero__meta">
+        <span th:text="${movie.min} + ' min'">— min</span>
+        <span class="sep">·</span>
+        <span th:text="${#temporals.format(movie.date, 'yyyy')}">—</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SESIONES POR DÍA -->
+  <main class="sessions-main">
+
+    <div class="sessions-header">
+      <div class="sessions-eyebrow">// Próximas sesiones</div>
+      <h3 class="sessions-title">Elige tu sesión</h3>
+    </div>
+
+    <!-- Sin sesiones -->
+    <div class="sessions-empty" th:if="${sessionsByDay.isEmpty()}">
+      <p>No hay sesiones programadas para esta película.</p>
+      <a th:href="@{/client/billboard}" class="btn-back-link">← Volver a cartelera</a>
+    </div>
+
+    <!-- Un bloque por día -->
+    <div class="day-block" th:each="entry : ${sessionsByDay}">
+      <div class="day-label"
+           th:text="${#temporals.format(entry.key, 'EEEE d MMMM', new java.util.Locale('es'))}">
+        Día
+      </div>
+      <div class="time-slots">
+        <a class="time-slot"
+           th:each="s : ${entry.value}"
+           th:href="@{/client/movie/{id}(id=${movie.id})}">
+          <span class="time-slot__hour"
+                th:text="${#temporals.format(s.screeningDateTime, 'HH:mm')}">00:00</span>
+          <span class="time-slot__room" th:text="${s.room.name}">Sala</span>
+          <span class="time-slot__price" th:text="${s.precio} + ' €'">0 €</span>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>DAW1 2026 · Lumière</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cartelera — Lumière</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <link rel="stylesheet" th:href="@{/css/client-billboard.css}" />
+  <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h1>Lumière</h1>
+    <nav>
+      <a th:href="@{/client}">Inicio</a>
+      <a th:href="@{/client/billboard}">Cartelera</a>
+      <a th:href="@{/logout}">Salir</a>
+    </nav>
+  </header>
+
+  <!-- PAGE HERO -->
+  <section class="billboard-hero">
+    <div class="billboard-hero__eyebrow">// En cartelera</div>
+    <h2 class="billboard-hero__title">Cartelera</h2>
+    <p class="billboard-hero__sub">Películas disponibles con sesiones próximas</p>
+  </section>
+
+  <!-- GRID DE PELÍCULAS -->
+  <section class="billboard-grid" th:if="${not #lists.isEmpty(movies)}">
+    <a class="movie-card" th:each="movie : ${movies}"
+       th:href="@{/client/movie/{id}(id=${movie.id})}">
+
+      <div class="movie-card__poster"
+           th:style="'background-image: url(/images/' + ${movie.posterUrl} + ')'">
+        <div class="movie-card__overlay"></div>
+      </div>
+
+      <div class="movie-card__info">
+        <span class="movie-card__genre" th:text="${movie.gener}">Género</span>
+        <h3 class="movie-card__title" th:text="${movie.title}">Título</h3>
+        <div class="movie-card__meta">
+          <span th:text="${movie.min} + ' min'">— min</span>
+          <span class="movie-card__sep">·</span>
+          <span th:text="${#temporals.format(movie.date, 'yyyy')}">—</span>
+        </div>
+        <span class="movie-card__cta">Ver sesiones →</span>
+      </div>
+
+    </a>
+  </section>
+
+  <!-- EMPTY STATE -->
+  <section class="billboard-empty" th:if="${#lists.isEmpty(movies)}">
+    <div class="billboard-empty__icon">🎬</div>
+    <p class="billboard-empty__title">Sin sesiones próximas</p>
+    <p class="billboard-empty__sub">No hay películas programadas en este momento. Vuelve pronto.</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>DAW1 2026 · Lumière</p>
+  </footer>
+
+</body>
+</html>

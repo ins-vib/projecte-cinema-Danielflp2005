@@ -1,0 +1,63 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reserva confirmada — Lumière</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <link rel="stylesheet" th:href="@{/css/client-seats.css}" />
+  <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
+</head>
+<body>
+
+  <header>
+    <h1>Lumière</h1>
+    <nav>
+      <a th:href="@{/client}">Inicio</a>
+      <a th:href="@{/client/billboard}">Cartelera</a>
+      <a th:href="@{/logout}">Salir</a>
+    </nav>
+  </header>
+
+  <main class="confirm-main">
+    <div class="confirm-card">
+
+      <div class="confirm-icon">✓</div>
+      <h2 class="confirm-title">¡Reserva confirmada!</h2>
+
+      <p class="confirm-sub" th:if="${count != null and count > 0}">
+        Has reservado <strong th:text="${count}">0</strong>
+        <span th:text="${count == 1 ? 'entrada' : 'entradas'}">entradas</span>
+      </p>
+
+      <div class="confirm-details">
+        <div class="confirm-row">
+          <span>Película</span>
+          <strong th:text="${screening.movie.title}">—</strong>
+        </div>
+        <div class="confirm-row">
+          <span>Fecha</span>
+          <strong th:text="${#temporals.format(screening.screeningDateTime,
+                             'EEEE d MMMM yyyy', new java.util.Locale('es'))}">—</strong>
+        </div>
+        <div class="confirm-row">
+          <span>Hora</span>
+          <strong th:text="${#temporals.format(screening.screeningDateTime, 'HH:mm')}">—</strong>
+        </div>
+        <div class="confirm-row">
+          <span>Sala</span>
+          <strong th:text="${screening.room.name + ' · ' + screening.room.cinema.cinemaName}">—</strong>
+        </div>
+      </div>
+
+      <a th:href="@{/client/billboard}" class="confirm-back">← Volver a cartelera</a>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>DAW1 2026 · Lumière</p>
+  </footer>
+
+</body>
+</html>

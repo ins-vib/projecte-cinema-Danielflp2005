@@ -1,9 +1,6 @@
 package com.daw.cinemadaw.controller;
 
-import java.time.LocalDate;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.daw.cinemadaw.domain.cinema.Movie;
-import com.daw.cinemadaw.domain.cinema.Screening;
 import com.daw.cinemadaw.repository.MovieRepository;
 import com.daw.cinemadaw.repository.ScreeningRepository;
 
@@ -92,27 +88,5 @@ public class MovieController {
         return "redirect:/admin/movies/billboard";
     }
 
-    @GetMapping("/client/billboard")
-    public String billboard(Model model) {
-        List<Movie> movies = movieRepository.findMoviesWithFuturesScreenings();
-        model.addAttribute("movies", movies);
-        return "client/billboard";
-    }
-
-    @GetMapping("/client/movie/{id}")
-    public String movieSessions(@PathVariable Long id, Model model) {
-        Optional<Movie> optional = movieRepository.findById(id);
-        if (optional.isEmpty()) {
-            return "redirect:/client/billboard";
-        }
-        List<Screening> screenings = screeningRepository.findByMovieIdOrderByScreeningDateTimeAsc(id);
-        Map<LocalDate, List<Screening>> byDay = new LinkedHashMap<>();
-        for (Screening s : screenings) {
-            LocalDate day = s.getScreeningDateTime().toLocalDate();
-            byDay.computeIfAbsent(day, k -> new java.util.ArrayList<>()).add(s);
-        }
-        model.addAttribute("movie", optional.get());
-        model.addAttribute("sessionsByDay", byDay);
-        return "client/movie-sessions";
-    }
+  
 }

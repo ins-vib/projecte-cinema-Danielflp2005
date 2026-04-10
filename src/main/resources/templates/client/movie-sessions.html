@@ -1,77 +1,269 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title th:text="${movie.title} + ' — Sesiones'">Sesiones</title>
-  <link rel="stylesheet" th:href="@{/css/style.css}" />
-  <link rel="stylesheet" th:href="@{/css/client-sessions.css}" />
+  <title th:text="${movie.title} + ' — Lumière'">Película — Lumière</title>
+  <link rel="stylesheet" th:href="@{/css/movie-detalles.css}" />
   <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
+  <style>
+    /* ══ SESSIONS SECTION ══ */
+    .sessions-section {
+      background: var(--bg);
+      padding: 5rem 3rem 6rem;
+      border-top: 1px solid var(--border2);
+    }
+
+    .sessions-inner {
+      max-width: 1060px;
+      margin: 0 auto;
+    }
+
+    .sessions-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .sessions-eyebrow::before {
+      content: '';
+      width: 25px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .sessions-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      letter-spacing: 0.05em;
+      line-height: 1;
+      margin-bottom: 2.5rem;
+    }
+
+    .day-block {
+      margin-bottom: 2.5rem;
+    }
+
+    .day-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--border2);
+      margin-bottom: 1rem;
+    }
+
+    .time-slots {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .time-slot {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      padding: 1rem 1.4rem;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.02);
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color var(--ease), background var(--ease);
+      min-width: 130px;
+    }
+
+    .time-slot:hover {
+      border-color: var(--red);
+      background: rgba(139, 26, 26, 0.08);
+    }
+
+    .time-slot__hour {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.05em;
+      line-height: 1;
+      color: var(--text);
+    }
+
+    .time-slot__room {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .time-slot__price {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      margin-top: 0.2rem;
+    }
+
+    .sessions-empty {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--muted);
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .btn-back-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .btn-back-link:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .sessions-section {
+        padding: 3rem 1.5rem 4rem;
+      }
+    }
+  </style>
 </head>
+
 <body>
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="hero-bg" th:style="'background-image: url(/images/' + ${movie.posterUrl} + ')'"></div>
+    <div class="hero-overlay"></div>
 
-  <!-- HEADER -->
-  <header>
-    <h1>Lumière</h1>
-    <nav>
-      <a th:href="@{/client}">Inicio</a>
-      <a th:href="@{/client/billboard}">Cartelera</a>
-      <a th:href="@{/logout}">Salir</a>
+    <!-- Nav -->
+    <nav class="hero-nav">
+      <a th:href="@{/client}" class="nav-logo">LUMIÈRE<span>/ CINE</span></a>
+      <div class="hero-nav__links">
+        <a th:href="@{/client}" class="btn-back">← Inicio</a>
+        <a th:href="@{/client/billboard}" class="btn-back">← Cartelera</a>
+      </div>
     </nav>
-  </header>
 
-  <!-- HERO PELÍCULA -->
-  <section class="sessions-hero"
-           th:style="'background-image: url(/images/' + ${movie.posterUrl} + ')'">
-    <div class="sessions-hero__overlay"></div>
-    <div class="sessions-hero__content">
-      <span class="sessions-hero__genre" th:text="${movie.gener}">Género</span>
-      <h2 class="sessions-hero__title" th:text="${movie.title}">Título</h2>
-      <div class="sessions-hero__meta">
-        <span th:text="${movie.min} + ' min'">— min</span>
-        <span class="sep">·</span>
-        <span th:text="${#temporals.format(movie.date, 'yyyy')}">—</span>
+    <!-- Main content left -->
+    <div class="hero-content">
+      <div class="movie-genre-tags">
+        <span class="genre-tag" th:text="${movie.gener}">Género</span>
       </div>
-    </div>
-  </section>
-
-  <!-- SESIONES POR DÍA -->
-  <main class="sessions-main">
-
-    <div class="sessions-header">
-      <div class="sessions-eyebrow">// Próximas sesiones</div>
-      <h3 class="sessions-title">Elige tu sesión</h3>
-    </div>
-
-    <!-- Sin sesiones -->
-    <div class="sessions-empty" th:if="${sessionsByDay.isEmpty()}">
-      <p>No hay sesiones programadas para esta película.</p>
-      <a th:href="@{/client/billboard}" class="btn-back-link">← Volver a cartelera</a>
-    </div>
-
-    <!-- Un bloque por día -->
-    <div class="day-block" th:each="entry : ${sessionsByDay}">
-      <div class="day-label"
-           th:text="${#temporals.format(entry.key, 'EEEE d MMMM', new java.util.Locale('es'))}">
-        Día
-      </div>
-      <div class="time-slots">
-        <a class="time-slot"
-           th:each="s : ${entry.value}"
-           th:href="@{/client/screening/{id}/seats(id=${s.id})}">
-          <span class="time-slot__hour"
-                th:text="${#temporals.format(s.screeningDateTime, 'HH:mm')}">00:00</span>
-          <span class="time-slot__room" th:text="${s.room.name}">Sala</span>
-          <span class="time-slot__price" th:text="${s.precio} + ' €'">0 €</span>
+      <h1 class="movie-title" th:text="${movie.title}">Título</h1>
+      <p class="movie-desc" th:text="${movie.descripcion}">Descripción.</p>
+      <div class="hero-actions">
+        <a href="#sessions" class="btn-tickets">
+          <span>Ver Sesiones</span>
         </a>
       </div>
     </div>
 
-  </main>
+    <!-- Meta pills top right -->
+    <div class="hero-meta">
+      <div class="meta-row">
+        <span class="meta-key">Género</span>
+        <span class="meta-pill" th:text="${movie.gener}">—</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-key">Duración</span>
+        <span class="meta-pill" th:text="${movie.min} + ' min'">— min</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-key">Estreno</span>
+        <span class="meta-pill" th:text="${#temporals.format(movie.date, 'dd MMM yyyy')}">—</span>
+      </div>
+    </div>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>DAW1 2026 · Lumière</p>
+    <div class="scroll-hint">Más info</div>
+  </section>
+
+  <!-- ═══ INFO SECTION ═══ -->
+  <section class="info-section">
+    <div class="info-inner">
+      <div class="synopsis-block">
+        <div class="section-eyebrow">Sinopsis</div>
+        <h2 class="section-title">Sobre la película</h2>
+        <p class="synopsis-text" th:text="${movie.descripcion}">Descripción completa.</p>
+      </div>
+
+      <div class="movie-sidebar">
+        <div class="sidebar-item">
+          <span class="sidebar-key">Título</span>
+          <span class="sidebar-val" th:text="${movie.title}">—</span>
+        </div>
+        <div class="sidebar-item">
+          <span class="sidebar-key">Género</span>
+          <span class="sidebar-val" th:text="${movie.gener}">—</span>
+        </div>
+        <div class="sidebar-item">
+          <span class="sidebar-key">Duración</span>
+          <span class="sidebar-val" th:text="${movie.min} + ' min'">—</span>
+        </div>
+        <div class="sidebar-item">
+          <span class="sidebar-key">Estreno</span>
+          <span class="sidebar-val" th:text="${#temporals.format(movie.date, 'dd / MM / yyyy')}">—</span>
+        </div>
+        <a href="#sessions" class="sidebar-cta">
+          Ver sesiones →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SESSIONS SECTION ═══ -->
+  <section class="sessions-section" id="sessions">
+    <div class="sessions-inner">
+      <div class="sessions-eyebrow">Próximas sesiones</div>
+      <h2 class="sessions-heading">Elige tu sesión</h2>
+
+      <!-- Sin sesiones -->
+      <div class="sessions-empty" th:if="${sessionsByDay.isEmpty()}">
+        <p>No hay sesiones programadas para esta película.</p>
+        <a th:href="@{/client/billboard}" class="btn-back-link">← Volver a cartelera</a>
+      </div>
+
+      <!-- Un bloque por día -->
+      <div class="day-block" th:each="entry : ${sessionsByDay}">
+        <div class="day-label"
+             th:text="${#temporals.format(entry.key, 'EEEE d MMMM', new java.util.Locale('es'))}">
+          Día
+        </div>
+        <div class="time-slots">
+          <a class="time-slot"
+             th:each="s : ${entry.value}"
+             th:href="@{/client/screening/{id}/seats(id=${s.id})}">
+            <span class="time-slot__hour"
+                  th:text="${#temporals.format(s.screeningDateTime, 'HH:mm')}">00:00</span>
+            <span class="time-slot__room" th:text="${s.room.name}">Sala</span>
+            <span class="time-slot__price" th:text="${s.precio} + ' €'">0 €</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="movie-footer">
+    <a th:href="@{/client}" class="movie-footer__logo">LUMIÈRE<span>/ CINE</span></a>
+    <p class="movie-footer__copy">© DAW1 2026</p>
+    <nav class="movie-footer__nav">
+      <a th:href="@{/client}">Inicio</a>
+      <a th:href="@{/client/billboard}">Cartelera</a>
+      <a th:href="@{/logout}">Salir</a>
+    </nav>
   </footer>
 
 </body>

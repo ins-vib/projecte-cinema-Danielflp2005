@@ -27,11 +27,12 @@ public class SecurityConfig {
 
             .requestMatchers("/h2-console/**").permitAll()
             .requestMatchers("/login", "/logout").permitAll()
+            .requestMatchers("/cookies/**").permitAll()
             .requestMatchers("/css/**", "/images/**", "/favicon.svg").permitAll()
             .requestMatchers("/").permitAll()
         
             .requestMatchers("/admin/**").hasRole("ADMIN")
-            .requestMatchers("/client/**").hasAnyRole("CLIENT", "ADMIN")
+            .requestMatchers("/client/**", "/session/**").hasAnyRole("CLIENT", "ADMIN")
         
             .anyRequest().authenticated()
         )

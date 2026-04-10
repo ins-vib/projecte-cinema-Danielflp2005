@@ -32,9 +32,6 @@
       <h1 class="movie-title" th:text="${movie.title}">Título</h1>
       <p class="movie-desc" th:text="${movie.descripcion}">Descripción.</p>
       <div class="hero-actions">
-        <a th:href="@{/movies/{id}/seats(id=${movie.id})}" class="btn-tickets">
-          <span>Comprar entradas</span>
-        </a>
         <a th:href="@{/admin/screening/create/{id}(id=${movie.id})}" class="btn-schedule">
           <span>Programar sesión</span>
         </a>
@@ -88,9 +85,6 @@
         </div>
         <a th:href="@{/admin/screening/create/{id}(id=${movie.id})}" class="sidebar-schedule">
           Programar sesión →
-        </a>
-        <a th:href="@{/movies/{id}/seats(id=${movie.id})}" class="sidebar-cta">
-          Seleccionar asiento →
         </a>
       </div>
     </div>

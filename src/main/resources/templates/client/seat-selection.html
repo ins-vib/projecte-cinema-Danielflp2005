@@ -7,6 +7,29 @@
   <link rel="stylesheet" th:href="@{/css/style.css}" />
   <link rel="stylesheet" th:href="@{/css/client-seats.css}" />
   <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
+  <style>
+    /* Ocultar el checkbox nativo; el label actúa visualmente como asiento */
+    .seat input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+    }
+    .seat {
+      cursor: pointer;
+    }
+    .seat.occupied {
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    /* Estado seleccionado via CSS puro */
+    .seat:has(input[type="checkbox"]:checked) {
+      background-color: var(--seat-selected-bg, #f59e0b);
+      color: var(--seat-selected-color, #000);
+      border-color: var(--seat-selected-border, #d97706);
+    }
+  </style>
 </head>
 <body>
 
@@ -53,9 +76,7 @@
   </div>
 
   <!-- LAYOUT PRINCIPAL -->
-  <div class="cinema-layout"
-       th:data-base-price="${screening.precio}"
-       th:data-premium-surcharge="${premiumSurcharge}">
+  <div class="cinema-layout">
 
     <!-- MAPA DE ASIENTOS -->
     <div class="seat-map">
@@ -80,53 +101,36 @@
           <div class="seat-row" th:each="entry : ${seatsByRow}">
             <span class="row-label" th:text="${entry.key}">A</span>
             <div class="seats">
-              <button type="button"
-                      th:each="seat : ${entry.value}"
-                      th:data-id="${seat.id}"
-                      th:data-type="${seat.type}"
-                      th:disabled="${bookedIds.contains(seat.id)}"
-                      th:class="${bookedIds.contains(seat.id) ? 'seat occupied' :
-                                 (seat.type.name() == 'Premium' ? 'seat premium' :
-                                 (seat.type.name() == 'Adapted' ? 'seat adapted' : 'seat standard'))}"
-                      th:title="${'Fila ' + entry.key + ' · Asiento ' + seat.seatNumber + ' · ' + seat.type}"
-                      th:text="${seat.seatNumber}">
-              </button>
+              <label th:each="seat : ${entry.value}"
+                     th:title="${'Fila ' + entry.key + ' · Asiento ' + seat.seatNumber + ' · ' + seat.type}"
+                     th:class="${bookedIds.contains(seat.id) ? 'seat occupied' :
+                                (seat.type.name() == 'Premium' ? 'seat premium' :
+                                (seat.type.name() == 'Adapted' ? 'seat adapted' : 'seat standard'))}">
+                <input type="checkbox"
+                       name="seatIds"
+                       th:value="${seat.id}"
+                       th:disabled="${bookedIds.contains(seat.id)}" />
+                <span th:text="${seat.seatNumber}"></span>
+              </label>
             </div>
             <span class="row-label" th:text="${entry.key}">A</span>
           </div>
         </div>
 
-        <div id="hidden-inputs"></div>
+        <!-- Botón de confirmación dentro del form -->
+        <div class="confirm-wrap">
+          <button type="submit" class="confirm-btn">Confirmar compra</button>
+        </div>
 
       </form>
     </div>
 
-    <!-- PANEL RESUMEN -->
+    <!-- PANEL LATERAL -->
     <aside class="summary-panel">
 
-      <div class="summary-panel__title">Tu selección</div>
+      <div class="summary-panel__title">Información</div>
 
-      <div class="summary-empty" id="summary-empty">
-        <p>Haz clic en un asiento disponible para seleccionarlo</p>
-      </div>
-
-      <ul class="summary-list" id="summary-list"></ul>
-
-      <div class="summary-totals" id="summary-totals" style="display:none">
-        <div class="summary-row">
-          <span>Entradas</span>
-          <span id="count-display">0</span>
-        </div>
-        <div class="summary-row summary-row--price">
-          <span>Total</span>
-          <span id="price-display">0,00 €</span>
-        </div>
-      </div>
-
-      <button type="submit" form="booking-form" id="confirm-btn" class="confirm-btn" disabled>
-        Confirmar compra
-        <span id="total-inline"></span>
-      </button>
+      <p class="summary-info">Marca los asientos que deseas reservar y pulsa <strong>Confirmar compra</strong>.</p>
 
       <!-- Leyenda -->
       <div class="legend">
@@ -145,78 +149,6 @@
   <footer>
     <p>DAW1 2026 · Lumière</p>
   </footer>
-
-  <script>
-    const layout       = document.querySelector('.cinema-layout');
-    const basePrice    = parseFloat(layout.dataset.basePrice);
-    const premSurcharge = parseFloat(layout.dataset.premiumSurcharge);
-    const hiddenInputs = document.getElementById('hidden-inputs');
-    const summaryEmpty = document.getElementById('summary-empty');
-    const summaryList  = document.getElementById('summary-list');
-    const summaryTotals = document.getElementById('summary-totals');
-    const countDisplay = document.getElementById('count-display');
-    const priceDisplay = document.getElementById('price-display');
-    const totalInline  = document.getElementById('total-inline');
-    const confirmBtn   = document.getElementById('confirm-btn');
-
-    const selected = new Map(); // seatId -> { label, price, type }
-
-    document.querySelectorAll('.seat:not(.occupied)').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const id       = btn.dataset.id;
-        const type     = btn.dataset.type;
-        const rowLabel = btn.closest('.seat-row').querySelector('.row-label').textContent;
-        const num      = btn.textContent.trim();
-        const label    = `${rowLabel}${num}`;
-        const price    = type === 'Premium' ? basePrice + premSurcharge : basePrice;
-
-        if (selected.has(id)) {
-          selected.delete(id);
-          btn.classList.remove('selected');
-        } else {
-          selected.set(id, { label, price, type });
-          btn.classList.add('selected');
-        }
-        refresh();
-      });
-    });
-
-    function fmt(n) {
-      return n.toFixed(2).replace('.', ',') + '\u00a0€';
-    }
-
-    function refresh() {
-      hiddenInputs.innerHTML = '';
-      summaryList.innerHTML  = '';
-      let total = 0;
-
-      selected.forEach((data, id) => {
-        total += data.price;
-
-        const inp = document.createElement('input');
-        inp.type  = 'hidden';
-        inp.name  = 'seatIds';
-        inp.value = id;
-        hiddenInputs.appendChild(inp);
-
-        const li = document.createElement('li');
-        li.className = 'summary-item';
-        li.innerHTML =
-          `<span class="si-seat">${data.label}</span>` +
-          `<span class="si-type">${data.type}</span>` +
-          `<span class="si-price">${fmt(data.price)}</span>`;
-        summaryList.appendChild(li);
-      });
-
-      const count = selected.size;
-      summaryEmpty.style.display  = count === 0 ? '' : 'none';
-      summaryTotals.style.display = count === 0 ? 'none' : '';
-      countDisplay.textContent = count;
-      priceDisplay.textContent = fmt(total);
-      totalInline.textContent  = count > 0 ? '— ' + fmt(total) : '';
-      confirmBtn.disabled = count === 0;
-    }
-  </script>
 
 </body>
 </html>

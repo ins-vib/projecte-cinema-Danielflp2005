@@ -1,0 +1,44 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Compra confirmada — Lumière</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <link rel="stylesheet" th:href="@{/css/client-seats.css}" />
+  <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
+</head>
+<body>
+
+  <header>
+    <h1>Lumière</h1>
+    <nav>
+      <a th:href="@{/client}">Inicio</a>
+      <a th:href="@{/client/billboard}">Cartelera</a>
+      <a th:href="@{/logout}">Salir</a>
+    </nav>
+  </header>
+
+  <main class="confirm-main">
+    <div class="confirm-card">
+
+      <div class="confirm-icon">✓</div>
+      <h2 class="confirm-title">¡Compra confirmada!</h2>
+
+      <p class="confirm-sub" th:if="${totalBooked != null and totalBooked > 0}">
+        Has reservado <strong th:text="${totalBooked}">0</strong>
+        <span th:text="${totalBooked == 1 ? 'entrada' : 'entradas'}">entradas</span>
+        en total.
+      </p>
+
+      <a th:href="@{/client/billboard}" class="confirm-back">← Volver a cartelera</a>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>DAW1 2026 · Lumière</p>
+  </footer>
+
+</body>
+</html>

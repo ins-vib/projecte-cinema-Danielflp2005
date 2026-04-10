@@ -39,6 +39,7 @@
     <nav>
       <a th:href="@{/client}">Inicio</a>
       <a th:href="@{/client/billboard}">Cartelera</a>
+      <a th:href="@{/client/cart}">Carrito (<span th:text="${@cartService.itemCount}">0</span>)</a>
       <a th:href="@{/logout}">Salir</a>
     </nav>
   </header>
@@ -109,6 +110,7 @@
                 <input type="checkbox"
                        name="seatIds"
                        th:value="${seat.id}"
+                       th:checked="${preselected.contains(seat.id)}"
                        th:disabled="${bookedIds.contains(seat.id)}" />
                 <span th:text="${seat.seatNumber}"></span>
               </label>
@@ -119,7 +121,7 @@
 
         <!-- Botón de confirmación dentro del form -->
         <div class="confirm-wrap">
-          <button type="submit" class="confirm-btn">Confirmar compra</button>
+          <button type="submit" class="confirm-btn">Añadir al carrito</button>
         </div>
 
       </form>
@@ -130,7 +132,9 @@
 
       <div class="summary-panel__title">Información</div>
 
-      <p class="summary-info">Marca los asientos que deseas reservar y pulsa <strong>Confirmar compra</strong>.</p>
+      <p class="summary-info">Marca los asientos que deseas reservar y pulsa <strong>Añadir al carrito</strong>.</p>
+
+      <p th:if="${error}" style="color:red" th:text="${error}"></p>
 
       <!-- Leyenda -->
       <div class="legend">

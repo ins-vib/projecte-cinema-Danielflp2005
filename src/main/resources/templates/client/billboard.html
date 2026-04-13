@@ -1,5 +1,6 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,6 +9,7 @@
   <link rel="stylesheet" th:href="@{/css/client-billboard.css}" />
   <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
 </head>
+
 <body>
 
   <!-- HEADER -->
@@ -30,11 +32,9 @@
 
   <!-- GRID DE PELÍCULAS -->
   <section class="billboard-grid" th:if="${not #lists.isEmpty(movies)}">
-    <a class="movie-card" th:each="movie : ${movies}"
-       th:href="@{/client/movie/{id}(id=${movie.id})}">
+    <a class="movie-card" th:each="movie : ${movies}" th:href="@{/client/movie/{id}(id=${movie.id})}">
 
-      <div class="movie-card__poster"
-           th:style="'background-image: url(/images/' + ${movie.posterUrl} + ')'">
+      <div class="movie-card__poster" th:style="'background-image: url(/images/' + ${movie.posterUrl} + ')'">
         <div class="movie-card__overlay"></div>
       </div>
 
@@ -65,4 +65,5 @@
   </footer>
 
 </body>
+
 </html>

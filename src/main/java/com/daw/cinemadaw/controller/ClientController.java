@@ -21,13 +21,15 @@ import com.daw.cinemadaw.cart.CartEntryView;
 import com.daw.cinemadaw.cart.CartItem;
 import com.daw.cinemadaw.cart.CartService;
 import com.daw.cinemadaw.domain.cinema.Movie;
+import com.daw.cinemadaw.domain.cinema.Order;
 import com.daw.cinemadaw.domain.cinema.Screening;
 import com.daw.cinemadaw.domain.cinema.Seat;
-import com.daw.cinemadaw.domain.cinema.SeatBooking;
 import com.daw.cinemadaw.repository.MovieRepository;
+import com.daw.cinemadaw.repository.OrderRepository;
 import com.daw.cinemadaw.repository.ScreeningRepository;
 import com.daw.cinemadaw.repository.SeatBookingRepository;
 import com.daw.cinemadaw.repository.SeatRepository;
+import com.daw.cinemadaw.service.OrderService;
 
 @Controller
 public class ClientController {
@@ -37,17 +39,23 @@ public class ClientController {
     private final SeatBookingRepository seatBookingRepository;
     private final MovieRepository movieRepository;
     private final CartService cartService;
+    private final OrderService orderService;
+    private final OrderRepository orderRepository;
 
     public ClientController(ScreeningRepository screeningRepository,
             SeatRepository seatRepository,
             SeatBookingRepository seatBookingRepository,
             MovieRepository movieRepository,
-            CartService cartService) {
+            CartService cartService,
+            OrderService orderService,
+            OrderRepository orderRepository) {
         this.screeningRepository = screeningRepository;
         this.seatRepository = seatRepository;
         this.seatBookingRepository = seatBookingRepository;
         this.movieRepository = movieRepository;
         this.cartService = cartService;
+        this.orderService = orderService;
+        this.orderRepository = orderRepository;
     }
 
     // ── Selección de asientos ────────────────────────────────────────────────
@@ -144,34 +152,40 @@ public class ClientController {
     // ── Finalizar compra ─────────────────────────────────────────────────────
 
     @PostMapping("/client/cart/checkout")
-    public String checkout(RedirectAttributes attrs) {
+    public String checkout(@RequestParam String clientName,
+            @RequestParam String clientEmail,
+            RedirectAttributes attrs) {
         if (cartService.isEmpty()) return "redirect:/client/cart";
 
-        int totalBooked = 0;
-
-        for (CartItem item : cartService.getItems().values()) {
-            Optional<Screening> screeningOpt = screeningRepository.findById(item.getScreeningId());
-            if (screeningOpt.isEmpty()) continue;
-            Screening screening = screeningOpt.get();
-
-            for (Long seatId : item.getSeatIds()) {
-                Optional<Seat> seatOpt = seatRepository.findById(seatId);
-                if (seatOpt.isPresent()
-                        && !seatBookingRepository.existsBySeatAndScreening(seatOpt.get(), screening)) {
-                    seatBookingRepository.save(new SeatBooking(seatOpt.get(), screening));
-                    totalBooked++;
-                }
-            }
-        }
-
+        Order order = orderService.createOrderFromCart(cartService, clientName, clientEmail);
         cartService.clear();
-        attrs.addFlashAttribute("totalBooked", totalBooked);
+        attrs.addFlashAttribute("orderId", order.getId());
         return "redirect:/client/cart/confirm";
     }
 
     @GetMapping("/client/cart/confirm")
-    public String cartConfirm() {
+    public String cartConfirm(Model model) {
         return "client/cart-confirm";
+    }
+
+    // ── Mis pedidos ──────────────────────────────────────────────────────────
+
+    @GetMapping("/client/my-orders")
+    public String myOrders(@RequestParam(required = false) String email, Model model) {
+        if (email != null && !email.isBlank()) {
+            List<Order> orders = orderRepository.findByClientEmailOrderByOrderDateTimeDesc(email);
+            model.addAttribute("orders", orders);
+            model.addAttribute("email", email);
+        }
+        return "client/my-orders";
+    }
+
+    @GetMapping("/client/my-orders/{id}")
+    public String orderDetail(@PathVariable Long id, Model model) {
+        Optional<Order> optional = orderRepository.findById(id);
+        if (optional.isEmpty()) return "redirect:/client/my-orders";
+        model.addAttribute("order", optional.get());
+        return "client/order-detail";
     }
 
     // ── Cartelera y sesiones ─────────────────────────────────────────────────

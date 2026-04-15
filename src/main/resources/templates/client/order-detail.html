@@ -1,0 +1,80 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title th:text="'Pedido #' + ${order.id} + ' — Lumière'">Pedido — Lumière</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <link rel="stylesheet" th:href="@{/css/client-orders.css}" />
+  <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
+</head>
+<body>
+
+  <header>
+    <h1>Lumière</h1>
+    <nav>
+      <a th:href="@{/client}">Inicio</a>
+      <a th:href="@{/client/billboard}">Cartelera</a>
+      <a th:href="@{/client/cart}">Carrito (<span th:text="${@cartService.itemCount}">0</span>)</a>
+      <a th:href="@{/logout}">Salir</a>
+    </nav>
+  </header>
+
+  <main class="detail-main">
+
+    <div class="detail-eyebrow">Detalle del pedido</div>
+    <div class="detail-title" th:text="'Pedido #' + ${order.id}">—</div>
+
+    <div class="detail-meta">
+      <span th:text="${#temporals.format(order.orderDateTime, 'dd/MM/yyyy HH:mm')}">—</span>
+      &nbsp;·&nbsp;
+      <span th:text="${order.clientName}">—</span>
+      &nbsp;·&nbsp;
+      <span th:text="${order.clientEmail}">—</span>
+      &nbsp;·&nbsp;
+      <span th:class="${'status-badge ' + order.status.name()}" th:text="${order.status.name()}"></span>
+    </div>
+
+    <!-- Entradas -->
+    <div th:if="${order.tickets.isEmpty()}">
+      <p class="empty-tickets-msg">Este pedido no contiene entradas.</p>
+    </div>
+
+    <div th:each="ticket : ${order.tickets}" class="ticket-row">
+      <div class="ticket-info">
+        <span class="movie" th:text="${ticket.screening.movie.title}">—</span>
+        <span class="meta">
+          <span th:text="${#temporals.format(ticket.screening.screeningDateTime, 'dd/MM/yyyy HH:mm')}">—</span>
+          &nbsp;·&nbsp;
+          <span th:text="${ticket.screening.room.name + ' · ' + ticket.screening.room.cinema.cinemaName}">—</span>
+        </span>
+      </div>
+      <div class="ticket-seat">
+        <span th:text="${ticket.seat.seatrow + ticket.seat.seatNumber}">—</span><br/>
+        <span th:class="${'seat-type ' + ticket.seat.type.name()}"
+              th:text="${ticket.seat.type.name()}">
+        </span>
+      </div>
+      <div class="ticket-price"
+           th:text="${#numbers.formatDecimal(ticket.price, 1, 'POINT', 2, 'COMMA') + ' €'}">
+      </div>
+    </div>
+
+    <!-- Total -->
+    <div class="order-total-row" th:if="${!order.tickets.isEmpty()}">
+      <span class="order-total-label">Total</span>
+      <span class="order-total-price"
+            th:text="${#numbers.formatDecimal(order.totalAmount, 1, 'POINT', 2, 'COMMA') + ' €'}">
+      </span>
+    </div>
+
+    <a th:href="@{/client/my-orders}" class="btn-back-orders">← Volver a mis pedidos</a>
+
+  </main>
+
+  <footer>
+    <p>DAW1 2026 · Lumière</p>
+  </footer>
+
+</body>
+</html>

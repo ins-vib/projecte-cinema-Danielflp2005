@@ -1,0 +1,276 @@
+/* ============================================================
+   LUMIÈRE — client-cart.css
+   Página del carrito de compra
+   ============================================================ */
+
+/* ── Layout ─────────────────────────────────────────────────── */
+.cart-main {
+  max-width: 820px;
+  margin: 3rem auto 6rem;
+  padding: 0 2rem;
+  animation: fadeUp 0.5s ease both;
+}
+
+/* ── Título ─────────────────────────────────────────────────── */
+.cart-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: rgba(201,168,76,0.6);
+  margin-bottom: 0.6rem;
+}
+.cart-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--text);
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border2);
+}
+
+/* ── Flash añadido ──────────────────────────────────────────── */
+.flash-added {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  padding: 0.6rem 1rem;
+  margin-bottom: 1.5rem;
+  background: var(--gold-dim);
+}
+
+/* ── Carrito vacío ──────────────────────────────────────────── */
+.cart-empty {
+  text-align: center;
+  padding: 5rem 0;
+}
+.cart-empty__icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 1.2rem;
+  opacity: 0.2;
+}
+.cart-empty__text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+
+/* ── Entrada de carrito ─────────────────────────────────────── */
+.cart-entry {
+  border: 1px solid var(--border2);
+  border-left: 3px solid rgba(201,168,76,0.25);
+  padding: 1.4rem 1.6rem;
+  margin-bottom: 0.8rem;
+  background: rgba(255,255,255,0.02);
+  transition: background 0.25s ease, border-left-color 0.25s ease;
+}
+.cart-entry:hover {
+  background: rgba(201,168,76,0.04);
+  border-left-color: var(--gold);
+}
+.cart-entry__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.cart-entry__movie {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 0.05em;
+  color: var(--text);
+}
+.cart-entry__meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.3rem;
+}
+
+/* ── Asientos ───────────────────────────────────────────────── */
+.cart-entry__seats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1rem;
+}
+.seat-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid var(--border2);
+  color: var(--muted);
+}
+.seat-badge.Premium {
+  border-color: rgba(201,168,76,0.4);
+  color: var(--gold);
+  background: var(--gold-dim);
+}
+.seat-badge.Adapted {
+  border-color: rgba(100,200,150,0.3);
+  color: rgba(100,220,160,0.75);
+}
+
+/* ── Footer de entrada ──────────────────────────────────────── */
+.cart-entry__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--border2);
+}
+.cart-entry__count {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.cart-entry__subtotal {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ── Botón eliminar ─────────────────────────────────────────── */
+.btn-remove {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: none;
+  border: 1px solid rgba(192,57,43,0.3);
+  color: rgba(192,57,43,0.7);
+  padding: 0.35rem 0.8rem;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.btn-remove:hover {
+  border-color: var(--red2);
+  color: var(--red2);
+  background: rgba(192,57,43,0.08);
+}
+
+/* ── Resumen total ──────────────────────────────────────────── */
+.cart-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 1.2rem 0 0.4rem;
+  border-top: 1px solid var(--border);
+  margin-top: 0.6rem;
+}
+.cart-total-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.cart-total-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+/* ── Acciones ───────────────────────────────────────────────── */
+.cart-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.8rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.btn-back {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--muted);
+  border: 1px solid var(--border2);
+  padding: 0.7rem 1.4rem;
+  transition: color 0.25s, border-color 0.25s;
+}
+.btn-back:hover {
+  color: var(--text);
+  border-color: rgba(201,168,76,0.3);
+}
+.btn-checkout {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 0.75rem 2rem;
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s;
+}
+.btn-checkout:hover {
+  background: var(--gold2);
+  border-color: var(--gold2);
+}
+.btn-empty-back {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--gold);
+  border: 1px solid var(--border);
+  padding: 0.7rem 1.6rem;
+  transition: background 0.25s;
+}
+.btn-empty-back:hover {
+  background: var(--gold-dim);
+}
+
+/* ── Formulario de checkout ─────────────────────────────────── */
+.checkout-form {
+  margin-top: 1.8rem;
+}
+.checkout-fields {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.checkout-field {
+  flex: 1;
+  min-width: 200px;
+}
+.checkout-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+.checkout-input {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border2);
+  color: var(--text);
+  padding: 0.6rem 0.8rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+}

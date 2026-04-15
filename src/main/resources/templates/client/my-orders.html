@@ -1,0 +1,76 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mis pedidos — Lumière</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <link rel="stylesheet" th:href="@{/css/client-orders.css}" />
+  <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
+</head>
+<body>
+
+  <header>
+    <h1>Lumière</h1>
+    <nav>
+      <a th:href="@{/client}">Inicio</a>
+      <a th:href="@{/client/billboard}">Cartelera</a>
+      <a th:href="@{/client/cart}">Carrito (<span th:text="${@cartService.itemCount}">0</span>)</a>
+      <a th:href="@{/logout}">Salir</a>
+    </nav>
+  </header>
+
+  <main class="orders-main">
+
+    <div class="orders-eyebrow">Historial</div>
+    <div class="orders-title">Mis pedidos</div>
+
+    <!-- Búsqueda por email -->
+    <form th:action="@{/client/my-orders}" method="get" class="search-form">
+      <input type="email" name="email" th:value="${email}" placeholder="Introduce tu correo electrónico" />
+      <button type="submit">Buscar</button>
+    </form>
+
+    <!-- Sin email aún -->
+    <div class="empty-msg" th:if="${orders == null}">
+      Introduce tu correo para consultar tus pedidos.
+    </div>
+
+    <!-- Sin resultados -->
+    <div class="empty-msg" th:if="${orders != null and orders.isEmpty()}">
+      No se encontraron pedidos para ese correo.
+    </div>
+
+    <!-- Lista de pedidos -->
+    <div th:if="${orders != null and !orders.isEmpty()}">
+      <div class="order-card" th:each="order : ${orders}">
+        <div class="order-card__header">
+          <div>
+            <div class="order-card__id" th:text="'Pedido #' + ${order.id}">—</div>
+            <div class="order-card__meta">
+              <span th:text="${#temporals.format(order.orderDateTime, 'dd/MM/yyyy HH:mm')}">—</span>
+              &nbsp;·&nbsp;
+              <span th:text="${order.clientName}">—</span>
+            </div>
+          </div>
+          <div class="order-card__total"
+               th:text="${#numbers.formatDecimal(order.totalAmount, 1, 'POINT', 2, 'COMMA') + ' €'}">
+          </div>
+        </div>
+        <div class="order-card__footer">
+          <span th:class="${'status-badge ' + order.status.name()}"
+                th:text="${order.status.name()}">
+          </span>
+          <a th:href="@{/client/my-orders/{id}(id=${order.id})}" class="btn-detail">Ver detalle →</a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>DAW1 2026 · Lumière</p>
+  </footer>
+
+</body>
+</html>

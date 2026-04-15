@@ -194,4 +194,117 @@
   .time-slot { min-width: 90px; padding: 0.75rem 1rem; }
 }
 
+/* ── Sección de sesiones en movie-sessions.html ─────────────── */
+.sessions-section {
+  background: var(--bg);
+  padding: 5rem 3rem 6rem;
+  border-top: 1px solid var(--border2);
+}
+.sessions-inner {
+  max-width: 1060px;
+  margin: 0 auto;
+}
+.sessions-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.7rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.sessions-eyebrow::before {
+  content: '';
+  width: 25px;
+  height: 1px;
+  background: var(--gold);
+}
+.sessions-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.8rem;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  margin-bottom: 2.5rem;
+}
+.day-block {
+  margin-bottom: 2.5rem;
+}
+.day-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border2);
+  margin-bottom: 1rem;
+}
+.time-slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.time-slot {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 1rem 1.4rem;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color var(--ease), background var(--ease);
+  min-width: 130px;
+}
+.time-slot:hover {
+  border-color: var(--red);
+  background: rgba(139, 26, 26, 0.08);
+}
+.time-slot__hour {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  color: var(--text);
+}
+.time-slot__room {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.time-slot__price {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  margin-top: 0.2rem;
+}
+.sessions-empty {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.btn-back-link {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+}
+.btn-back-link:hover {
+  text-decoration: underline;
+}
+@media (max-width: 768px) {
+  .sessions-section { padding: 3rem 1.5rem 4rem; }
+}
+
 

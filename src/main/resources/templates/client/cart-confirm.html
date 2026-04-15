@@ -25,13 +25,18 @@
       <div class="confirm-icon">✓</div>
       <h2 class="confirm-title">¡Compra confirmada!</h2>
 
-      <p class="confirm-sub" th:if="${totalBooked != null and totalBooked > 0}">
-        Has reservado <strong th:text="${totalBooked}">0</strong>
-        <span th:text="${totalBooked == 1 ? 'entrada' : 'entradas'}">entradas</span>
-        en total.
+      <p class="confirm-sub" th:if="${orderId != null}">
+        Pedido <strong th:text="'#' + ${orderId}">—</strong> registrado correctamente.
+      </p>
+      <p class="confirm-sub" th:if="${orderId == null}">
+        Tu reserva se ha completado.
       </p>
 
-      <a th:href="@{/client/billboard}" class="confirm-back">← Volver a cartelera</a>
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-top:1.5rem;">
+        <a th:if="${orderId != null}" th:href="@{/client/my-orders/{id}(id=${orderId})}" class="confirm-back">Ver mi pedido</a>
+        <a th:href="@{/client/my-orders}" class="confirm-back">Mis pedidos</a>
+        <a th:href="@{/client/billboard}" class="confirm-back">← Volver a cartelera</a>
+      </div>
 
     </div>
   </main>

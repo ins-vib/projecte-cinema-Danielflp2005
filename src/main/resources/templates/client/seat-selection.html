@@ -8,32 +8,6 @@
   <link rel="stylesheet" th:href="@{/css/style.css}" />
   <link rel="stylesheet" th:href="@{/css/client-seats.css}" />
   <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
-  <style>
-    /* Ocultar el checkbox nativo; el label actúa visualmente como asiento */
-    .seat input[type="checkbox"] {
-      position: absolute;
-      opacity: 0;
-      width: 0;
-      height: 0;
-      pointer-events: none;
-    }
-
-    .seat {
-      cursor: pointer;
-    }
-
-    .seat.occupied {
-      cursor: not-allowed;
-      pointer-events: none;
-    }
-
-    /* Estado seleccionado via CSS puro */
-    .seat:has(input[type="checkbox"]:checked) {
-      background-color: var(--seat-selected-bg, #f59e0b);
-      color: var(--seat-selected-color, #000);
-      border-color: var(--seat-selected-border, #d97706);
-    }
-  </style>
 </head>
 
 <body>

@@ -454,3 +454,24 @@
   .seats { gap: 4px; }
   .seat:nth-child(5) { margin-right: 10px; }
 }
+
+/* ── Checkbox oculto (selección via label) ──────────────────── */
+.seat input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+.seat {
+  cursor: pointer;
+}
+.seat.occupied {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.seat:has(input[type="checkbox"]:checked) {
+  background-color: var(--seat-selected-bg, #f59e0b);
+  color: var(--seat-selected-color, #000);
+  border-color: var(--seat-selected-border, #d97706);
+}

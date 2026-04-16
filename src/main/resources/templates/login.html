@@ -66,6 +66,11 @@
           <span>Sesión cerrada correctamente.</span>
         </div>
 
+        <!-- Success registro -->
+        <div class="form-success" th:if="${success}">
+          <span th:text="${success}"></span>
+        </div>
+
         <form th:action="@{/login}" method="post" class="login-form">
 
           <div class="login-field">
@@ -101,6 +106,8 @@
 
         <div class="form-footer">
           <a th:href="@{/}" class="form-footer__link">← Volver al inicio</a>
+          <span style="color:var(--muted);margin:0 0.5rem;">·</span>
+          <a th:href="@{/register}" class="form-footer__link">Crear cuenta</a>
         </div>
 
       </div>

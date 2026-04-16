@@ -26,7 +26,7 @@ public class SecurityConfig {
         .authorizeHttpRequests(auth -> auth
 
             .requestMatchers("/h2-console/**").permitAll()
-            .requestMatchers("/login", "/logout").permitAll()
+            .requestMatchers("/login", "/logout", "/register").permitAll()
             .requestMatchers("/cookies/**").permitAll()
             .requestMatchers("/css/**", "/images/**", "/favicon.svg").permitAll()
             .requestMatchers("/").permitAll()

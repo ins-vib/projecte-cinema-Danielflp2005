@@ -1,0 +1,118 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mi perfil — Lumière</title>
+  <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
+  <link rel="stylesheet" th:href="@{/css/login.css}" />
+  <style>
+    .perfil-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2rem;
+      margin-top: 1.5rem;
+    }
+    .perfil-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.85rem;
+    }
+    .perfil-row:last-child { border-bottom: none; }
+    .perfil-row__label { color: var(--muted); }
+    .perfil-row__value { color: var(--text); }
+    .perfil-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+    .btn-outline {
+      display: block;
+      text-align: center;
+      padding: 0.75rem 1.5rem;
+      border: 1px solid var(--border);
+      color: var(--text);
+      text-decoration: none;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      transition: border-color var(--ease), color var(--ease);
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+    .btn-danger {
+      border-color: rgba(139,26,26,0.4);
+      color: var(--muted);
+    }
+    .btn-danger:hover { border-color: var(--red2); color: var(--red2); }
+  </style>
+</head>
+<body>
+
+  <div class="grain"></div>
+
+  <div class="login-split">
+
+    <!-- ═══ PANEL IZQUIERDO ═══ -->
+    <div class="login-panel login-panel--visual">
+      <div class="visual-bg"></div>
+      <div class="visual-overlay"></div>
+
+      <div class="visual-filmstrip">
+        <div class="filmstrip-hole" th:each="i : ${#numbers.sequence(1, 10)}"></div>
+      </div>
+
+      <div class="visual-content">
+        <div class="visual-eyebrow">// Mi cuenta</div>
+        <h2 class="visual-title">Bienvenido<br/>de vuelta,<br/><span th:text="${username}">usuario</span>.</h2>
+      </div>
+    </div>
+
+    <!-- ═══ PANEL DERECHO ═══ -->
+    <div class="login-panel login-panel--form">
+
+      <div class="form-panel__inner">
+
+        <a th:href="@{/}" class="form-logo">
+          <span class="form-logo__name">Lumière</span>
+          <span class="form-logo__sub">/ CINE</span>
+        </a>
+
+        <div class="form-header">
+          <div class="form-header__eyebrow">Cuenta</div>
+          <h1 class="form-header__title">Mi perfil</h1>
+        </div>
+
+        <div class="perfil-card">
+          <div class="perfil-row">
+            <span class="perfil-row__label">Usuario</span>
+            <span class="perfil-row__value" th:text="${username}">—</span>
+          </div>
+          <div class="perfil-row">
+            <span class="perfil-row__label">Rol</span>
+            <span class="perfil-row__value">Cliente</span>
+          </div>
+        </div>
+
+        <div class="perfil-actions">
+          <a th:href="@{/client/my-orders}" class="btn-outline">Ver mis pedidos →</a>
+          <a th:href="@{/client/billboard}" class="btn-outline">Ir a la cartelera →</a>
+          <a th:href="@{/logout}" class="btn-outline btn-danger">Cerrar sesión</a>
+        </div>
+
+        <div class="form-footer" style="margin-top:1.5rem;">
+          <a th:href="@{/client/home}" class="form-footer__link">← Volver al inicio</a>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

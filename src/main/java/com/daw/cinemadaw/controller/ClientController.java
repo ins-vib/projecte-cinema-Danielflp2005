@@ -9,6 +9,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.daw.cinemadaw.domain.cinema.User.CustomUserDetails;
 
 import com.daw.cinemadaw.cart.CartEntryView;
 import com.daw.cinemadaw.cart.CartItem;
@@ -152,12 +156,11 @@ public class ClientController {
     // ── Finalizar compra ─────────────────────────────────────────────────────
 
     @PostMapping("/client/cart/checkout")
-    public String checkout(@RequestParam String clientName,
-            @RequestParam String clientEmail,
-            RedirectAttributes attrs) {
+    public String checkout(Authentication authentication, RedirectAttributes attrs) {
         if (cartService.isEmpty()) return "redirect:/client/cart";
 
-        Order order = orderService.createOrderFromCart(cartService, clientName, clientEmail);
+        String username = authentication.getName();
+        Order order = orderService.createOrderFromCart(cartService, username, username);
         cartService.clear();
         attrs.addFlashAttribute("orderId", order.getId());
         return "redirect:/client/cart/confirm";
@@ -171,12 +174,10 @@ public class ClientController {
     // ── Mis pedidos ──────────────────────────────────────────────────────────
 
     @GetMapping("/client/my-orders")
-    public String myOrders(@RequestParam(required = false) String email, Model model) {
-        if (email != null && !email.isBlank()) {
-            List<Order> orders = orderRepository.findByClientEmailOrderByOrderDateTimeDesc(email);
-            model.addAttribute("orders", orders);
-            model.addAttribute("email", email);
-        }
+    public String myOrders(Authentication authentication, Model model) {
+        String username = authentication.getName();
+        List<Order> orders = orderRepository.findByClientEmailOrderByOrderDateTimeDesc(username);
+        model.addAttribute("orders", orders);
         return "client/my-orders";
     }
 
@@ -186,6 +187,14 @@ public class ClientController {
         if (optional.isEmpty()) return "redirect:/client/my-orders";
         model.addAttribute("order", optional.get());
         return "client/order-detail";
+    }
+
+    // ── Perfil ───────────────────────────────────────────────────────────────
+
+    @GetMapping("/perfil")
+    public String perfil(@AuthenticationPrincipal CustomUserDetails user, Model model) {
+        model.addAttribute("username", user.getUsername());
+        return "client/perfil";
     }
 
     // ── Cartelera y sesiones ─────────────────────────────────────────────────

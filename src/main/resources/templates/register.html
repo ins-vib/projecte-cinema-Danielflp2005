@@ -1,0 +1,117 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registro — Lumière</title>
+  <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
+  <link rel="stylesheet" th:href="@{/css/login.css}" />
+</head>
+<body>
+
+  <div class="grain"></div>
+
+  <div class="login-split">
+
+    <!-- ═══ PANEL IZQUIERDO — Imagen ═══ -->
+    <div class="login-panel login-panel--visual">
+      <div class="visual-bg"></div>
+      <div class="visual-overlay"></div>
+
+      <div class="visual-filmstrip">
+        <div class="filmstrip-hole" th:each="i : ${#numbers.sequence(1, 10)}"></div>
+      </div>
+
+      <div class="visual-content">
+        <div class="visual-eyebrow">// EST. 2026</div>
+        <h2 class="visual-title">Tu historia<br/>en el cine<br/>empieza aquí.</h2>
+        <p class="visual-quote">"Cada película es un mundo nuevo<br/>esperando ser descubierto."</p>
+      </div>
+
+      <div class="visual-bottom">
+        <div class="visual-dots">
+          <span class="dot dot--active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ PANEL DERECHO — Formulario ═══ -->
+    <div class="login-panel login-panel--form">
+
+      <div class="form-panel__inner">
+
+        <a th:href="@{/}" class="form-logo">
+          <span class="form-logo__name">Lumière</span>
+          <span class="form-logo__sub">/ CINE</span>
+        </a>
+
+        <div class="form-header">
+          <div class="form-header__eyebrow">Nueva cuenta</div>
+          <h1 class="form-header__title">Crear cuenta</h1>
+          <p class="form-header__sub">Rellena los campos para registrarte</p>
+        </div>
+
+        <!-- Error -->
+        <div class="form-error" th:if="${error}">
+          <span class="form-error__icon">⚠</span>
+          <span th:text="${error}"></span>
+        </div>
+
+        <form th:action="@{/register}" method="post" class="login-form">
+
+          <div class="login-field">
+            <label class="login-field__label" for="username">Usuario</label>
+            <input
+              class="login-field__input"
+              type="text"
+              id="username"
+              name="username"
+              placeholder="elige un nombre de usuario"
+              autocomplete="username"
+              required />
+          </div>
+
+          <div class="login-field">
+            <label class="login-field__label" for="password">Contraseña</label>
+            <input
+              class="login-field__input"
+              type="password"
+              id="password"
+              name="password"
+              placeholder="••••••••"
+              autocomplete="new-password"
+              required />
+          </div>
+
+          <div class="login-field">
+            <label class="login-field__label" for="confirmPassword">Confirmar contraseña</label>
+            <input
+              class="login-field__input"
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              placeholder="••••••••"
+              autocomplete="new-password"
+              required />
+          </div>
+
+          <button class="login-btn" type="submit">
+            <span class="login-btn__text">Crear cuenta</span>
+            <span class="login-btn__arrow">→</span>
+          </button>
+
+        </form>
+
+        <div class="form-footer">
+          <a th:href="@{/login}" class="form-footer__link">← Ya tengo cuenta</a>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

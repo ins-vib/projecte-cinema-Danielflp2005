@@ -14,7 +14,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
@@ -35,8 +34,6 @@ public class Order {
     @Column(nullable = false)
     private String clientName;
 
-    @NotBlank
-    @Email
     @Column(nullable = false)
     private String clientEmail;
 

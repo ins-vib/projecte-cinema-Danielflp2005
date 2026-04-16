@@ -16,6 +16,7 @@
       <a th:href="@{/client}">Inicio</a>
       <a th:href="@{/client/billboard}">Cartelera</a>
       <a th:href="@{/client/cart}">Carrito (<span th:text="${@cartService.itemCount}">0</span>)</a>
+      <a th:href="@{/perfil}">Mi perfil</a>
       <a th:href="@{/logout}">Salir</a>
     </nav>
   </header>
@@ -90,18 +91,8 @@
         <a th:href="@{/client/billboard}" class="btn-back">← Seguir comprando</a>
       </div>
 
-      <!-- Datos del cliente y confirmar -->
+      <!-- Confirmar compra -->
       <form th:action="@{/client/cart/checkout}" method="post" class="checkout-form">
-        <div class="checkout-fields">
-          <div class="checkout-field">
-            <label class="checkout-label">Nombre</label>
-            <input type="text" name="clientName" required placeholder="Tu nombre" class="checkout-input" />
-          </div>
-          <div class="checkout-field">
-            <label class="checkout-label">Correo electrónico</label>
-            <input type="email" name="clientEmail" required placeholder="tu@email.com" class="checkout-input" />
-          </div>
-        </div>
         <button type="submit" class="btn-checkout">Confirmar compra</button>
       </form>
 

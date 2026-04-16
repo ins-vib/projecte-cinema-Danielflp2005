@@ -16,6 +16,7 @@
       <a th:href="@{/client}">Inicio</a>
       <a th:href="@{/client/billboard}">Cartelera</a>
       <a th:href="@{/client/cart}">Carrito (<span th:text="${@cartService.itemCount}">0</span>)</a>
+      <a th:href="@{/perfil}">Mi perfil</a>
       <a th:href="@{/logout}">Salir</a>
     </nav>
   </header>
@@ -25,24 +26,13 @@
     <div class="orders-eyebrow">Historial</div>
     <div class="orders-title">Mis pedidos</div>
 
-    <!-- Búsqueda por email -->
-    <form th:action="@{/client/my-orders}" method="get" class="search-form">
-      <input type="email" name="email" th:value="${email}" placeholder="Introduce tu correo electrónico" />
-      <button type="submit">Buscar</button>
-    </form>
-
-    <!-- Sin email aún -->
-    <div class="empty-msg" th:if="${orders == null}">
-      Introduce tu correo para consultar tus pedidos.
-    </div>
-
     <!-- Sin resultados -->
-    <div class="empty-msg" th:if="${orders != null and orders.isEmpty()}">
-      No se encontraron pedidos para ese correo.
+    <div class="empty-msg" th:if="${orders.isEmpty()}">
+      Todavía no tienes pedidos.
     </div>
 
     <!-- Lista de pedidos -->
-    <div th:if="${orders != null and !orders.isEmpty()}">
+    <div th:if="${!orders.isEmpty()}">
       <div class="order-card" th:each="order : ${orders}">
         <div class="order-card__header">
           <div>

@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.daw.cinemadaw.domain.cinema.User.CustomUserDetails;
 import com.daw.cinemadaw.domain.cinema.User.User;
 import com.daw.cinemadaw.repository.UserRepository;
 
@@ -29,10 +30,6 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("Usuari no trobat"));
 
         // Convertim el nostre User a un UserDetails de Spring
-        return org.springframework.security.core.userdetails.User
-                .withUsername(user.getUsername()) // username
-                .password(user.getPassword()) // password encriptat
-                .roles(user.getRole().name()) // rol: ADMIN o CLIENT
-                .build();
+        return new CustomUserDetails(user);
     }
 }

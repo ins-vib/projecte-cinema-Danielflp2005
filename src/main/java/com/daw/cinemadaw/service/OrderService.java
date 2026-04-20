@@ -56,7 +56,9 @@ public class OrderService {
                 if (seatOpt.isEmpty()) continue;
                 Seat seat = seatOpt.get();
 
-                if (seatBookingRepository.existsBySeatAndScreening(seat, screening)) continue;
+                if (seatBookingRepository.existsBySeatAndScreening(seat, screening)) {
+                    throw new SeatsAlreadyBookedException();
+                }
 
                 seatBookingRepository.save(new SeatBooking(seat, screening));
 

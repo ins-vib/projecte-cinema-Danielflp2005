@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -34,6 +35,7 @@ import com.daw.cinemadaw.repository.ScreeningRepository;
 import com.daw.cinemadaw.repository.SeatBookingRepository;
 import com.daw.cinemadaw.repository.SeatRepository;
 import com.daw.cinemadaw.service.OrderService;
+import com.daw.cinemadaw.service.SeatsAlreadyBookedException;
 
 @Controller
 public class ClientController {
@@ -160,10 +162,16 @@ public class ClientController {
         if (cartService.isEmpty()) return "redirect:/client/cart";
 
         String username = authentication.getName();
-        Order order = orderService.createOrderFromCart(cartService, username, username);
-        cartService.clear();
-        attrs.addFlashAttribute("orderId", order.getId());
-        return "redirect:/client/cart/confirm";
+        try {
+            Order order = orderService.createOrderFromCart(cartService, username, username);
+            cartService.clear();
+            attrs.addFlashAttribute("orderId", order.getId());
+            return "redirect:/client/cart/confirm";
+        } catch (SeatsAlreadyBookedException | DataIntegrityViolationException e) {
+            attrs.addFlashAttribute("error",
+                "Uno o más asientos ya han sido comprados por otro usuario. Por favor, revisa tu selección.");
+            return "redirect:/client/cart";
+        }
     }
 
     @GetMapping("/client/cart/confirm")

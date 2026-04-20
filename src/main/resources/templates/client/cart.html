@@ -31,6 +31,9 @@
       <strong th:text="${added}"></strong> — añadida al carrito.
     </div>
 
+    <!-- Error de asientos ya comprados -->
+    <div class="flash-error" th:if="${error}" th:text="${error}"></div>
+
     <!-- Carrito vacío -->
     <div class="cart-empty" th:if="${cartEntries.isEmpty()}">
       <span class="cart-empty__icon">◻</span>

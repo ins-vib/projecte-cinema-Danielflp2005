@@ -470,7 +470,7 @@
   cursor: not-allowed;
   pointer-events: none;
 }
-.seat:has(input[type="checkbox"]:checked) {
+.seat:not(.occupied):has(input[type="checkbox"]:checked) {
   background-color: var(--seat-selected-bg, #f59e0b);
   color: var(--seat-selected-color, #000);
   border-color: var(--seat-selected-border, #d97706);

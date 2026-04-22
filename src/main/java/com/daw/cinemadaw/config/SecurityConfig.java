@@ -14,18 +14,20 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
          http
-        // Desactiva CSRF (necessari per H2)
-        .csrf(csrf -> csrf.disable())
+        // CSRF only disabled for H2 console (dev tool)
+        .csrf(csrf -> csrf
+            .ignoringRequestMatchers("/h2-console/**")
+        )
 
-        // Permet carregar la consola H2 en un iframe
+        // Only same-origin iframes allowed (prevents clickjacking)
         .headers(headers -> headers
-            .frameOptions(frame -> frame.disable())
+            .frameOptions(frame -> frame.sameOrigin())
         )
 
         // Configuració d'autoritzacions
         .authorizeHttpRequests(auth -> auth
 
-            .requestMatchers("/h2-console/**").permitAll()
+            .requestMatchers("/h2-console/**").hasRole("ADMIN")
             .requestMatchers("/login", "/logout", "/register").permitAll()
             .requestMatchers("/cookies/**").permitAll()
             .requestMatchers("/css/**", "/images/**", "/favicon.svg").permitAll()

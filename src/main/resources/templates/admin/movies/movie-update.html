@@ -3,49 +3,57 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Editar Película — Lumière</title>
+    <link rel="stylesheet" th:href="@{/css/layout.css}" />
     <link rel="stylesheet" th:href="@{/css/cinema-create.css}" />
-    <title>Editar Película</title>
     <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
   </head>
   <body>
-    <form th:action="@{/admin/movie/editar}" th:object="${movie}" method="post">
-      <legend>Editar Película</legend>
 
-      <input type="hidden" name="id" th:value="${movie.id}">
+    <div th:replace="~{layoutadmin :: layoutadmin(~{::content})}">
+      <div th:fragment="content">
 
-      <div class="field-group">
-        <label>Título:</label>
-        <input type="text" th:field="*{title}" />
-        <div class="field-error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+        <form th:action="@{/admin/movie/editar}" th:object="${movie}" method="post">
+          <legend>Editar Película</legend>
+
+          <input type="hidden" name="id" th:value="${movie.id}">
+          <input type="hidden" th:field="*{posterUrl}" />
+
+          <div class="field-group">
+            <label>Título:</label>
+            <input type="text" th:field="*{title}" />
+            <div class="field-error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+          </div>
+
+          <div class="field-group">
+            <label>Duración (min):</label>
+            <input type="number" th:field="*{min}" />
+            <div class="field-error" th:if="${#fields.hasErrors('min')}" th:errors="*{min}"></div>
+          </div>
+
+          <div class="field-group">
+            <label>Género:</label>
+            <input type="text" th:field="*{gener}" />
+            <div class="field-error" th:if="${#fields.hasErrors('gener')}" th:errors="*{gener}"></div>
+          </div>
+
+          <div class="field-group">
+            <label>Descripción:</label>
+            <input type="text" th:field="*{descripcion}" />
+            <div class="field-error" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>
+          </div>
+
+          <div class="field-group">
+            <label>Fecha de estreno:</label>
+            <input type="date" th:field="*{date}" />
+            <div class="field-error" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></div>
+          </div>
+
+          <button type="submit"><span>Guardar</span></button>
+        </form>
+
       </div>
+    </div>
 
-      <div class="field-group">
-        <label>Duración (min):</label>
-        <input type="number" th:field="*{min}" />
-        <div class="field-error" th:if="${#fields.hasErrors('min')}" th:errors="*{min}"></div>
-      </div>
-
-      <div class="field-group">
-        <label>Género:</label>
-        <input type="text" th:field="*{gener}" />
-        <div class="field-error" th:if="${#fields.hasErrors('gener')}" th:errors="*{gener}"></div>
-      </div>
-
-      <div class="field-group">
-        <label>Descripción:</label>
-        <input type="text" th:field="*{descripcion}" />
-        <div class="field-error" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>
-      </div>
-
-      <div class="field-group">
-        <label>Fecha de estreno:</label>
-        <input type="date" th:field="*{date}" />
-        <div class="field-error" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></div>
-      </div>
-
-
-
-      <button type="submit"><span>Guardar</span></button>
-    </form>
   </body>
 </html>

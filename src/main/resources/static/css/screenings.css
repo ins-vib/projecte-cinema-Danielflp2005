@@ -498,3 +498,17 @@
   text-transform: uppercase;
   color: rgba(232,224,208,0.4);
 }
+
+.screenings-header {
+  display: flex;
+  align-items: center;      /* Cambiado de flex-end para mejor alineación */
+  justify-content: space-between;
+  position: relative;
+  z-index: 20;              /* Por encima de las cards */
+  margin-bottom: 2rem;
+}
+
+.screenings-header__actions .sc-btn {
+  position: relative;
+  z-index: 21;
+}

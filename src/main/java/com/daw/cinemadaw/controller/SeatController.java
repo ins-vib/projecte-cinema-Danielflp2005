@@ -48,8 +48,10 @@ public class SeatController {
 
     @GetMapping("/admin/seats/new/{id}")
     public String createSeats(@PathVariable Long id, Model model) {
+        Room room = roomRepository.findById(id).orElse(null);
+        if (room == null) return "redirect:/admin/cinemes";
         Seat seat = new Seat();
-        seat.setRoom(roomRepository.findById(id).get());
+        seat.setRoom(room);
         model.addAttribute("seat", seat);
         model.addAttribute("types", SeatType.values());
         return "admin/seats/seats-create";
@@ -89,11 +91,12 @@ public class SeatController {
 
     @PostMapping("/admin/seats/edit/{id}")
     public String editSeatPost(@PathVariable Long id, @ModelAttribute Seat seat) {
-        Long roomId = seat.getRoom().getId();
-        Optional<Room> room = roomRepository.findById(roomId);
-        if (room.isPresent()) {
-            seat.setRoom(room.get());
-        }
+        // Resolve room from DB to avoid NPE if form field is missing/tampered
+        Seat existing = seatRepository.findById(seat.getId() != null ? seat.getId() : id)
+                .orElse(null);
+        if (existing == null) return "redirect:/admin/cinemes";
+        Long roomId = existing.getRoom().getId();
+        roomRepository.findById(roomId).ifPresent(seat::setRoom);
         seatRepository.save(seat);
         return "redirect:/admin/seats/room/" + roomId;
     }

@@ -39,7 +39,7 @@ public class OrderService {
         this.seatBookingRepository = seatBookingRepository;
     }
 
-    @Transactional
+    @Transactional(isolation = org.springframework.transaction.annotation.Isolation.SERIALIZABLE)
     public Order createOrderFromCart(CartService cartService, String clientName, String clientEmail) {
         Order order = new Order(LocalDateTime.now(), 0, clientName, clientEmail, OrderStatus.CONFIRMED);
         order = orderRepository.save(order);

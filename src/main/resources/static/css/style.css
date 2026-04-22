@@ -149,6 +149,17 @@ nav a:last-child { border-color: var(--border); color: var(--text); }
 nav a:last-child::after { display: none; }
 nav a:last-child:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
 
+nav .logout-form { display: contents; }
+nav .logout-btn {
+  font-family: 'DM Mono', monospace; font-size: 0.65rem;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--text); padding: 0.5rem 1.1rem;
+  border: 1px solid var(--border); background: transparent;
+  cursor: pointer;
+  transition: border-color var(--ease), color var(--ease), background var(--ease);
+}
+nav .logout-btn:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+
 /* ══════════════════════════════════════════
    HERO SECTION
 ══════════════════════════════════════════ */

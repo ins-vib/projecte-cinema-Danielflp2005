@@ -82,17 +82,13 @@
         <div class="sidebar-item">
           <span class="sidebar-key">Estreno</span>
           <span class="sidebar-val" th:text="${#temporals.format(movie.date, 'dd / MM / yyyy')}">—</span>
+
         </div>
-        <a th:href="@{/admin/screening/create/{id}(id=${movie.id})}" class="sidebar-schedule">
-          Programar sesión →
-        </a>
-      </div>
-    </div>
   </section>
 
   <!-- ═══ FOOTER ═══ -->
   <footer class="movie-footer">
-    <a th:href="@{/}" class="movie-footer__logo">LUMIÈRE<span>/ CINE</span></a>
+    <a th:href="@{/admin}" class="movie-footer__logo">LUMIÈRE<span>/ CINE</span></a>
     <p class="movie-footer__copy">© DAW1 2026</p>
     <nav class="movie-footer__nav">
       <a th:href="@{/admin}">Inicio</a>
@@ -102,4 +98,5 @@
   </footer>
 
 </body>
+
 </html>

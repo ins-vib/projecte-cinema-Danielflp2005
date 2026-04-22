@@ -41,6 +41,12 @@ body {
   color: var(--text);
   font-family: "Cormorant Garamond", serif;
   min-height: 100vh;
+  /* padding removed: was offsetting the layout wrapper and misaligning header/footer */
+}
+
+/* ── Layout integration ─────────────────────────────────────── */
+.l-main {
+  flex: 1 1 auto;
   padding: 2.5rem 2rem 5rem;
 }
 
@@ -235,9 +241,17 @@ body {
   text-transform: uppercase;
 }
 
-/* Botón Nueva Sala */
-.btn-add-room {
+/* Action buttons group — pushes as a unit to the right */
+.rooms-section__actions {
   margin-left: auto;
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+/* Botón Nueva Sala / Programar sesión */
+.btn-add-room {
+  margin-left: 0;
   display: inline-flex;
   align-items: center;
   font-family: "DM Mono", monospace;
@@ -483,8 +497,9 @@ body {
     flex-wrap: wrap;
     gap: 0.5rem;
   }
-  .btn-add-room {
+  .rooms-section__actions {
     margin-left: 0;
+    flex-wrap: wrap;
   }
   .room-item__actions {
     opacity: 1;

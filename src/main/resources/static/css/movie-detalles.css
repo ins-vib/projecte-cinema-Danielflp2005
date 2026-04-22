@@ -154,6 +154,22 @@ body {
   color: #c9a84c;
 }
 
+.movie-footer__nav .logout-form { display: contents; }
+.movie-footer__nav .logout-btn {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(232, 224, 208, 0.4);
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.3s ease;
+}
+.movie-footer__nav .logout-btn:hover { color: #c9a84c; }
+
 .nav-logo {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1.8rem;

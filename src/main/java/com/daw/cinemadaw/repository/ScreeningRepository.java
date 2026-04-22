@@ -12,4 +12,5 @@ public interface ScreeningRepository extends JpaRepository<Screening, Long> {
     List<Screening> findByMovie(Movie movie);
     List<Screening> findByRoom(Room room);
     List<Screening> findByMovieIdOrderByScreeningDateTimeAsc(Long movieId);
+    List<Screening> findAllByOrderByScreeningDateTimeAsc();
 }

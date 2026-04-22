@@ -190,10 +190,14 @@ public class ClientController {
     }
 
     @GetMapping("/client/my-orders/{id}")
-    public String orderDetail(@PathVariable Long id, Model model) {
+    public String orderDetail(@PathVariable Long id, Authentication authentication, Model model) {
         Optional<Order> optional = orderRepository.findById(id);
         if (optional.isEmpty()) return "redirect:/client/my-orders";
-        model.addAttribute("order", optional.get());
+        Order order = optional.get();
+        if (!order.getClientEmail().equals(authentication.getName())) {
+            return "redirect:/client/my-orders";
+        }
+        model.addAttribute("order", order);
         return "client/order-detail";
     }
 

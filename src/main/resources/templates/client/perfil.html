@@ -50,6 +50,7 @@
       color: var(--muted);
     }
     .btn-danger:hover { border-color: var(--red2); color: var(--red2); }
+    button.btn-outline { background: transparent; cursor: pointer; width: 100%; }
   </style>
 </head>
 <body>
@@ -78,7 +79,7 @@
 
       <div class="form-panel__inner">
 
-        <a th:href="@{/}" class="form-logo">
+        <a th:href="@{/client}" class="form-logo">
           <span class="form-logo__name">Lumière</span>
           <span class="form-logo__sub">/ CINE</span>
         </a>
@@ -102,11 +103,13 @@
         <div class="perfil-actions">
           <a th:href="@{/client/my-orders}" class="btn-outline">Ver mis pedidos →</a>
           <a th:href="@{/client/billboard}" class="btn-outline">Ir a la cartelera →</a>
-          <a th:href="@{/logout}" class="btn-outline btn-danger">Cerrar sesión</a>
+          <form th:action="@{/logout}" method="post">
+            <button type="submit" class="btn-outline btn-danger">Cerrar sesión</button>
+          </form>
         </div>
 
         <div class="form-footer" style="margin-top:1.5rem;">
-          <a th:href="@{/client/home}" class="form-footer__link">← Volver al inicio</a>
+          <a th:href="@{/client}" class="form-footer__link">← Volver al inicio</a>
         </div>
 
       </div>

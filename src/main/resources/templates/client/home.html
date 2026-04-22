@@ -29,7 +29,9 @@
       <nav>
         <a href="/client/billboard">Cartelera</a>
         <a th:href="@{/perfil}">Mi perfil</a>
-        <a th:href="@{/logout}">Salir</a>
+        <form th:action="@{/logout}" method="post" class="logout-form">
+          <button type="submit" class="logout-btn">Logout</button>
+        </form>
       </nav>
     </header>
 

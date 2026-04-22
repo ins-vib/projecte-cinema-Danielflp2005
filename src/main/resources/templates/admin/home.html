@@ -28,7 +28,9 @@
         <a href="/admin/cinemes">Administrar Cines</a>
         <a href="/admin/movies/billboard">Aministrar Peliculas</a>
         <a href="/admin/screenings">Administrar Sesiones</a>
-        <a th:href="@{/logout}">Logout</a>
+        <form th:action="@{/logout}" method="post" class="logout-form">
+          <button type="submit" class="logout-btn">Logout</button>
+        </form>
       </nav>
     </header>
 

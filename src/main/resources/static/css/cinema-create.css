@@ -450,3 +450,40 @@ button[type="submit"] span {
 button[type="submit"]::before {
   content: '' !important;
 }
+
+/* ── Layout integration: center the form card within l-main ── */
+.l-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
+  padding: 3rem 1.5rem;
+}
+
+form {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;           /* Asegura centrado dentro de l-main */
+  background: var(--bg2);
+  /* ... resto de tus estilos ... */
+}
+
+/* Evita que los botones se sobrepongan limpiando los flujos */
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.6rem;
+  clear: both;              /* Evita solapamiento con floats */
+}
+
+/* Si tienes botones de "Crear" fuera del form, usa esto */
+.screenings-header__actions {
+  display: flex;
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+  z-index: 5;               /* Asegura que sea clickable */
+  position: relative;
+}

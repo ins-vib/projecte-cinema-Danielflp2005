@@ -1,15 +1,19 @@
 package com.daw.cinemadaw.domain.cinema;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Screening {
@@ -21,12 +25,18 @@ public class Screening {
     @DateTimeFormat(pattern= "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime screeningDateTime;
     @Column
-    private double precio; 
+    private double precio;
 
     @ManyToOne
     private Movie movie;
     @ManyToOne
     private Room room;
+
+    @OneToMany(mappedBy = "screening", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SeatBooking> seatBookings = new ArrayList<>();
+
+    @OneToMany(mappedBy = "screening", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Ticket> tickets = new ArrayList<>();
 
     public Screening() {
     }
@@ -78,5 +88,6 @@ public class Screening {
         this.room = room;
     }
 
-
+    public List<SeatBooking> getSeatBookings() { return seatBookings; }
+    public List<Ticket> getTickets() { return tickets; }
 }

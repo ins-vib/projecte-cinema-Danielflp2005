@@ -19,6 +19,7 @@ import com.daw.cinemadaw.repository.RoomRepository;
 import com.daw.cinemadaw.repository.SeatRepository;
 
 import jakarta.validation.Valid;
+import org.springframework.transaction.annotation.Transactional;
 
 @Controller
 public class RoomController {
@@ -64,6 +65,7 @@ public class RoomController {
         return "redirect:/admin/cinemes";
     }
 
+    @Transactional
     @PostMapping("/admin/room/editar")
     public String editRoom(@Valid @ModelAttribute Room room, BindingResult result) {
         if (result.hasErrors()) {
@@ -77,9 +79,31 @@ public class RoomController {
 
         if (existingRoom.isPresent() && cinema.isPresent()) {
             Room roomToUpdate = existingRoom.get();
+            int oldCapacity = roomToUpdate.getSeat().size();
+            int newCapacity = room.getCapacity();
+
             roomToUpdate.setName(room.getName());
-            roomToUpdate.setCapacity(room.getCapacity());
+            roomToUpdate.setCapacity(newCapacity);
             roomToUpdate.setCinema(cinema.get());
+
+            if (newCapacity != oldCapacity) {
+                roomToUpdate.getSeat().clear();          // orphanRemoval deletes old seats
+                roomRepository.saveAndFlush(roomToUpdate);
+
+                int cols = 10;
+                for (int i = 0; i < newCapacity; i++) {
+                    Seat seat = new Seat();
+                    seat.setSeatNumber(i + 1);
+                    seat.setSeatrow(String.valueOf((char) ('A' + i / cols)));
+                    seat.setX(i % cols);
+                    seat.setY(i / cols);
+                    seat.setType(SeatType.Standard);
+                    seat.setEstado(false);
+                    seat.setRoom(roomToUpdate);
+                    roomToUpdate.getSeat().add(seat);
+                }
+            }
+
             roomRepository.save(roomToUpdate);
         }
         return "redirect:/admin/cinema/" + cinemaid;

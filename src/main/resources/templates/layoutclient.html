@@ -11,12 +11,12 @@
 <div th:fragment="layout(content)">
 
   <header class="l-header">
-    <h1 class="l-logo"><a th:href="@{/}">Lumière</a></h1>
+    <h1 class="l-logo"><a th:href="@{/client}">Lumière</a></h1>
     <nav class="l-nav">
-      <a th:href="@{/}">Inicio</a>
-      <a th:href="@{/movies/billboard}">Administraar peliculas</a>
-      <a th:href="@{/cinemes}">Administrar Cines</a>
-      <a th:href="@{/screenings}">Administrar Sesiones</a>
+      <a th:href="@{/client}">Inicio</a>
+      <a th:href="@{/client/billboard}">Cartelera</a>
+      <a th:href="@{/client/my-orders}">Mis pedidos</a>
+      <a th:href="@{/client/cart}">Carrito</a>
     </nav>
   </header>
 

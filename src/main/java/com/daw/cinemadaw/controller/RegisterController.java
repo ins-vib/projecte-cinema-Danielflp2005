@@ -33,6 +33,16 @@ public class RegisterController {
                            @RequestParam String confirmPassword,
                            RedirectAttributes attrs) {
 
+        if (username == null || username.isBlank() || username.length() > 50) {
+            attrs.addFlashAttribute("error", "El nombre de usuario debe tener entre 1 y 50 caracteres.");
+            return "redirect:/register";
+        }
+
+        if (password.length() < 8) {
+            attrs.addFlashAttribute("error", "La contraseña debe tener al menos 8 caracteres.");
+            return "redirect:/register";
+        }
+
         if (!password.equals(confirmPassword)) {
             attrs.addFlashAttribute("error", "Las contraseñas no coinciden.");
             return "redirect:/register";

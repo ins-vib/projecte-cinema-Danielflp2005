@@ -16,7 +16,9 @@
       <a th:href="@{/client}">Inicio</a>
       <a th:href="@{/client/billboard}">Cartelera</a>
       <a th:href="@{/client/cart}">Carrito (<span th:text="${@cartService.itemCount}">0</span>)</a>
-      <a th:href="@{/logout}">Salir</a>
+      <form th:action="@{/logout}" method="post" class="logout-form">
+        <button type="submit" class="logout-btn">Salir</button>
+      </form>
     </nav>
   </header>
 

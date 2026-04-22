@@ -46,9 +46,11 @@
             <span class="rooms-section__eyebrow">// INSTALACIONES</span>
             <h2 class="rooms-section__title">Salas</h2>
             <span class="rooms-section__count" th:text="${#lists.size(cinema.rooms)} + ' salas'">0 salas</span>
-            <a class="btn-add-room" th:href="@{/admin/room/create/{id}(id=${cinema.id})}">
-              <span>+ Nueva sala</span>
-            </a>
+            <div class="rooms-section__actions">
+              <a class="btn-add-room" th:href="@{/admin/room/create/{id}(id=${cinema.id})}">
+                <span>+ Nueva sala</span>
+              </a>
+            </div>
           </div>
 
           <ul class="rooms-list">
@@ -63,7 +65,8 @@
               <div class="room-item__actions">
                 <a class="room-btn room-btn--edit" th:href="@{/admin/room/{id}(id=${room.id})}">Ver detalles</a>
                 <a class="room-btn room-btn--edit" th:href="@{/admin/room/edit/{id}(id=${room.id})}">Editar</a>
-                <a class="room-btn room-btn--edit" th:href="@{/admin/screenings/room/{id}(id=${room.id})}">Ver sesiones</a>
+                <a class="room-btn room-btn--edit" th:href="@{/admin/screenings/room/{id}(id=${room.id})}">Ver
+                  sesiones</a>
                 <a class="room-btn room-btn--edit" th:href="@{/admin/seats/room/{id}(id=${room.id})}">Ver butacas</a>
                 <a class="room-btn room-btn--delete" th:href="@{/admin/room/delete/{id}(id=${room.id})}">Eliminar</a>
               </div>

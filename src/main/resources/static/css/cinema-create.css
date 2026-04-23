@@ -1,5 +1,5 @@
 /* ============================================================
-   LUMIÈRE — cinema-create.css
+   IMPERIAL — cinema-create.css
    Formulario Crear / Editar Cine
    ============================================================ */
 
@@ -42,16 +42,12 @@ html {
 body {
   background-color: var(--bg);
   background-image:
-    radial-gradient(
-      ellipse 55% 45% at 15% 20%,
+    radial-gradient(ellipse 55% 45% at 15% 20%,
       rgba(201, 168, 76, 0.04) 0%,
-      transparent 55%
-    ),
-    radial-gradient(
-      ellipse 50% 50% at 85% 80%,
+      transparent 55%),
+    radial-gradient(ellipse 50% 50% at 85% 80%,
       rgba(139, 26, 26, 0.07) 0%,
-      transparent 55%
-    );
+      transparent 55%);
   color: var(--text);
   font-family: "Cormorant Garamond", serif;
   min-height: 100vh;
@@ -97,6 +93,7 @@ form {
     opacity: 0;
     transform: translateY(28px) scale(0.98);
   }
+
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -156,13 +153,13 @@ legend {
 
 /* ── Field Groups ───────────────────────────────────────────── */
 .field-group,
-form > label {
+form>label {
   display: block;
   margin-bottom: 1.6rem;
 }
 
 /* Stack each label + input pair */
-form > label {
+form>label {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -314,13 +311,16 @@ button[type="submit"]:active {
 ::-webkit-scrollbar {
   width: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: var(--bg);
 }
+
 ::-webkit-scrollbar-thumb {
   background: var(--muted2);
   border-radius: 3px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: var(--gold);
 }
@@ -336,6 +336,7 @@ button[type="submit"]:active {
   form {
     padding: 2rem 1.5rem 2rem;
   }
+
   legend {
     font-size: 1.8rem;
   }
@@ -347,9 +348,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
   opacity: 0.6;
 }
+
 input[type="date"]::-webkit-calendar-picker-indicator:hover {
   opacity: 1;
 }
+
 /* ── Añadir al final de cinema-create.css ── */
 
 /* Field group — envuelve label + input + error */
@@ -409,7 +412,7 @@ select {
 }
 
 select:hover {
-  border-color: rgba(201,168,76,0.28);
+  border-color: rgba(201, 168, 76, 0.28);
   background-color: var(--bg4);
 }
 
@@ -465,7 +468,8 @@ form {
   z-index: 1;
   width: 100%;
   max-width: 520px;
-  margin: 0 auto;           /* Asegura centrado dentro de l-main */
+  margin: 0 auto;
+  /* Asegura centrado dentro de l-main */
   background: var(--bg2);
   /* ... resto de tus estilos ... */
 }
@@ -476,7 +480,8 @@ form {
   flex-direction: column;
   gap: 0.5rem;
   margin-bottom: 1.6rem;
-  clear: both;              /* Evita solapamiento con floats */
+  clear: both;
+  /* Evita solapamiento con floats */
 }
 
 /* Si tienes botones de "Crear" fuera del form, usa esto */
@@ -484,6 +489,7 @@ form {
   display: flex;
   gap: 1rem;
   padding-bottom: 1.5rem;
-  z-index: 5;               /* Asegura que sea clickable */
+  z-index: 5;
+  /* Asegura que sea clickable */
   position: relative;
 }

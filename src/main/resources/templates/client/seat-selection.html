@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Seleccionar asientos — Lumière</title>
+  <title>Seleccionar asientos — IMPERIAL</title>
   <link rel="stylesheet" th:href="@{/css/style.css}" />
   <link rel="stylesheet" th:href="@{/css/client-seats.css}" />
   <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
@@ -14,11 +14,13 @@
 
   <!-- HEADER -->
   <header>
-    <h1>Lumière</h1>
+    <h1>IMPERIAL</h1>
     <nav>
       <a th:href="@{/client}">Inicio</a>
       <a th:href="@{/client/billboard}">Cartelera</a>
+      <a th:href="@{/client/my-orders}">Mis pedidos</a>
       <a th:href="@{/client/cart}">Carrito (<span th:text="${@cartService.itemCount}">0</span>)</a>
+      <a th:href="@{/client/loyalty}">Mi Tarjeta</a>
       <form th:action="@{/logout}" method="post" class="logout-form">
         <button type="submit" class="logout-btn">Salir</button>
       </form>
@@ -125,7 +127,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <p>DAW1 2026 · Lumière</p>
+    <p>DAW1 2026 · IMPERIAL</p>
   </footer>
 
 </body>

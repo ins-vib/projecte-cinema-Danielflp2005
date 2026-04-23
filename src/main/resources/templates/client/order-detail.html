@@ -1,17 +1,19 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title th:text="'Pedido #' + ${order.id} + ' — Lumière'">Pedido — Lumière</title>
+  <title th:text="'Pedido #' + ${order.id} + ' — IMPERIAL'">Pedido — IMPERIAL</title>
   <link rel="stylesheet" th:href="@{/css/style.css}" />
   <link rel="stylesheet" th:href="@{/css/client-orders.css}" />
   <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
 </head>
+
 <body>
 
   <header>
-    <h1>Lumière</h1>
+    <h1>IMPERIAL</h1>
     <nav>
       <a th:href="@{/client}">Inicio</a>
       <a th:href="@{/client/billboard}">Cartelera</a>
@@ -52,13 +54,11 @@
         </span>
       </div>
       <div class="ticket-seat">
-        <span th:text="${ticket.seat.seatrow + ticket.seat.seatNumber}">—</span><br/>
-        <span th:class="${'seat-type ' + ticket.seat.type.name()}"
-              th:text="${ticket.seat.type.name()}">
+        <span th:text="${ticket.seat.seatrow + ticket.seat.seatNumber}">—</span><br />
+        <span th:class="${'seat-type ' + ticket.seat.type.name()}" th:text="${ticket.seat.type.name()}">
         </span>
       </div>
-      <div class="ticket-price"
-           th:text="${#numbers.formatDecimal(ticket.price, 1, 'POINT', 2, 'COMMA') + ' €'}">
+      <div class="ticket-price" th:text="${#numbers.formatDecimal(ticket.price, 1, 'POINT', 2, 'COMMA') + ' €'}">
       </div>
     </div>
 
@@ -66,7 +66,7 @@
     <div class="order-total-row" th:if="${!order.tickets.isEmpty()}">
       <span class="order-total-label">Total</span>
       <span class="order-total-price"
-            th:text="${#numbers.formatDecimal(order.totalAmount, 1, 'POINT', 2, 'COMMA') + ' €'}">
+        th:text="${#numbers.formatDecimal(order.totalAmount, 1, 'POINT', 2, 'COMMA') + ' €'}">
       </span>
     </div>
 
@@ -75,8 +75,9 @@
   </main>
 
   <footer>
-    <p>DAW1 2026 · Lumière</p>
+    <p>DAW1 2026 · IMPERIAL</p>
   </footer>
 
 </body>
+
 </html>

@@ -1,28 +1,34 @@
 /* ============================================================
-   LUMIÈRE — cinema.css
+   IMPERIAL — cinema.css
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600&family=DM+Mono:wght@300;400&display=swap');
 
 :root {
-  --bg:       #080808;
-  --bg2:      #0f0f0f;
-  --bg3:      #141414;
-  --bg4:      #1a1a1a;
-  --gold:     #c9a84c;
-  --gold2:    #e8c97a;
-  --gold-dim: rgba(201,168,76,0.12);
-  --red:      #8b1a1a;
-  --red2:     #c0392b;
-  --text:     #e8e0d0;
-  --muted:    #6b6257;
-  --muted2:   #4a4540;
-  --border:   rgba(201,168,76,0.15);
-  --border2:  rgba(232,224,208,0.06);
-  --ease:     0.25s ease;
+  --bg: #080808;
+  --bg2: #0f0f0f;
+  --bg3: #141414;
+  --bg4: #1a1a1a;
+  --gold: #c9a84c;
+  --gold2: #e8c97a;
+  --gold-dim: rgba(201, 168, 76, 0.12);
+  --red: #8b1a1a;
+  --red2: #c0392b;
+  --text: #e8e0d0;
+  --muted: #6b6257;
+  --muted2: #4a4540;
+  --border: rgba(201, 168, 76, 0.15);
+  --border2: rgba(232, 224, 208, 0.06);
+  --ease: 0.25s ease;
 }
 
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
   background: var(--bg);
@@ -34,7 +40,7 @@ body {
 /* ── Wrapper ────────────────────────────────────────────────── */
 .table-header {
   max-width: 1100px;
-  margin: 2.5rem auto 0 auto; 
+  margin: 2.5rem auto 0 auto;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -47,8 +53,10 @@ body {
 .table-header::after {
   content: '';
   position: absolute;
-  bottom: -1px; left: 0;
-  width: 50px; height: 2px;
+  bottom: -1px;
+  left: 0;
+  width: 50px;
+  height: 2px;
   background: var(--gold);
 }
 
@@ -73,7 +81,7 @@ body {
 }
 
 /* ── Header buttons ─────────────────────────────────────────── */
-.table-header > a {
+.table-header>a {
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
@@ -92,23 +100,41 @@ body {
 }
 
 /* Añadir nuevo cine */
-.table-header > a:not(.btn-primary) {
+.table-header>a:not(.btn-primary) {
   background: var(--red);
   color: var(--text);
   border: 1px solid transparent;
 }
-.table-header > a:not(.btn-primary)::before { content: '+'; font-size: 1.1rem; line-height: 1; }
-.table-header > a:not(.btn-primary)::after {
+
+.table-header>a:not(.btn-primary)::before {
+  content: '+';
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.table-header>a:not(.btn-primary)::after {
   content: '';
-  position: absolute; inset: 0;
+  position: absolute;
+  inset: 0;
   background: var(--red2);
   transform: translateX(-100%);
   transition: transform var(--ease);
-  z-index: 0;  /* was 1 — kept below text to prevent overlap */
+  z-index: 0;
+  /* was 1 — kept below text to prevent overlap */
 }
-.table-header > a:not(.btn-primary) > * { position: relative; z-index: 1; }
-.table-header > a:not(.btn-primary):hover::after { transform: translateX(0); }
-.table-header > a:not(.btn-primary):hover { box-shadow: 0 4px 20px rgba(139,26,26,.35); }
+
+.table-header>a:not(.btn-primary)>* {
+  position: relative;
+  z-index: 1;
+}
+
+.table-header>a:not(.btn-primary):hover::after {
+  transform: translateX(0);
+}
+
+.table-header>a:not(.btn-primary):hover {
+  box-shadow: 0 4px 20px rgba(139, 26, 26, .35);
+}
 
 /* Volver al home */
 .btn-primary {
@@ -116,18 +142,36 @@ body {
   color: var(--gold);
   border: 1px solid var(--border);
 }
-.btn-primary::before { content: ''; font-size: 1rem; transition: transform var(--ease); display: inline-block; }
+
+.btn-primary::before {
+  content: '';
+  font-size: 1rem;
+  transition: transform var(--ease);
+  display: inline-block;
+}
+
 .btn-primary::after {
   content: '';
-  position: absolute; inset: 0;
+  position: absolute;
+  inset: 0;
   background: var(--gold-dim);
   transform: translateX(-100%);
   transition: transform var(--ease);
   z-index: 1;
 }
-.btn-primary:hover { color: var(--gold2); border-color: rgba(201,168,76,.4); }
-.btn-primary:hover::before { transform: translateX(-3px); }
-.btn-primary:hover::after  { transform: translateX(0); }
+
+.btn-primary:hover {
+  color: var(--gold2);
+  border-color: rgba(201, 168, 76, .4);
+}
+
+.btn-primary:hover::before {
+  transform: translateX(-3px);
+}
+
+.btn-primary:hover::after {
+  transform: translateX(0);
+}
 
 /* ── Table ──────────────────────────────────────────────────── */
 table {
@@ -155,7 +199,9 @@ th {
   border-bottom: 1px solid var(--border);
 }
 
-th:last-child { text-align: right; }
+th:last-child {
+  text-align: right;
+}
 
 /* ── Body rows ──────────────────────────────────────────────── */
 tbody tr {
@@ -163,8 +209,13 @@ tbody tr {
   transition: background var(--ease);
 }
 
-tbody tr:last-child { border-bottom: none; }
-tbody tr:hover { background: var(--bg4); }
+tbody tr:last-child {
+  border-bottom: none;
+}
+
+tbody tr:hover {
+  background: var(--bg4);
+}
 
 /* ── Cells ──────────────────────────────────────────────────── */
 td {
@@ -183,7 +234,7 @@ td:first-child {
 }
 
 /* Ciudad */
-td:first-child + td {
+td:first-child+td {
   font-family: 'DM Mono', monospace;
   font-size: 0.7rem;
   letter-spacing: 0.12em;
@@ -219,11 +270,14 @@ td:last-child {
   margin-left: 0.35rem;
 }
 
-.btn-secondary:first-of-type { margin-left: 0; }
+.btn-secondary:first-of-type {
+  margin-left: 0;
+}
 
 .btn-secondary::before {
   content: '';
-  position: absolute; inset: 0;
+  position: absolute;
+  inset: 0;
   background: var(--gold-dim);
   transform: scaleX(0);
   transform-origin: left;
@@ -231,40 +285,89 @@ td:last-child {
 }
 
 /* Ver detalles */
-.btn-secondary:hover { color: var(--gold); border-color: rgba(201,168,76,.4); }
-.btn-secondary:hover::before { transform: scaleX(1); }
+.btn-secondary:hover {
+  color: var(--gold);
+  border-color: rgba(201, 168, 76, .4);
+}
+
+.btn-secondary:hover::before {
+  transform: scaleX(1);
+}
 
 /* Borrar cine */
 a[href*="delete"].btn-secondary {
-  border-color: rgba(139,26,26,.3);
+  border-color: rgba(139, 26, 26, .3);
   color: var(--muted2);
 }
-a[href*="delete"].btn-secondary::before { background: rgba(139,26,26,.09); }
-a[href*="delete"].btn-secondary:hover   { color: #e05c5c; border-color: rgba(192,57,43,.5); }
+
+a[href*="delete"].btn-secondary::before {
+  background: rgba(139, 26, 26, .09);
+}
+
+a[href*="delete"].btn-secondary:hover {
+  color: #e05c5c;
+  border-color: rgba(192, 57, 43, .5);
+}
 
 /* Editar cine */
 a[href*="edit"].btn-secondary {
-  border-color: rgba(201,168,76,.18);
+  border-color: rgba(201, 168, 76, .18);
 }
-a[href*="edit"].btn-secondary::before { background: rgba(201,168,76,.07); }
-a[href*="edit"].btn-secondary:hover   { color: var(--gold2); border-color: rgba(201,168,76,.5); }
+
+a[href*="edit"].btn-secondary::before {
+  background: rgba(201, 168, 76, .07);
+}
+
+a[href*="edit"].btn-secondary:hover {
+  color: var(--gold2);
+  border-color: rgba(201, 168, 76, .5);
+}
 
 /* ── Misc ───────────────────────────────────────────────────── */
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--muted2); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--gold); }
-::selection { background: rgba(201,168,76,.2); color: var(--gold2); }
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--muted2);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
+
+::selection {
+  background: rgba(201, 168, 76, .2);
+  color: var(--gold2);
+}
 
 /* ── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 800px) {
-  body { padding: 2rem 1rem; }
-  .table-header { flex-wrap: wrap; }
-  .table-header h1 { flex: none; width: 100%; }
-  table { display: block; overflow-x: auto; }
+  body {
+    padding: 2rem 1rem;
+  }
+
+  .table-header {
+    flex-wrap: wrap;
+  }
+
+  .table-header h1 {
+    flex: none;
+    width: 100%;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+  }
 }
 
-.table-header > a {
+.table-header>a {
   position: relative;
   z-index: 1;
 }

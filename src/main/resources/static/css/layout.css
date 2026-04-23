@@ -1,5 +1,5 @@
 /* ============================================================
-   LUMIÈRE — layout.css
+   IMPERIAL — layout.css
    Header, Nav y Footer globales
    ============================================================ */
 
@@ -52,12 +52,13 @@ body::before {
 }
 
 /* ── Wrapper del fragment ── */
-body > div {
+body>div {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   width: 100%;
-  align-items: stretch; /* CLAVE: obliga a header, main y footer a estirarse al 100% */
+  align-items: stretch;
+  /* CLAVE: obliga a header, main y footer a estirarse al 100% */
 }
 
 /* ══════════════════════════════════════════
@@ -183,11 +184,14 @@ body > div {
       MAIN
    ══════════════════════════════════════════ */
 .l-main {
-  flex: 1; /* Ocupa todo el espacio sobrante */
+  flex: 1;
+  /* Ocupa todo el espacio sobrante */
   display: flex;
   flex-direction: column;
-  align-items: center;    /* Centra horizontalmente */
-  justify-content: center; /* Centra verticalmente */
+  align-items: center;
+  /* Centra horizontalmente */
+  justify-content: center;
+  /* Centra verticalmente */
   width: 100%;
   padding: 2rem;
   box-sizing: border-box;
@@ -282,7 +286,7 @@ body > div {
 }
 
 /* Asegura que el envoltorio ocupe todo el alto y permita centrar */
-body > div {
+body>div {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -304,4 +308,3 @@ body > div {
   padding: 2rem 0;
   /* Espacio para que no pegue al header/footer */
 }
-

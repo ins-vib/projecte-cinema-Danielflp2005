@@ -1,5 +1,5 @@
 /* ============================================================
-   LUMIÈRE — client-cart.css
+   IMPERIAL — client-cart.css
    Página del carrito de compra
    ============================================================ */
 
@@ -17,9 +17,10 @@
   font-size: 0.58rem;
   letter-spacing: 0.45em;
   text-transform: uppercase;
-  color: rgba(201,168,76,0.6);
+  color: rgba(201, 168, 76, 0.6);
   margin-bottom: 0.6rem;
 }
+
 .cart-title {
   font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(2.5rem, 5vw, 4rem);
@@ -62,12 +63,14 @@
   text-align: center;
   padding: 5rem 0;
 }
+
 .cart-empty__icon {
   font-size: 2.5rem;
   display: block;
   margin-bottom: 1.2rem;
   opacity: 0.2;
 }
+
 .cart-empty__text {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.2rem;
@@ -79,28 +82,32 @@
 /* ── Entrada de carrito ─────────────────────────────────────── */
 .cart-entry {
   border: 1px solid var(--border2);
-  border-left: 3px solid rgba(201,168,76,0.25);
+  border-left: 3px solid rgba(201, 168, 76, 0.25);
   padding: 1.4rem 1.6rem;
   margin-bottom: 0.8rem;
-  background: rgba(255,255,255,0.02);
+  background: rgba(255, 255, 255, 0.02);
   transition: background 0.25s ease, border-left-color 0.25s ease;
 }
+
 .cart-entry:hover {
-  background: rgba(201,168,76,0.04);
+  background: rgba(201, 168, 76, 0.04);
   border-left-color: var(--gold);
 }
+
 .cart-entry__header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: 1rem;
 }
+
 .cart-entry__movie {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1.4rem;
   letter-spacing: 0.05em;
   color: var(--text);
 }
+
 .cart-entry__meta {
   font-family: 'DM Mono', monospace;
   font-size: 0.58rem;
@@ -117,6 +124,7 @@
   gap: 0.4rem;
   margin-top: 1rem;
 }
+
 .seat-badge {
   font-family: 'DM Mono', monospace;
   font-size: 0.6rem;
@@ -125,14 +133,16 @@
   border: 1px solid var(--border2);
   color: var(--muted);
 }
+
 .seat-badge.Premium {
-  border-color: rgba(201,168,76,0.4);
+  border-color: rgba(201, 168, 76, 0.4);
   color: var(--gold);
   background: var(--gold-dim);
 }
+
 .seat-badge.Adapted {
-  border-color: rgba(100,200,150,0.3);
-  color: rgba(100,220,160,0.75);
+  border-color: rgba(100, 200, 150, 0.3);
+  color: rgba(100, 220, 160, 0.75);
 }
 
 /* ── Footer de entrada ──────────────────────────────────────── */
@@ -144,6 +154,7 @@
   padding-top: 0.8rem;
   border-top: 1px solid var(--border2);
 }
+
 .cart-entry__count {
   font-family: 'DM Mono', monospace;
   font-size: 0.6rem;
@@ -151,6 +162,7 @@
   text-transform: uppercase;
   color: var(--muted);
 }
+
 .cart-entry__subtotal {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.1rem;
@@ -165,17 +177,18 @@
   letter-spacing: 0.15em;
   text-transform: uppercase;
   background: none;
-  border: 1px solid rgba(192,57,43,0.3);
-  color: rgba(192,57,43,0.7);
+  border: 1px solid rgba(192, 57, 43, 0.3);
+  color: rgba(192, 57, 43, 0.7);
   padding: 0.35rem 0.8rem;
   cursor: pointer;
   transition: border-color 0.2s, color 0.2s, background 0.2s;
   white-space: nowrap;
 }
+
 .btn-remove:hover {
   border-color: var(--red2);
   color: var(--red2);
-  background: rgba(192,57,43,0.08);
+  background: rgba(192, 57, 43, 0.08);
 }
 
 /* ── Resumen total ──────────────────────────────────────────── */
@@ -187,6 +200,7 @@
   border-top: 1px solid var(--border);
   margin-top: 0.6rem;
 }
+
 .cart-total-label {
   font-family: 'DM Mono', monospace;
   font-size: 0.65rem;
@@ -194,6 +208,7 @@
   text-transform: uppercase;
   color: var(--muted);
 }
+
 .cart-total-price {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.8rem;
@@ -209,6 +224,7 @@
   flex-wrap: wrap;
   align-items: center;
 }
+
 .btn-back {
   font-family: 'DM Mono', monospace;
   font-size: 0.62rem;
@@ -220,10 +236,12 @@
   padding: 0.7rem 1.4rem;
   transition: color 0.25s, border-color 0.25s;
 }
+
 .btn-back:hover {
   color: var(--text);
-  border-color: rgba(201,168,76,0.3);
+  border-color: rgba(201, 168, 76, 0.3);
 }
+
 .btn-checkout {
   font-family: 'DM Mono', monospace;
   font-size: 0.65rem;
@@ -236,10 +254,12 @@
   cursor: pointer;
   transition: background 0.25s, color 0.25s;
 }
+
 .btn-checkout:hover {
   background: var(--gold2);
   border-color: var(--gold2);
 }
+
 .btn-empty-back {
   font-family: 'DM Mono', monospace;
   font-size: 0.62rem;
@@ -251,24 +271,111 @@
   padding: 0.7rem 1.6rem;
   transition: background 0.25s;
 }
+
 .btn-empty-back:hover {
   background: var(--gold-dim);
+}
+
+/* ── Loyalty block in cart ──────────────────────────────────── */
+.loyalty-cart-block {
+  margin-top: 1.8rem;
+  padding: 1rem 1.4rem;
+  background: rgba(201, 168, 76, 0.04);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  border-left: 3px solid var(--gold);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.loyalty-cart-block__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.loyalty-cart-block__label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.loyalty-cart-block__number {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  color: rgba(201, 168, 76, 0.5);
+}
+
+.loyalty-cart-block__balance {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: rgba(232, 224, 208, 0.5);
+}
+
+.loyalty-cart-block__eq {
+  color: var(--gold);
+  font-size: 0.7rem;
+}
+
+.loyalty-cart-block__empty {
+  font-style: italic;
+  font-size: 0.6rem;
+}
+
+/* ── Loyalty checkbox in checkout form ──────────────────────── */
+.loyalty-checkbox-row {
+  margin-bottom: 1rem;
+  padding: 0.9rem 1.2rem;
+  background: rgba(201, 168, 76, 0.05);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+}
+
+.loyalty-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  color: rgba(232, 224, 208, 0.7);
+  cursor: pointer;
+}
+
+.loyalty-checkbox-label input[type="checkbox"] {
+  accent-color: var(--gold);
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+}
+
+.loyalty-checkbox-label strong {
+  color: var(--gold);
 }
 
 /* ── Formulario de checkout ─────────────────────────────────── */
 .checkout-form {
   margin-top: 1.8rem;
 }
+
 .checkout-fields {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
   margin-bottom: 1rem;
 }
+
 .checkout-field {
   flex: 1;
   min-width: 200px;
 }
+
 .checkout-label {
   font-family: 'DM Mono', monospace;
   font-size: 0.58rem;
@@ -278,9 +385,10 @@
   display: block;
   margin-bottom: 0.4rem;
 }
+
 .checkout-input {
   width: 100%;
-  background: rgba(255,255,255,0.04);
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border2);
   color: var(--text);
   padding: 0.6rem 0.8rem;

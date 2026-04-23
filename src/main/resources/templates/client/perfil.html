@@ -1,9 +1,10 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mi perfil — Lumière</title>
+  <title>Mi perfil — IMPERIAL</title>
   <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
   <link rel="stylesheet" th:href="@{/css/login.css}" />
   <style>
@@ -14,6 +15,7 @@
       padding: 2rem;
       margin-top: 1.5rem;
     }
+
     .perfil-row {
       display: flex;
       justify-content: space-between;
@@ -23,15 +25,26 @@
       font-family: 'DM Mono', monospace;
       font-size: 0.85rem;
     }
-    .perfil-row:last-child { border-bottom: none; }
-    .perfil-row__label { color: var(--muted); }
-    .perfil-row__value { color: var(--text); }
+
+    .perfil-row:last-child {
+      border-bottom: none;
+    }
+
+    .perfil-row__label {
+      color: var(--muted);
+    }
+
+    .perfil-row__value {
+      color: var(--text);
+    }
+
     .perfil-actions {
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
       margin-top: 2rem;
     }
+
     .btn-outline {
       display: block;
       text-align: center;
@@ -44,15 +57,30 @@
       letter-spacing: 0.05em;
       transition: border-color var(--ease), color var(--ease);
     }
-    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
     .btn-danger {
-      border-color: rgba(139,26,26,0.4);
+      border-color: rgba(139, 26, 26, 0.4);
       color: var(--muted);
     }
-    .btn-danger:hover { border-color: var(--red2); color: var(--red2); }
-    button.btn-outline { background: transparent; cursor: pointer; width: 100%; }
+
+    .btn-danger:hover {
+      border-color: var(--red2);
+      color: var(--red2);
+    }
+
+    button.btn-outline {
+      background: transparent;
+      cursor: pointer;
+      width: 100%;
+    }
   </style>
 </head>
+
 <body>
 
   <div class="grain"></div>
@@ -70,7 +98,7 @@
 
       <div class="visual-content">
         <div class="visual-eyebrow">// Mi cuenta</div>
-        <h2 class="visual-title">Bienvenido<br/>de vuelta,<br/><span th:text="${username}">usuario</span>.</h2>
+        <h2 class="visual-title">Bienvenido<br />de vuelta,<br /><span th:text="${username}">usuario</span>.</h2>
       </div>
     </div>
 
@@ -80,7 +108,7 @@
       <div class="form-panel__inner">
 
         <a th:href="@{/client}" class="form-logo">
-          <span class="form-logo__name">Lumière</span>
+          <span class="form-logo__name">IMPERIAL</span>
           <span class="form-logo__sub">/ CINE</span>
         </a>
 
@@ -118,4 +146,5 @@
   </div>
 
 </body>
+
 </html>

@@ -1,0 +1,300 @@
+/* ============================================================
+   IMPERIAL — loyalty.css
+   Tarjeta de fidelización
+   ============================================================ */
+
+:root {
+  --gold: #c9a84c;
+  --gold2: #e8c97a;
+  --gold-dim: rgba(201, 168, 76, 0.10);
+  --bg: #080808;
+  --bg2: #0f0f0f;
+  --bg3: #141414;
+  --text: #e8e0d0;
+  --muted: rgba(232, 224, 208, 0.45);
+  --border: rgba(201, 168, 76, 0.18);
+  --border2: rgba(232, 224, 208, 0.06);
+  --ease: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.loyalty-main {
+  max-width: 600px;
+  margin: 3rem auto 6rem;
+  padding: 0 2rem;
+  animation: fadeUp 0.5s ease both;
+}
+
+.loyalty-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: rgba(201, 168, 76, 0.6);
+  margin-bottom: 0.5rem;
+}
+
+.loyalty-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--text);
+  margin-bottom: 2.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border2);
+}
+
+/* ── Flash ────────────────────────────────────────────────── */
+.loyalty-flash {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  padding: 0.7rem 1rem;
+  margin-bottom: 1.8rem;
+}
+
+.loyalty-flash--success {
+  color: var(--gold);
+  border-left: 3px solid var(--gold);
+  background: var(--gold-dim);
+}
+
+/* ── Card visual ──────────────────────────────────────────── */
+.loyalty-card {
+  background: linear-gradient(135deg, #1a1508 0%, #0f0f0f 60%, #1a1106 100%);
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  border-radius: 12px;
+  padding: 2rem 2rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(201, 168, 76, 0.08) inset,
+    0 1px 0 rgba(201, 168, 76, 0.3) inset;
+}
+
+.loyalty-card__stripe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold) 0%, var(--gold2) 50%, var(--gold) 100%);
+}
+
+.loyalty-card::after {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 168, 76, 0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.loyalty-card__brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.35em;
+  color: var(--gold);
+  margin-bottom: 2rem;
+}
+
+.loyalty-card__brand span {
+  font-size: 0.45em;
+  letter-spacing: 0.2em;
+  color: rgba(201, 168, 76, 0.4);
+  margin-left: 0.4rem;
+  vertical-align: middle;
+  font-family: 'DM Mono', monospace;
+}
+
+.loyalty-card__number {
+  font-family: 'DM Mono', monospace;
+  font-size: 1.3rem;
+  letter-spacing: 0.35em;
+  color: var(--text);
+  margin-bottom: 2rem;
+}
+
+.loyalty-card__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.loyalty-card__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.loyalty-card__label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.48rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(201, 168, 76, 0.45);
+}
+
+.loyalty-card__value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.loyalty-card__points {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  color: var(--gold);
+  line-height: 1;
+}
+
+/* ── Info rows ────────────────────────────────────────────── */
+.loyalty-info {
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.loyalty-info__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.loyalty-info__label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.loyalty-info__value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.loyalty-info__value--gold {
+  color: var(--gold);
+}
+
+.loyalty-info__row--muted {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  color: rgba(232, 224, 208, 0.2);
+  justify-content: center;
+  border-top: 1px solid var(--border2);
+  padding-top: 0.6rem;
+  margin-top: 0.2rem;
+}
+
+/* ── CTA button ───────────────────────────────────────────── */
+.loyalty-action-btn {
+  display: inline-flex;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--bg);
+  background: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 0.8rem 2rem;
+  transition: background var(--ease), color var(--ease);
+}
+
+.loyalty-action-btn:hover {
+  background: var(--gold2);
+  border-color: var(--gold2);
+}
+
+/* ── Registration section ─────────────────────────────────── */
+.loyalty-register {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 2.5rem 2rem;
+  position: relative;
+}
+
+.loyalty-register::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 2rem;
+  width: 40px;
+  height: 2px;
+  background: var(--gold);
+}
+
+.loyalty-register__text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: rgba(232, 224, 208, 0.7);
+  margin-bottom: 2rem;
+}
+
+.loyalty-perks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-bottom: 2rem;
+}
+
+.loyalty-perk {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  color: rgba(232, 224, 208, 0.55);
+}
+
+.loyalty-perk__icon {
+  color: var(--gold);
+  font-size: 0.5rem;
+}
+
+.loyalty-register-btn {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 0.9rem 2.2rem;
+  cursor: pointer;
+  transition: background var(--ease);
+  width: 100%;
+}
+
+.loyalty-register-btn:hover {
+  background: var(--gold2);
+  border-color: var(--gold2);
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

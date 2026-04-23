@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" th:href="@{/css/layout.css}" />
   <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
 </head>
+
 <body>
 
-<div th:fragment="layout(content)">
+  <div th:fragment="layout(content)">
 
-  <header class="l-header">
-    <h1 class="l-logo"><a th:href="@{/client}">Lumière</a></h1>
-    <nav class="l-nav">
-      <a th:href="@{/client}">Inicio</a>
-      <a th:href="@{/client/billboard}">Cartelera</a>
-      <a th:href="@{/client/my-orders}">Mis pedidos</a>
-      <a th:href="@{/client/cart}">Carrito</a>
-    </nav>
-  </header>
+    <header class="l-header">
+      <h1 class="l-logo"><a th:href="@{/client}">IMPERIAL</a></h1>
+      <nav class="l-nav">
+        <a th:href="@{/client}">Inicio</a>
+        <a th:href="@{/client/billboard}">Cartelera</a>
+        <a th:href="@{/client/my-orders}">Mis pedidos</a>
+        <a th:href="@{/client/cart}">Carrito</a>
+        <a th:href="@{/client/loyalty}">Mi Tarjeta</a>
+      </nav>
+    </header>
 
-  <main class="l-main" th:replace="${content}"></main>
+    <main class="l-main" th:replace="${content}"></main>
 
-  <footer class="l-footer">
-    <p>DAW1 2026</p>
-  </footer>
+    <footer class="l-footer">
+      <p>DAW1 2026</p>
+    </footer>
 
-</div>
+  </div>
 
 </body>
+
 </html>

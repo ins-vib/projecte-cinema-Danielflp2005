@@ -25,6 +25,7 @@ import com.daw.cinemadaw.domain.cinema.User.CustomUserDetails;
 import com.daw.cinemadaw.cart.CartEntryView;
 import com.daw.cinemadaw.cart.CartItem;
 import com.daw.cinemadaw.cart.CartService;
+import com.daw.cinemadaw.domain.cinema.LoyaltyCard;
 import com.daw.cinemadaw.domain.cinema.Movie;
 import com.daw.cinemadaw.domain.cinema.Order;
 import com.daw.cinemadaw.domain.cinema.Screening;
@@ -34,6 +35,7 @@ import com.daw.cinemadaw.repository.OrderRepository;
 import com.daw.cinemadaw.repository.ScreeningRepository;
 import com.daw.cinemadaw.repository.SeatBookingRepository;
 import com.daw.cinemadaw.repository.SeatRepository;
+import com.daw.cinemadaw.service.LoyaltyService;
 import com.daw.cinemadaw.service.OrderService;
 import com.daw.cinemadaw.service.SeatsAlreadyBookedException;
 
@@ -47,6 +49,7 @@ public class ClientController {
     private final CartService cartService;
     private final OrderService orderService;
     private final OrderRepository orderRepository;
+    private final LoyaltyService loyaltyService;
 
     public ClientController(ScreeningRepository screeningRepository,
             SeatRepository seatRepository,
@@ -54,7 +57,8 @@ public class ClientController {
             MovieRepository movieRepository,
             CartService cartService,
             OrderService orderService,
-            OrderRepository orderRepository) {
+            OrderRepository orderRepository,
+            LoyaltyService loyaltyService) {
         this.screeningRepository = screeningRepository;
         this.seatRepository = seatRepository;
         this.seatBookingRepository = seatBookingRepository;
@@ -62,6 +66,7 @@ public class ClientController {
         this.cartService = cartService;
         this.orderService = orderService;
         this.orderRepository = orderRepository;
+        this.loyaltyService = loyaltyService;
     }
 
     // ── Selección de asientos ────────────────────────────────────────────────
@@ -119,10 +124,10 @@ public class ClientController {
     // ── Carrito ──────────────────────────────────────────────────────────────
 
     @GetMapping("/client/cart")
-    public String viewCart(Model model) {
+    public String viewCart(Authentication authentication, Model model) {
         List<CartEntryView> entries = new ArrayList<>();
         double total = 0;
-
+        
         for (CartItem item : cartService.getItems().values()) {
             Optional<Screening> screeningOpt = screeningRepository.findById(item.getScreeningId());
             if (screeningOpt.isEmpty()) continue;
@@ -146,6 +151,17 @@ public class ClientController {
 
         model.addAttribute("cartEntries", entries);
         model.addAttribute("cartTotal", total);
+
+        // Loyalty card integration 
+        final double cartTotal = total;
+        if (authentication != null) {
+            loyaltyService.findByUsername(authentication.getName()).ifPresent(card -> {
+                model.addAttribute("loyaltyCard", card);
+                model.addAttribute("loyaltyDiscount",
+                        loyaltyService.computeDiscount(card, cartTotal));
+            });
+        }
+
         return "client/cart";
     }
 
@@ -158,12 +174,34 @@ public class ClientController {
     // ── Finalizar compra ─────────────────────────────────────────────────────
 
     @PostMapping("/client/cart/checkout")
-    public String checkout(Authentication authentication, RedirectAttributes attrs) {
+    public String checkout(Authentication authentication,
+                           @RequestParam(name = "usePoints", required = false, defaultValue = "false") boolean usePoints,
+                           RedirectAttributes attrs) {
         if (cartService.isEmpty()) return "redirect:/client/cart";
 
         String username = authentication.getName();
+
+        // Resolve loyalty discount before creating the order
+        LoyaltyCard loyaltyCard = null;
+        double discount = 0;
+        if (usePoints) {
+            loyaltyCard = loyaltyService.findByUsername(username).orElse(null);
+            if (loyaltyCard != null) {
+                double grossTotal = computeCartTotal();
+                discount = loyaltyService.computeDiscount(loyaltyCard, grossTotal);
+            }
+        }
+
         try {
-            Order order = orderService.createOrderFromCart(cartService, username, username);
+            Order order = orderService.createOrderFromCart(cartService, username, username, discount);
+
+            // Deduct points that were applied as discount
+            if (loyaltyCard != null && discount > 0) {
+                loyaltyService.deductPoints(loyaltyCard, discount);
+            }
+            // Earn new points on the net amount paid
+            loyaltyService.addPoints(username, order.getTotalAmount());
+
             cartService.clear();
             attrs.addFlashAttribute("orderId", order.getId());
             return "redirect:/client/cart/confirm";
@@ -172,6 +210,23 @@ public class ClientController {
                 "Uno o más asientos ya han sido comprados por otro usuario. Por favor, revisa tu selección.");
             return "redirect:/client/cart";
         }
+    }
+
+    private double computeCartTotal() {
+        double total = 0;
+        for (CartItem item : cartService.getItems().values()) {
+            Optional<Screening> sOpt = screeningRepository.findById(item.getScreeningId());
+            if (sOpt.isEmpty()) continue;
+            Screening screening = sOpt.get();
+            for (Long seatId : item.getSeatIds()) {
+                Optional<Seat> seat = seatRepository.findById(seatId);
+                if (seat.isEmpty()) continue;
+                total += seat.get().getType().name().equals("Premium")
+                        ? screening.getPrecio() + 2.0
+                        : screening.getPrecio();
+            }
+        }
+        return total;
     }
 
     @GetMapping("/client/cart/confirm")

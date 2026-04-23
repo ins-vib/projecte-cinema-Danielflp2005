@@ -1,5 +1,5 @@
 /* ============================================================
-   LUMIÈRE — detail.css
+   IMPERIAL — detail.css
    Detalle de Cine
    ============================================================ */
 
@@ -122,6 +122,7 @@ body {
   color: var(--gold2);
   border-color: rgba(201, 168, 76, 0.4);
 }
+
 .btn-back:hover::before {
   transform: translateX(0);
 }
@@ -289,6 +290,7 @@ body {
   border-color: var(--gold);
   color: var(--gold2);
 }
+
 .btn-add-room:hover::before {
   transform: translateX(0);
 }
@@ -317,15 +319,19 @@ body {
 .room-item:nth-child(1) {
   animation-delay: 0.25s;
 }
+
 .room-item:nth-child(2) {
   animation-delay: 0.3s;
 }
+
 .room-item:nth-child(3) {
   animation-delay: 0.35s;
 }
+
 .room-item:nth-child(4) {
   animation-delay: 0.4s;
 }
+
 .room-item:nth-child(n + 5) {
   animation-delay: 0.43s;
 }
@@ -350,6 +356,7 @@ body {
 .room-item:hover {
   background: rgba(26, 26, 26, 0.5);
 }
+
 .room-item:hover::before {
   transform: scaleY(1);
 }
@@ -403,7 +410,8 @@ body {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  opacity: 1; /* antes era 0 */
+  opacity: 1;
+  /* antes era 0 */
 }
 
 .room-btn {
@@ -425,6 +433,7 @@ body {
   color: var(--gold);
   border-color: rgba(201, 168, 76, 0.25);
 }
+
 .room-btn--edit:hover {
   background: rgba(201, 168, 76, 0.1);
   border-color: var(--gold);
@@ -434,6 +443,7 @@ body {
   color: rgba(192, 57, 43, 0.75);
   border-color: rgba(192, 57, 43, 0.2);
 }
+
 .room-btn--delete:hover {
   background: rgba(192, 57, 43, 0.1);
   border-color: rgba(192, 57, 43, 0.75);
@@ -446,6 +456,7 @@ body {
     opacity: 0;
     transform: translateY(16px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -457,6 +468,7 @@ body {
     opacity: 0;
     transform: translateX(-8px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -467,16 +479,20 @@ body {
 ::-webkit-scrollbar {
   width: 5px;
 }
+
 ::-webkit-scrollbar-track {
   background: var(--bg);
 }
+
 ::-webkit-scrollbar-thumb {
   background: var(--muted2);
   border-radius: 3px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: var(--gold);
 }
+
 ::selection {
   background: rgba(201, 168, 76, 0.2);
   color: var(--gold2);
@@ -487,21 +503,28 @@ body {
   body {
     padding: 1.5rem 1rem 4rem;
   }
+
   .cinema-card {
     padding: 1.5rem;
   }
+
   .cinema-card__info {
     gap: 1.5rem;
   }
+
   .rooms-section__header {
     flex-wrap: wrap;
     gap: 0.5rem;
   }
+
   .rooms-section__actions {
     margin-left: 0;
     flex-wrap: wrap;
   }
+
   .room-item__actions {
     opacity: 1;
-  } /* siempre visibles en móvil */
+  }
+
+  /* siempre visibles en móvil */
 }

@@ -1,32 +1,38 @@
 /* ============================================================
-   LUMIÈRE — room-detail.css
+   IMPERIAL — room-detail.css
    Detalle de Sala
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Mono:wght@300;400&display=swap');
 
 :root {
-  --bg:       #080808;
-  --gold:     #c9a84c;
-  --gold2:    #e8c97a;
-  --gold-dim: rgba(201,168,76,0.12);
-  --red:      #8b1a1a;
-  --text:     #e8e0d0;
-  --muted:    #6b6257;
-  --muted2:   #4a4540;
-  --border:   rgba(201,168,76,0.15);
-  --border2:  rgba(232,224,208,0.07);
-  --glass:    rgba(8,8,8,0.55);
-  --ease:     0.25s ease;
+  --bg: #080808;
+  --gold: #c9a84c;
+  --gold2: #e8c97a;
+  --gold-dim: rgba(201, 168, 76, 0.12);
+  --red: #8b1a1a;
+  --text: #e8e0d0;
+  --muted: #6b6257;
+  --muted2: #4a4540;
+  --border: rgba(201, 168, 76, 0.15);
+  --border2: rgba(232, 224, 208, 0.07);
+  --glass: rgba(8, 8, 8, 0.55);
+  --ease: 0.25s ease;
 }
 
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 /* ── Body ───────────────────────────────────────────────────── */
 body {
   background-color: var(--bg);
   background-image:
-    linear-gradient(rgba(8,8,8,0.78), rgba(8,8,8,0.78)),
+    linear-gradient(rgba(8, 8, 8, 0.78), rgba(8, 8, 8, 0.78)),
     url('/images/cinema-bg.png');
   background-size: cover;
   background-position: center;
@@ -60,8 +66,10 @@ body {
 .page-header::after {
   content: '';
   position: absolute;
-  bottom: -1px; left: 0;
-  width: 40px; height: 2px;
+  bottom: -1px;
+  left: 0;
+  width: 40px;
+  height: 2px;
   background: var(--gold);
 }
 
@@ -93,14 +101,21 @@ body {
 
 .btn-back::before {
   content: '';
-  position: absolute; inset: 0;
+  position: absolute;
+  inset: 0;
   background: var(--gold-dim);
   transform: translateX(-100%);
   transition: transform var(--ease);
 }
 
-.btn-back:hover { color: var(--gold2); border-color: rgba(201,168,76,.4); }
-.btn-back:hover::before { transform: translateX(0); }
+.btn-back:hover {
+  color: var(--gold2);
+  border-color: rgba(201, 168, 76, .4);
+}
+
+.btn-back:hover::before {
+  transform: translateX(0);
+}
 
 /* ── Room card ──────────────────────────────────────────────── */
 .room-card {
@@ -117,8 +132,10 @@ body {
 .room-card::before {
   content: '';
   position: absolute;
-  top: -1px; left: 2.5rem;
-  width: 50px; height: 2px;
+  top: -1px;
+  left: 2.5rem;
+  width: 50px;
+  height: 2px;
   background: var(--gold);
 }
 
@@ -210,8 +227,10 @@ body {
 .seats-section__header::after {
   content: '';
   position: absolute;
-  bottom: -1px; left: 0;
-  width: 35px; height: 2px;
+  bottom: -1px;
+  left: 0;
+  width: 35px;
+  height: 2px;
   background: var(--gold);
 }
 
@@ -287,25 +306,50 @@ body {
   animation: rowIn 0.4s ease both;
 }
 
-.seat-item:nth-child(1)  { animation-delay: 0.25s; }
-.seat-item:nth-child(2)  { animation-delay: 0.28s; }
-.seat-item:nth-child(3)  { animation-delay: 0.31s; }
-.seat-item:nth-child(4)  { animation-delay: 0.34s; }
-.seat-item:nth-child(n+5){ animation-delay: 0.37s; }
+.seat-item:nth-child(1) {
+  animation-delay: 0.25s;
+}
 
-.seat-item:last-child { border-bottom: none; }
+.seat-item:nth-child(2) {
+  animation-delay: 0.28s;
+}
+
+.seat-item:nth-child(3) {
+  animation-delay: 0.31s;
+}
+
+.seat-item:nth-child(4) {
+  animation-delay: 0.34s;
+}
+
+.seat-item:nth-child(n+5) {
+  animation-delay: 0.37s;
+}
+
+.seat-item:last-child {
+  border-bottom: none;
+}
 
 .seat-item::before {
   content: '';
-  position: absolute; left: 0; top: 0; bottom: 0;
-  width: 2px; background: var(--gold);
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--gold);
   transform: scaleY(0);
   transition: transform var(--ease);
   transform-origin: center;
 }
 
-.seat-item:hover { background: rgba(26,26,26,0.5); }
-.seat-item:hover::before { transform: scaleY(1); }
+.seat-item:hover {
+  background: rgba(26, 26, 26, 0.5);
+}
+
+.seat-item:hover::before {
+  transform: scaleY(1);
+}
 
 .seat-item__num {
   font-family: 'Bebas Neue', sans-serif;
@@ -334,26 +378,67 @@ body {
 
 /* ── Animations ─────────────────────────────────────────────── */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes rowIn {
-  from { opacity: 0; transform: translateX(-8px); }
-  to   { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 /* ── Misc ───────────────────────────────────────────────────── */
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--muted2); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--gold); }
-::selection { background: rgba(201,168,76,.2); color: var(--gold2); }
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--muted2);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
+
+::selection {
+  background: rgba(201, 168, 76, .2);
+  color: var(--gold2);
+}
 
 /* ── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 600px) {
-  body { padding: 1.5rem 1rem 4rem; }
-  .room-card { padding: 1.5rem; }
-  .room-card__info { gap: 1.5rem; }
-  .info-item__big-num { font-size: 2.5rem; }
+  body {
+    padding: 1.5rem 1rem 4rem;
+  }
+
+  .room-card {
+    padding: 1.5rem;
+  }
+
+  .room-card__info {
+    gap: 1.5rem;
+  }
+
+  .info-item__big-num {
+    font-size: 2.5rem;
+  }
 }

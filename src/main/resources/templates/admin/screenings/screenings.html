@@ -1,13 +1,15 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sesiones — Lumière</title>
+  <title>Sesiones — IMPERIAL</title>
   <link rel="stylesheet" th:href="@{/css/layout.css}" />
   <link rel="stylesheet" th:href="@{/css/screenings.css}" />
   <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
 </head>
+
 <body>
 
   <div th:replace="~{layoutadmin :: layoutadmin(~{::content})}">
@@ -44,11 +46,13 @@
       <div class="screenings-empty" th:if="${#lists.isEmpty(movies)}">
         <span class="screenings-empty__icon">🎬</span>
         <p>No hay sesiones programadas</p>
-        <p class="screenings-empty__sub">Programa una sesión desde el detalle de una película o con el botón de arriba</p>
+        <p class="screenings-empty__sub">Programa una sesión desde el detalle de una película o con el botón de arriba
+        </p>
       </div>
 
     </div>
   </div>
 
 </body>
+
 </html>

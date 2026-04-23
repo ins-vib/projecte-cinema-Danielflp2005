@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Asientos — Lumière</title>
+  <title>Asientos — IMPERIAL</title>
   <link rel="stylesheet" th:href="@{/css/layout.css}" />
   <link rel="stylesheet" th:href="@{/css/cinema.css}" />
   <link rel="stylesheet" th:href="@{/css/seats.css}" />
@@ -16,7 +16,7 @@
   <div th:replace="~{layoutadmin :: layoutadmin(~{::content})}">
     <div th:fragment="content">
 
-      
+
       <div class="table-header">
         <h1 th:text="${room.name}">Sala</h1>
         <a class="btn-back" th:href="@{/admin/cinema/{id}(id=${room.cinema.id})}">← Volver</a>

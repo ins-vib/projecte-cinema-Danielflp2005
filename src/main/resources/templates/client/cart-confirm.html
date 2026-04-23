@@ -1,17 +1,19 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Compra confirmada — Lumière</title>
+  <title>Compra confirmada — IMPERIAL</title>
   <link rel="stylesheet" th:href="@{/css/style.css}" />
   <link rel="stylesheet" th:href="@{/css/client-seats.css}" />
   <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
 </head>
+
 <body>
 
   <header>
-    <h1><a th:href="@{/client}" style="text-decoration: none; color: inherit;">Lumière</a></h1>
+    <h1><a th:href="@{/client}" style="text-decoration: none; color: inherit;">IMPERIAL</a></h1>
     <nav>
       <a th:href="@{/client}">Inicio</a>
       <a th:href="@{/client/billboard}">Cartelera</a>
@@ -35,7 +37,8 @@
       </p>
 
       <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-top:1.5rem;">
-        <a th:if="${orderId != null}" th:href="@{/client/my-orders/{id}(id=${orderId})}" class="confirm-back">Ver mi pedido</a>
+        <a th:if="${orderId != null}" th:href="@{/client/my-orders/{id}(id=${orderId})}" class="confirm-back">Ver mi
+          pedido</a>
         <a th:href="@{/client/my-orders}" class="confirm-back">Mis pedidos</a>
         <a th:href="@{/client/billboard}" class="confirm-back">← Volver a cartelera</a>
       </div>
@@ -44,8 +47,9 @@
   </main>
 
   <footer>
-    <p>DAW1 2026 · Lumière</p>
+    <p>DAW1 2026 · IMPERIAL</p>
   </footer>
 
 </body>
+
 </html>

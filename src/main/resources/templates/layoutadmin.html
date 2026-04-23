@@ -1,35 +1,38 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" th:href="@{/css/layout.css}" />
   <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
 </head>
+
 <body>
 
-<div th:fragment="layoutadmin(content)">
+  <div th:fragment="layoutadmin(content)">
 
-  <header class="l-header">
-    <h1 class="l-logo"><a th:href="@{/admin}" style="text-decoration: none; color: inherit;">Lumière</a></h1>
-    <nav class="l-nav">
-      <a th:href="@{/admin}">Inicio</a>
-      <a th:href="@{/admin/movies/billboard}">Administrar peliculas</a>
-      <a th:href="@{/admin/cinemes}">Administrar Cines</a>
-      <a th:href="@{/admin/screenings}">Administrar Sesiones</a>
-      <form th:action="@{/logout}" method="post" class="logout-form">
-        <button type="submit" class="logout-btn">Logout</button>
-      </form>
-    </nav>
-  </header>
+    <header class="l-header">
+      <h1 class="l-logo"><a th:href="@{/admin}" style="text-decoration: none; color: inherit;">IMPERIAL</a></h1>
+      <nav class="l-nav">
+        <a th:href="@{/admin}">Inicio</a>
+        <a th:href="@{/admin/movies/billboard}">Administrar peliculas</a>
+        <a th:href="@{/admin/cinemes}">Administrar Cines</a>
+        <a th:href="@{/admin/screenings}">Administrar Sesiones</a>
+        <form th:action="@{/logout}" method="post" class="logout-form">
+          <button type="submit" class="logout-btn">Logout</button>
+        </form>
+      </nav>
+    </header>
 
-  <main class="l-main" th:replace="${content}"></main>
+    <main class="l-main" th:replace="${content}"></main>
 
-  <footer class="l-footer">
-    <p>DAW1 2026</p>
-  </footer>
+    <footer class="l-footer">
+      <p>DAW1 2026</p>
+    </footer>
 
-</div>
+  </div>
 
 </body>
+
 </html>

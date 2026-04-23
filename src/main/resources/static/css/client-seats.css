@@ -1,11 +1,11 @@
 /* ============================================================
-   LUMIÈRE — client-seats.css
+   IMPERIAL — client-seats.css
    Selección de asientos + confirmación
    ============================================================ */
 
 /* ── Barra de info de sesión ────────────────────────────────── */
 .screening-bar {
-  background: rgba(201,168,76,0.06);
+  background: rgba(201, 168, 76, 0.06);
   border-bottom: 1px solid var(--border);
 }
 
@@ -30,7 +30,7 @@
   font-size: 0.45rem;
   letter-spacing: 0.35em;
   text-transform: uppercase;
-  color: rgba(201,168,76,0.5);
+  color: rgba(201, 168, 76, 0.5);
 }
 
 .sbar-val {
@@ -75,10 +75,10 @@
   max-width: 500px;
   height: 10px;
   background: linear-gradient(to bottom,
-    rgba(255,255,255,0.25) 0%,
-    rgba(255,255,255,0.05) 100%);
+      rgba(255, 255, 255, 0.25) 0%,
+      rgba(255, 255, 255, 0.05) 100%);
   border-radius: 50% 50% 0 0 / 8px 8px 0 0;
-  box-shadow: 0 -4px 30px rgba(255,255,255,0.12), 0 0 60px rgba(255,255,255,0.06);
+  box-shadow: 0 -4px 30px rgba(255, 255, 255, 0.12), 0 0 60px rgba(255, 255, 255, 0.06);
   margin-bottom: 0.5rem;
 }
 
@@ -87,7 +87,7 @@
   font-size: 0.48rem;
   letter-spacing: 0.55em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.2);
+  color: rgba(255, 255, 255, 0.2);
 }
 
 /* ── Grid de filas ──────────────────────────────────────────── */
@@ -107,7 +107,7 @@
   font-family: 'DM Mono', monospace;
   font-size: 0.55rem;
   letter-spacing: 0.1em;
-  color: rgba(232,224,208,0.25);
+  color: rgba(232, 224, 208, 0.25);
   width: 1rem;
   text-align: center;
   flex-shrink: 0;
@@ -141,40 +141,53 @@
   content: '';
   position: absolute;
   bottom: -3px;
-  left: 3px; right: 3px;
+  left: 3px;
+  right: 3px;
   height: 3px;
   border-radius: 0 0 3px 3px;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0.4);
 }
 
 .seat:not(.occupied):hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 /* Standard */
 .seat.standard {
   background: #2a2a2a;
-  color: rgba(232,224,208,0.5);
-  border: 1px solid rgba(232,224,208,0.1);
+  color: rgba(232, 224, 208, 0.5);
+  border: 1px solid rgba(232, 224, 208, 0.1);
 }
-.seat.standard:hover { background: #3a3a3a; color: var(--text); }
+
+.seat.standard:hover {
+  background: #3a3a3a;
+  color: var(--text);
+}
 
 /* Premium */
 .seat.premium {
   background: #1a2535;
-  color: rgba(100,150,220,0.7);
-  border: 1px solid rgba(100,150,220,0.2);
+  color: rgba(100, 150, 220, 0.7);
+  border: 1px solid rgba(100, 150, 220, 0.2);
 }
-.seat.premium:hover { background: #223046; color: #7aaae8; }
+
+.seat.premium:hover {
+  background: #223046;
+  color: #7aaae8;
+}
 
 /* Adapted */
 .seat.adapted {
   background: #1a2b1a;
-  color: rgba(80,180,100,0.7);
-  border: 1px solid rgba(80,180,100,0.2);
+  color: rgba(80, 180, 100, 0.7);
+  border: 1px solid rgba(80, 180, 100, 0.2);
 }
-.seat.adapted:hover { background: #213a21; color: #6dba7d; }
+
+.seat.adapted:hover {
+  background: #213a21;
+  color: #6dba7d;
+}
 
 /* Selected */
 .seat.selected {
@@ -182,14 +195,14 @@
   color: #080808 !important;
   border-color: var(--gold2) !important;
   transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(201,168,76,0.4);
+  box-shadow: 0 4px 14px rgba(201, 168, 76, 0.4);
 }
 
 /* Occupied */
 .seat.occupied {
   background: #141414;
-  color: rgba(232,224,208,0.12);
-  border: 1px solid rgba(232,224,208,0.05);
+  color: rgba(232, 224, 208, 0.12);
+  border: 1px solid rgba(232, 224, 208, 0.05);
   cursor: not-allowed;
   text-decoration: line-through;
 }
@@ -213,7 +226,7 @@
   gap: 1.2rem;
   border: 1px solid var(--border);
   padding: 1.5rem;
-  background: rgba(201,168,76,0.03);
+  background: rgba(201, 168, 76, 0.03);
 }
 
 .summary-panel__title {
@@ -305,7 +318,9 @@
   transition: background var(--ease), opacity var(--ease);
 }
 
-.confirm-btn:hover:not(:disabled) { background: var(--gold2); }
+.confirm-btn:hover:not(:disabled) {
+  background: var(--gold2);
+}
 
 .confirm-btn:disabled {
   opacity: 0.3;
@@ -326,7 +341,7 @@
   font-size: 0.48rem;
   letter-spacing: 0.4em;
   text-transform: uppercase;
-  color: rgba(201,168,76,0.4);
+  color: rgba(201, 168, 76, 0.4);
   margin-bottom: 0.3rem;
 }
 
@@ -344,11 +359,30 @@
   border-radius: 3px 3px 1px 1px;
   flex-shrink: 0;
 }
-.legend-dot.standard  { background: #2a2a2a; border: 1px solid rgba(232,224,208,0.1); }
-.legend-dot.premium   { background: #1a2535; border: 1px solid rgba(100,150,220,0.2); }
-.legend-dot.adapted   { background: #1a2b1a; border: 1px solid rgba(80,180,100,0.2); }
-.legend-dot.selected  { background: var(--gold); }
-.legend-dot.occupied  { background: #141414; border: 1px solid rgba(232,224,208,0.05); }
+
+.legend-dot.standard {
+  background: #2a2a2a;
+  border: 1px solid rgba(232, 224, 208, 0.1);
+}
+
+.legend-dot.premium {
+  background: #1a2535;
+  border: 1px solid rgba(100, 150, 220, 0.2);
+}
+
+.legend-dot.adapted {
+  background: #1a2b1a;
+  border: 1px solid rgba(80, 180, 100, 0.2);
+}
+
+.legend-dot.selected {
+  background: var(--gold);
+}
+
+.legend-dot.occupied {
+  background: #141414;
+  border: 1px solid rgba(232, 224, 208, 0.05);
+}
 
 /* ── Página de confirmación ─────────────────────────────────── */
 .confirm-main {
@@ -375,7 +409,7 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: rgba(201,168,76,0.12);
+  background: rgba(201, 168, 76, 0.12);
   border: 1px solid var(--gold);
   display: flex;
   align-items: center;
@@ -434,7 +468,10 @@
   margin-top: 0.5rem;
   transition: color var(--ease);
 }
-.confirm-back:hover { color: var(--gold2); }
+
+.confirm-back:hover {
+  color: var(--gold2);
+}
 
 /* ── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 900px) {
@@ -442,17 +479,31 @@
     flex-direction: column;
     padding: 0 1rem;
   }
+
   .summary-panel {
     width: 100%;
     position: static;
   }
-  .screening-bar__inner { padding: 0.8rem 1rem; }
+
+  .screening-bar__inner {
+    padding: 0.8rem 1rem;
+  }
 }
 
 @media (max-width: 600px) {
-  .seat { width: 24px; height: 22px; font-size: 0.42rem; }
-  .seats { gap: 4px; }
-  .seat:nth-child(5) { margin-right: 10px; }
+  .seat {
+    width: 24px;
+    height: 22px;
+    font-size: 0.42rem;
+  }
+
+  .seats {
+    gap: 4px;
+  }
+
+  .seat:nth-child(5) {
+    margin-right: 10px;
+  }
 }
 
 /* ── Checkbox oculto (selección via label) ──────────────────── */
@@ -463,13 +514,16 @@
   height: 0;
   pointer-events: none;
 }
+
 .seat {
   cursor: pointer;
 }
+
 .seat.occupied {
   cursor: not-allowed;
   pointer-events: none;
 }
+
 .seat:not(.occupied):has(input[type="checkbox"]:checked) {
   background-color: var(--seat-selected-bg, #f59e0b);
   color: var(--seat-selected-color, #000);

@@ -1,111 +1,120 @@
 /* ============================================================
-   LUMIÈRE — seats.css
+   IMPERIAL — seats.css
    Mapa visual de asientos
    ============================================================ */
 
 /* ── Contenedor del mapa ─────────────────────────────────────── */
 .seats-map {
-    max-width: 1100px;
-    margin: 2.5rem auto 3rem auto;
-    padding: 2rem;
-    background: #0f0f0f;
-    border: 1px solid rgba(201,168,76,0.15);
-    border-radius: 2px;
-    position: relative;
-    overflow-x: auto;
-  }
-  
-  /* Etiqueta "PANTALLA" arriba */
-  .seats-map::before {
-    content: '— PANTALLA —';
-    display: block;
-    text-align: center;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.55rem;
-    letter-spacing: 0.45em;
-    color: rgba(201,168,76,0.4);
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.8rem;
-    border-bottom: 1px solid rgba(201,168,76,0.1);
-  }
-  
-  /* ── SVG principal ───────────────────────────────────────────── */
-  .seats-map svg {
-    display: block;
-    width: 100%;
-    height: auto;
-    min-height: 300px;
-  }
-  
-  /* ── Asientos individuales ───────────────────────────────────── */
-  .seat {
-    color: rgba(201,168,76,0.5);
-    transition: color 0.2s ease, filter 0.2s ease;
-    cursor: pointer;
-    overflow: visible;
-  }
-  
-  .seat:hover {
-    color: #c9a84c;
-    filter: drop-shadow(0 0 6px rgba(201,168,76,0.5));
-  }
-  
-  /* ── Leyenda ─────────────────────────────────────────────────── */
-  .seats-legend {
-    display: flex;
-    gap: 1.5rem;
-    justify-content: center;
-    margin-top: 1.5rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(232,224,208,0.06);
-  }
-  
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.58rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: rgba(232,224,208,0.4);
-  }
-  
-  .legend-dot {
-    width: 12px; height: 12px;
-    border-radius: 2px;
-  }
-  
-  .legend-dot--free    { background: rgba(201,168,76,0.5); }
-  .legend-dot--ocupado { background: rgba(139,26,26,0.7); }
-  .legend-dot--premium { background: rgba(201,168,76,0.9); }
+  max-width: 1100px;
+  margin: 2.5rem auto 3rem auto;
+  padding: 2rem;
+  background: #0f0f0f;
+  border: 1px solid rgba(201, 168, 76, 0.15);
+  border-radius: 2px;
+  position: relative;
+  overflow-x: auto;
+}
 
-  .btn-back {
-    display: inline-flex;
-    align-items: center;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: rgba(232,224,208,0.4);
-    padding: 0.45rem 0.8rem;
-    border: 1px solid rgba(232,224,208,0.1);
-    border-radius: 2px;
-    transition: color 0.3s ease, border-color 0.3s ease;
-    flex-shrink: 0;
-  }
-  
-  .btn-back:hover {
-    color: #c9a84c;
-    border-color: rgba(201,168,76,0.4);
-  }
+/* Etiqueta "PANTALLA" arriba */
+.seats-map::before {
+  content: '— PANTALLA —';
+  display: block;
+  text-align: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.45em;
+  color: rgba(201, 168, 76, 0.4);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+}
 
-  .table-header > .btn-back::before {
-    content: '' !important;
-    display: none;
-  }
-  
-  .table-header > .btn-back::after {
-    display: none;
-  }
+/* ── SVG principal ───────────────────────────────────────────── */
+.seats-map svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 300px;
+}
+
+/* ── Asientos individuales ───────────────────────────────────── */
+.seat {
+  color: rgba(201, 168, 76, 0.5);
+  transition: color 0.2s ease, filter 0.2s ease;
+  cursor: pointer;
+  overflow: visible;
+}
+
+.seat:hover {
+  color: #c9a84c;
+  filter: drop-shadow(0 0 6px rgba(201, 168, 76, 0.5));
+}
+
+/* ── Leyenda ─────────────────────────────────────────────────── */
+.seats-legend {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(232, 224, 208, 0.06);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(232, 224, 208, 0.4);
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+.legend-dot--free {
+  background: rgba(201, 168, 76, 0.5);
+}
+
+.legend-dot--ocupado {
+  background: rgba(139, 26, 26, 0.7);
+}
+
+.legend-dot--premium {
+  background: rgba(201, 168, 76, 0.9);
+}
+
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: rgba(232, 224, 208, 0.4);
+  padding: 0.45rem 0.8rem;
+  border: 1px solid rgba(232, 224, 208, 0.1);
+  border-radius: 2px;
+  transition: color 0.3s ease, border-color 0.3s ease;
+  flex-shrink: 0;
+}
+
+.btn-back:hover {
+  color: #c9a84c;
+  border-color: rgba(201, 168, 76, 0.4);
+}
+
+.table-header>.btn-back::before {
+  content: '' !important;
+  display: none;
+}
+
+.table-header>.btn-back::after {
+  display: none;
+}

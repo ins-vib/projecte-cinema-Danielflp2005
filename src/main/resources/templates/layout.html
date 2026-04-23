@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" th:href="@{/css/layout.css}" />
   <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
 </head>
+
 <body>
 
-<div th:fragment="layout(content)">
+  <div th:fragment="layout(content)">
 
-  <header class="l-header">
-    <h1 class="l-logo"><a th:href="@{/}">Lumière</a></h1>
-    <nav class="l-nav">
-      <a th:href="@{/}">Inicio</a>
-      <a th:href="@{/movies/billboard}">Administraar peliculas</a>
-      <a th:href="@{/cinemes}">Administrar Cines</a>
-      <a th:href="@{/screenings}">Administrar Sesiones</a>
-    </nav>
-  </header>
+    <header class="l-header">
+      <h1 class="l-logo"><a th:href="@{/}">IMPERIAL</a></h1>
+      <nav class="l-nav">
+        <a th:href="@{/}">Inicio</a>
+        <a th:href="@{/movies/billboard}">Administraar peliculas</a>
+        <a th:href="@{/cinemes}">Administrar Cines</a>
+        <a th:href="@{/screenings}">Administrar Sesiones</a>
+      </nav>
+    </header>
 
-  <main class="l-main" th:replace="${content}"></main>
+    <main class="l-main" th:replace="${content}"></main>
 
-  <footer class="l-footer">
-    <p>DAW1 2026</p>
-  </footer>
+    <footer class="l-footer">
+      <p>DAW1 2026</p>
+    </footer>
 
-</div>
+  </div>
 
 </body>
+
 </html>

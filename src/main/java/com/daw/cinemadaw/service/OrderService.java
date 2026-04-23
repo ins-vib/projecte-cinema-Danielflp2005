@@ -40,7 +40,8 @@ public class OrderService {
     }
 
     @Transactional(isolation = org.springframework.transaction.annotation.Isolation.SERIALIZABLE)
-    public Order createOrderFromCart(CartService cartService, String clientName, String clientEmail) {
+    public Order createOrderFromCart(CartService cartService, String clientName, String clientEmail,
+                                     double loyaltyDiscount) {
         Order order = new Order(LocalDateTime.now(), 0, clientName, clientEmail, OrderStatus.CONFIRMED);
         order = orderRepository.save(order);
 
@@ -71,7 +72,7 @@ public class OrderService {
             }
         }
 
-        order.setTotalAmount(totalAmount);
+        order.setTotalAmount(Math.max(0, totalAmount - loyaltyDiscount));
         return orderRepository.save(order);
     }
 }

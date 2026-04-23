@@ -1,5 +1,5 @@
 /* ============================================================
-   LUMIÈRE — movie-detail.css
+   IMPERIAL — movie-detail.css
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Mono:wght@300;400&display=swap');
@@ -154,7 +154,10 @@ body {
   color: #c9a84c;
 }
 
-.movie-footer__nav .logout-form { display: contents; }
+.movie-footer__nav .logout-form {
+  display: contents;
+}
+
 .movie-footer__nav .logout-btn {
   font-family: 'DM Mono', monospace;
   font-size: 0.6rem;
@@ -168,7 +171,10 @@ body {
   padding: 0;
   transition: color 0.3s ease;
 }
-.movie-footer__nav .logout-btn:hover { color: #c9a84c; }
+
+.movie-footer__nav .logout-btn:hover {
+  color: #c9a84c;
+}
 
 .nav-logo {
   font-family: 'Bebas Neue', sans-serif;

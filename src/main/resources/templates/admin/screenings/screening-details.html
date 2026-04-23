@@ -1,13 +1,15 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title th:text="${screening.movie.title} + ' — Sesión — Lumière'">Sesión — Lumière</title>
+  <title th:text="${screening.movie.title} + ' — Sesión — IMPERIAL'">Sesión — IMPERIAL</title>
   <link rel="stylesheet" th:href="@{/css/layout.css}" />
   <link rel="stylesheet" th:href="@{/css/screenings.css}" />
   <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
 </head>
+
 <body>
 
   <div th:replace="~{layoutadmin :: layoutadmin(~{::content})}">
@@ -62,7 +64,8 @@
             </div>
 
             <div class="screening-detail__actions">
-              <a class="sc-btn sc-btn--edit" th:href="@{/admin/screening/edit/{id}(id=${screening.id})}">Editar sesión</a>
+              <a class="sc-btn sc-btn--edit" th:href="@{/admin/screening/edit/{id}(id=${screening.id})}">Editar
+                sesión</a>
               <a class="sc-btn sc-btn--delete" th:href="@{/admin/screening/delete/{id}(id=${screening.id})}"
                 onclick="return confirm('¿Eliminar esta sesión?')">Eliminar</a>
             </div>
@@ -76,4 +79,5 @@
   </div>
 
 </body>
+
 </html>

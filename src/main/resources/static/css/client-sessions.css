@@ -1,5 +1,5 @@
 /* ============================================================
-   LUMIÈRE — client-sessions.css
+   IMPERIAL — client-sessions.css
    Página de sesiones de una película
    ============================================================ */
 
@@ -16,12 +16,10 @@
 .sessions-hero__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(8,8,8,1) 0%,
-    rgba(8,8,8,0.6) 50%,
-    rgba(8,8,8,0.25) 100%
-  );
+  background: linear-gradient(to top,
+      rgba(8, 8, 8, 1) 0%,
+      rgba(8, 8, 8, 0.6) 50%,
+      rgba(8, 8, 8, 0.25) 100%);
 }
 
 .sessions-hero__content {
@@ -38,7 +36,7 @@
   font-size: 0.55rem;
   letter-spacing: 0.4em;
   text-transform: uppercase;
-  color: rgba(201,168,76,0.65);
+  color: rgba(201, 168, 76, 0.65);
 }
 
 .sessions-hero__title {
@@ -60,7 +58,9 @@
   color: var(--muted);
 }
 
-.sessions-hero__meta .sep { color: rgba(201,168,76,0.3); }
+.sessions-hero__meta .sep {
+  color: rgba(201, 168, 76, 0.3);
+}
 
 /* ── Contenido principal ────────────────────────────────────── */
 .sessions-main {
@@ -79,8 +79,10 @@
 .sessions-header::after {
   content: '';
   position: absolute;
-  bottom: -1px; left: 0;
-  width: 40px; height: 2px;
+  bottom: -1px;
+  left: 0;
+  width: 40px;
+  height: 2px;
   background: var(--gold);
 }
 
@@ -89,7 +91,7 @@
   font-size: 0.55rem;
   letter-spacing: 0.4em;
   text-transform: uppercase;
-  color: rgba(201,168,76,0.5);
+  color: rgba(201, 168, 76, 0.5);
   margin-bottom: 0.5rem;
 }
 
@@ -131,7 +133,7 @@
   gap: 0.25rem;
   padding: 0.9rem 1.4rem;
   border: 1px solid var(--border);
-  background: rgba(201,168,76,0.04);
+  background: rgba(201, 168, 76, 0.04);
   text-decoration: none;
   cursor: pointer;
   transition: background var(--ease), border-color var(--ease);
@@ -139,7 +141,7 @@
 }
 
 .time-slot:hover {
-  background: rgba(201,168,76,0.10);
+  background: rgba(201, 168, 76, 0.10);
   border-color: var(--gold);
 }
 
@@ -163,7 +165,7 @@
   font-family: 'DM Mono', monospace;
   font-size: 0.6rem;
   letter-spacing: 0.1em;
-  color: rgba(201,168,76,0.7);
+  color: rgba(201, 168, 76, 0.7);
   margin-top: 0.1rem;
 }
 
@@ -189,9 +191,18 @@
 
 /* ── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 700px) {
-  .sessions-hero__content { padding: 2rem 1.5rem; }
-  .sessions-main { padding: 2rem 1.5rem 4rem; }
-  .time-slot { min-width: 90px; padding: 0.75rem 1rem; }
+  .sessions-hero__content {
+    padding: 2rem 1.5rem;
+  }
+
+  .sessions-main {
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  .time-slot {
+    min-width: 90px;
+    padding: 0.75rem 1rem;
+  }
 }
 
 /* ── Sección de sesiones en movie-sessions.html ─────────────── */
@@ -200,10 +211,12 @@
   padding: 5rem 3rem 6rem;
   border-top: 1px solid var(--border2);
 }
+
 .sessions-inner {
   max-width: 1060px;
   margin: 0 auto;
 }
+
 .sessions-eyebrow {
   font-family: 'DM Mono', monospace;
   font-size: 0.58rem;
@@ -215,12 +228,14 @@
   align-items: center;
   gap: 0.7rem;
 }
+
 .sessions-eyebrow::before {
   content: '';
   width: 25px;
   height: 1px;
   background: var(--gold);
 }
+
 .sessions-heading {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 2.8rem;
@@ -228,9 +243,11 @@
   line-height: 1;
   margin-bottom: 2.5rem;
 }
+
 .day-block {
   margin-bottom: 2.5rem;
 }
+
 .day-label {
   font-family: 'DM Mono', monospace;
   font-size: 0.6rem;
@@ -241,11 +258,13 @@
   border-bottom: 1px solid var(--border2);
   margin-bottom: 1rem;
 }
+
 .time-slots {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
 }
+
 .time-slot {
   display: flex;
   flex-direction: column;
@@ -258,10 +277,12 @@
   transition: border-color var(--ease), background var(--ease);
   min-width: 130px;
 }
+
 .time-slot:hover {
   border-color: var(--red);
   background: rgba(139, 26, 26, 0.08);
 }
+
 .time-slot__hour {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1.8rem;
@@ -269,6 +290,7 @@
   line-height: 1;
   color: var(--text);
 }
+
 .time-slot__room {
   font-family: 'DM Mono', monospace;
   font-size: 0.55rem;
@@ -276,6 +298,7 @@
   text-transform: uppercase;
   color: var(--muted);
 }
+
 .time-slot__price {
   font-family: 'DM Mono', monospace;
   font-size: 0.62rem;
@@ -283,6 +306,7 @@
   color: var(--gold);
   margin-top: 0.2rem;
 }
+
 .sessions-empty {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.1rem;
@@ -292,6 +316,7 @@
   flex-direction: column;
   gap: 1.2rem;
 }
+
 .btn-back-link {
   font-family: 'DM Mono', monospace;
   font-size: 0.6rem;
@@ -300,11 +325,13 @@
   color: var(--gold);
   text-decoration: none;
 }
+
 .btn-back-link:hover {
   text-decoration: underline;
 }
+
 @media (max-width: 768px) {
-  .sessions-section { padding: 3rem 1.5rem 4rem; }
+  .sessions-section {
+    padding: 3rem 1.5rem 4rem;
+  }
 }
-
-

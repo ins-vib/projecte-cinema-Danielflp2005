@@ -1,25 +1,29 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Carrito — Lumière</title>
+  <title>Carrito — IMPERIAL</title>
   <link rel="stylesheet" th:href="@{/css/style.css}" />
   <link rel="stylesheet" th:href="@{/css/client-cart.css}" />
+  <link rel="stylesheet" th:href="@{/css/loyalty.css}" />
   <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
 </head>
+
 <body>
 
   <header>
-    <h1><a th:href="@{/client}" style="text-decoration: none; color: inherit;">Lumière</a></h1>
+    <h1><a th:href="@{/client}" style="text-decoration: none; color: inherit;">IMPERIAL</a></h1>
     <nav>
       <a th:href="@{/client}">Inicio</a>
       <a th:href="@{/client/billboard}">Cartelera</a>
       <a th:href="@{/client/cart}">Carrito (<span th:text="${@cartService.itemCount}">0</span>)</a>
+      <a th:href="@{/client/loyalty}">Mi Tarjeta</a>
       <a th:href="@{/perfil}">Mi perfil</a>
-        <form th:action="@{/logout}" method="post" class="logout-form">
-          <button type="submit" class="logout-btn">Logout</button>
-        </form>
+      <form th:action="@{/logout}" method="post" class="logout-form">
+        <button type="submit" class="logout-btn">Logout</button>
+      </form>
     </nav>
   </header>
 
@@ -66,18 +70,17 @@
 
         <!-- Asientos -->
         <div class="cart-entry__seats">
-          <span th:each="seat : ${entry.seats}"
-                th:class="${'seat-badge ' + seat.type.name()}"
-                th:text="${seat.seatrow + seat.seatNumber}">
+          <span th:each="seat : ${entry.seats}" th:class="${'seat-badge ' + seat.type.name()}"
+            th:text="${seat.seatrow + seat.seatNumber}">
           </span>
         </div>
 
         <div class="cart-entry__footer">
           <span class="cart-entry__count"
-                th:text="${entry.seats.size() + (entry.seats.size() == 1 ? ' entrada' : ' entradas')}">
+            th:text="${entry.seats.size() + (entry.seats.size() == 1 ? ' entrada' : ' entradas')}">
           </span>
           <span class="cart-entry__subtotal"
-                th:text="${#numbers.formatDecimal(entry.subtotal, 1, 'POINT', 2, 'COMMA') + ' €'}">
+            th:text="${#numbers.formatDecimal(entry.subtotal, 1, 'POINT', 2, 'COMMA') + ' €'}">
           </span>
         </div>
 
@@ -86,8 +89,7 @@
       <!-- Total -->
       <div class="cart-total-row">
         <span class="cart-total-label">Total</span>
-        <span class="cart-total-price"
-              th:text="${#numbers.formatDecimal(cartTotal, 1, 'POINT', 2, 'COMMA') + ' €'}">
+        <span class="cart-total-price" th:text="${#numbers.formatDecimal(cartTotal, 1, 'POINT', 2, 'COMMA') + ' €'}">
         </span>
       </div>
 
@@ -96,8 +98,37 @@
         <a th:href="@{/client/billboard}" class="btn-back">← Seguir comprando</a>
       </div>
 
+      <!-- Loyalty Points Section -->
+      <div class="loyalty-cart-block" th:if="${loyaltyCard != null}">
+        <div class="loyalty-cart-block__header">
+          <span class="loyalty-cart-block__label">Tarjeta IMPERIAL</span>
+          <span class="loyalty-cart-block__number" th:text="${loyaltyCard.cardNumber}">LUM-XXXXXXXX</span>
+        </div>
+        <div class="loyalty-cart-block__balance">
+          <span th:text="${loyaltyCard.points} + ' puntos disponibles'">0 puntos disponibles</span>
+          <span class="loyalty-cart-block__eq" th:if="${loyaltyDiscount > 0}"
+            th:text="'≈ ' + ${#numbers.formatDecimal(loyaltyDiscount, 1, 'POINT', 2, 'COMMA')} + ' € de descuento'">
+          </span>
+          <span class="loyalty-cart-block__empty" th:if="${loyaltyDiscount == 0}">
+            Sin puntos suficientes todavía
+          </span>
+        </div>
+      </div>
+
       <!-- Confirmar compra -->
       <form th:action="@{/client/cart/checkout}" method="post" class="checkout-form">
+        <!-- Loyalty checkbox -->
+        <div class="loyalty-checkbox-row"
+          th:if="${loyaltyCard != null and loyaltyDiscount != null and loyaltyDiscount > 0}">
+          <label class="loyalty-checkbox-label">
+            <input type="checkbox" name="usePoints" value="true" id="usePoints" onchange="updateTotal(this)">
+            Usar <strong th:text="${loyaltyCard.points}">0</strong> puntos
+            — Descuento:
+            <strong th:text="'-' + ${#numbers.formatDecimal(loyaltyDiscount, 1, 'POINT', 2, 'COMMA')} + ' €'">
+              -0.00 €
+            </strong>
+          </label>
+        </div>
         <button type="submit" class="btn-checkout">Confirmar compra</button>
       </form>
 
@@ -106,8 +137,9 @@
   </main>
 
   <footer>
-    <p>DAW1 2026 · Lumière</p>
+    <p>DAW1 2026 · IMPERIAL</p>
   </footer>
 
 </body>
+
 </html>

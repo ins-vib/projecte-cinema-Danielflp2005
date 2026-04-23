@@ -1,0 +1,113 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mi Tarjeta — IMPERIAL</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <link rel="stylesheet" th:href="@{/css/loyalty.css}" />
+  <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
+</head>
+
+<body>
+
+  <header>
+    <h1><a th:href="@{/client}" style="text-decoration:none;color:inherit;">IMPERIAL</a></h1>
+    <nav>
+      <a th:href="@{/client}">Inicio</a>
+      <a th:href="@{/client/billboard}">Cartelera</a>
+      <a th:href="@{/client/my-orders}">Mis pedidos</a>
+      <a th:href="@{/client/cart}">Carrito</a>
+      <a th:href="@{/client/loyalty}" class="active">Mi Tarjeta</a>
+      <form th:action="@{/logout}" method="post" class="logout-form">
+        <button type="submit" class="logout-btn">Logout</button>
+      </form>
+    </nav>
+  </header>
+
+  <main class="loyalty-main">
+
+    <div class="loyalty-eyebrow">// FIDELIZACIÓN</div>
+    <h1 class="loyalty-title">Tarjeta IMPERIAL</h1>
+
+    <!-- Flash messages -->
+    <div class="loyalty-flash loyalty-flash--success" th:if="${success}" th:text="${success}"></div>
+
+    <!-- Card exists -->
+    <div th:if="${loyaltyCard != null}">
+
+      <div class="loyalty-card">
+        <div class="loyalty-card__stripe"></div>
+        <div class="loyalty-card__brand">IMPERIAL<span>/ CINE</span></div>
+
+        <div class="loyalty-card__number" th:text="${loyaltyCard.cardNumber}">LUM-XXXXXXXX</div>
+
+        <div class="loyalty-card__footer">
+          <div class="loyalty-card__field">
+            <span class="loyalty-card__label">Miembro desde</span>
+            <span class="loyalty-card__value"
+              th:text="${#temporals.format(loyaltyCard.memberSince, 'dd/MM/yyyy')}">01/01/2026</span>
+          </div>
+          <div class="loyalty-card__field">
+            <span class="loyalty-card__label">Puntos</span>
+            <span class="loyalty-card__value loyalty-card__points" th:text="${loyaltyCard.points}">0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Points breakdown -->
+      <div class="loyalty-info">
+        <div class="loyalty-info__row">
+          <span class="loyalty-info__label">Puntos disponibles</span>
+          <span class="loyalty-info__value" th:text="${loyaltyCard.points} + ' pts'">0 pts</span>
+        </div>
+        <div class="loyalty-info__row">
+          <span class="loyalty-info__label">Descuento equivalente</span>
+          <span class="loyalty-info__value loyalty-info__value--gold"
+            th:text="${#numbers.formatDecimal(loyaltyCard.discountValue, 1, 'POINT', 2, 'COMMA') + ' €'}">
+            0.00 €
+          </span>
+        </div>
+        <div class="loyalty-info__row loyalty-info__row--muted">
+          <span>1€ gastado = 10 puntos · 100 puntos = 1€ de descuento</span>
+        </div>
+      </div>
+
+      <a class="loyalty-action-btn" th:href="@{/client/cart}">Usar puntos en el carrito →</a>
+    </div>
+
+    <!-- No card yet -->
+    <div th:if="${loyaltyCard == null}" class="loyalty-register">
+      <p class="loyalty-register__text">
+        Aún no tienes una tarjeta de fidelización.<br />
+        Regístrate y gana <strong>10 puntos por cada euro</strong> gastado.
+      </p>
+      <div class="loyalty-perks">
+        <div class="loyalty-perk">
+          <span class="loyalty-perk__icon">◆</span>
+          <span>1€ gastado = 10 puntos</span>
+        </div>
+        <div class="loyalty-perk">
+          <span class="loyalty-perk__icon">◆</span>
+          <span>100 puntos = 1€ de descuento</span>
+        </div>
+        <div class="loyalty-perk">
+          <span class="loyalty-perk__icon">◆</span>
+          <span>Descuento aplicable en cualquier compra</span>
+        </div>
+      </div>
+      <form th:action="@{/client/loyalty/register}" method="post">
+        <button type="submit" class="loyalty-register-btn">Generar mi Tarjeta IMPERIAL</button>
+      </form>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>DAW1 2026 · IMPERIAL</p>
+  </footer>
+
+</body>
+
+</html>

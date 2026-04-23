@@ -1,14 +1,16 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Editar Sesión — Lumière</title>
+  <title>Editar Sesión — IMPERIAL</title>
   <link rel="stylesheet" th:href="@{/css/layout.css}" />
   <link rel="stylesheet" th:href="@{/css/cinema-create.css}" />
   <link rel="stylesheet" th:href="@{/css/screenings.css}" />
   <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
 </head>
+
 <body>
 
   <div th:replace="~{layoutadmin :: layoutadmin(~{::content})}">
@@ -25,10 +27,8 @@
         <div class="field-group">
           <label>Película</label>
           <select name="movie.id">
-            <option th:each="movie : ${movies}"
-                    th:value="${movie.id}"
-                    th:text="${movie.title}"
-                    th:selected="${movie.id == screening.movie.id}">Película</option>
+            <option th:each="movie : ${movies}" th:value="${movie.id}" th:text="${movie.title}"
+              th:selected="${movie.id == screening.movie.id}">Película</option>
           </select>
         </div>
 
@@ -36,10 +36,9 @@
         <div class="field-group">
           <label>Sala</label>
           <select name="room.id">
-            <option th:each="room : ${rooms}"
-                    th:value="${room.id}"
-                    th:text="${room.name} + ' — ' + ${room.cinema.cinemaName}"
-                    th:selected="${room.id == screening.room.id}">Sala</option>
+            <option th:each="room : ${rooms}" th:value="${room.id}"
+              th:text="${room.name} + ' — ' + ${room.cinema.cinemaName}" th:selected="${room.id == screening.room.id}">
+              Sala</option>
           </select>
         </div>
 
@@ -62,4 +61,5 @@
   </div>
 
 </body>
+
 </html>

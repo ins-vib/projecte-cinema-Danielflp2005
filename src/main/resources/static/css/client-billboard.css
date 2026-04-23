@@ -1,5 +1,5 @@
 /* ============================================================
-   LUMIÈRE — client-billboard.css
+   IMPERIAL — client-billboard.css
    Cartelera del cliente
    ============================================================ */
 
@@ -15,8 +15,10 @@
 .billboard-hero::after {
   content: '';
   position: absolute;
-  bottom: -1px; left: 3rem;
-  width: 50px; height: 2px;
+  bottom: -1px;
+  left: 3rem;
+  width: 50px;
+  height: 2px;
   background: var(--gold);
 }
 
@@ -25,7 +27,7 @@
   font-size: 0.58rem;
   letter-spacing: 0.45em;
   text-transform: uppercase;
-  color: rgba(201,168,76,0.6);
+  color: rgba(201, 168, 76, 0.6);
   margin-bottom: 0.6rem;
   animation: fadeUp 0.6s 0.1s ease both;
 }
@@ -86,29 +88,27 @@
 .movie-card__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(8,8,8,0.97) 0%,
-    rgba(8,8,8,0.5) 45%,
-    rgba(8,8,8,0.15) 100%
-  );
+  background: linear-gradient(to top,
+      rgba(8, 8, 8, 0.97) 0%,
+      rgba(8, 8, 8, 0.5) 45%,
+      rgba(8, 8, 8, 0.15) 100%);
   transition: background 0.35s ease;
 }
 
 .movie-card:hover .movie-card__overlay {
-  background: linear-gradient(
-    to top,
-    rgba(8,8,8,1) 0%,
-    rgba(8,8,8,0.65) 50%,
-    rgba(8,8,8,0.3) 100%
-  );
+  background: linear-gradient(to top,
+      rgba(8, 8, 8, 1) 0%,
+      rgba(8, 8, 8, 0.65) 50%,
+      rgba(8, 8, 8, 0.3) 100%);
 }
 
 /* Gold top accent on hover */
 .movie-card::before {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   height: 2px;
   background: var(--gold);
   transform: scaleX(0);
@@ -124,7 +124,9 @@
 /* Info block */
 .movie-card__info {
   position: absolute;
-  bottom: 0; left: 0; right: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   padding: 1.4rem 1.1rem;
   display: flex;
   flex-direction: column;
@@ -137,7 +139,7 @@
   font-size: 0.5rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: rgba(201,168,76,0.65);
+  color: rgba(201, 168, 76, 0.65);
 }
 
 .movie-card__title {
@@ -156,18 +158,20 @@
   font-size: 0.5rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(232,224,208,0.3);
+  color: rgba(232, 224, 208, 0.3);
   margin-top: 0.1rem;
 }
 
-.movie-card__sep { color: rgba(201,168,76,0.25); }
+.movie-card__sep {
+  color: rgba(201, 168, 76, 0.25);
+}
 
 .movie-card__cta {
   font-family: 'DM Mono', monospace;
   font-size: 0.52rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(201,168,76,0.4);
+  color: rgba(201, 168, 76, 0.4);
   margin-top: 0.4rem;
   transition: color 0.3s ease;
 }
@@ -195,7 +199,7 @@
   font-family: 'Bebas Neue', sans-serif;
   font-size: 2rem;
   letter-spacing: 0.08em;
-  color: rgba(232,224,208,0.2);
+  color: rgba(232, 224, 208, 0.2);
   margin-bottom: 0.5rem;
 }
 
@@ -203,19 +207,37 @@
   font-family: 'Cormorant Garamond', serif;
   font-size: 0.95rem;
   font-style: italic;
-  color: rgba(232,224,208,0.15);
+  color: rgba(232, 224, 208, 0.15);
   line-height: 1.7;
 }
 
 /* ── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 900px) {
-  .billboard-hero { padding: 3rem 1.5rem 2rem; }
-  .billboard-hero::after { left: 1.5rem; }
-  .billboard-grid { padding: 0 1.5rem; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+  .billboard-hero {
+    padding: 3rem 1.5rem 2rem;
+  }
+
+  .billboard-hero::after {
+    left: 1.5rem;
+  }
+
+  .billboard-grid {
+    padding: 0 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
 }
 
 @media (max-width: 600px) {
-  .billboard-grid { grid-template-columns: repeat(2, 1fr); padding: 0 1rem; }
-  .billboard-hero { padding: 2.5rem 1rem 1.5rem; }
-  .billboard-hero::after { left: 1rem; }
+  .billboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 1rem;
+  }
+
+  .billboard-hero {
+    padding: 2.5rem 1rem 1.5rem;
+  }
+
+  .billboard-hero::after {
+    left: 1rem;
+  }
 }

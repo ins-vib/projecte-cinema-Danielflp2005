@@ -1,5 +1,5 @@
 /* ============================================================
-   LUMIÈRE — client-orders.css
+   IMPERIAL — client-orders.css
    Mis pedidos y detalle de pedido
    ============================================================ */
 
@@ -12,9 +12,21 @@
   padding: 0.2rem 0.6rem;
   border: 1px solid;
 }
-.status-badge.CONFIRMED { border-color: rgba(100,200,150,0.4); color: rgba(100,220,160,0.85); }
-.status-badge.PENDING   { border-color: rgba(201,168,76,0.4);  color: var(--gold); }
-.status-badge.CANCELLED { border-color: rgba(192,57,43,0.4);   color: rgba(192,57,43,0.8); }
+
+.status-badge.CONFIRMED {
+  border-color: rgba(100, 200, 150, 0.4);
+  color: rgba(100, 220, 160, 0.85);
+}
+
+.status-badge.PENDING {
+  border-color: rgba(201, 168, 76, 0.4);
+  color: var(--gold);
+}
+
+.status-badge.CANCELLED {
+  border-color: rgba(192, 57, 43, 0.4);
+  color: rgba(192, 57, 43, 0.8);
+}
 
 /* ── Lista de pedidos ───────────────────────────────────────── */
 .orders-main {
@@ -23,14 +35,16 @@
   padding: 0 2rem;
   animation: fadeUp 0.5s ease both;
 }
+
 .orders-eyebrow {
   font-family: 'DM Mono', monospace;
   font-size: 0.58rem;
   letter-spacing: 0.45em;
   text-transform: uppercase;
-  color: rgba(201,168,76,0.6);
+  color: rgba(201, 168, 76, 0.6);
   margin-bottom: 0.6rem;
 }
+
 .orders-title {
   font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(2.5rem, 5vw, 4rem);
@@ -41,22 +55,25 @@
   padding-bottom: 1rem;
   border-bottom: 1px solid var(--border2);
 }
+
 .search-form {
   display: flex;
   gap: 0.8rem;
   flex-wrap: wrap;
   margin-bottom: 2rem;
 }
+
 .search-form input[type="email"] {
   flex: 1;
   min-width: 240px;
-  background: rgba(255,255,255,0.04);
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border2);
   color: var(--text);
   padding: 0.65rem 1rem;
   font-family: 'DM Mono', monospace;
   font-size: 0.75rem;
 }
+
 .search-form button {
   font-family: 'DM Mono', monospace;
   font-size: 0.62rem;
@@ -69,28 +86,40 @@
   cursor: pointer;
   transition: background 0.25s;
 }
-.search-form button:hover { background: var(--gold2); border-color: var(--gold2); }
+
+.search-form button:hover {
+  background: var(--gold2);
+  border-color: var(--gold2);
+}
+
 .order-card {
   border: 1px solid var(--border2);
-  border-left: 3px solid rgba(201,168,76,0.25);
+  border-left: 3px solid rgba(201, 168, 76, 0.25);
   padding: 1.2rem 1.6rem;
   margin-bottom: 0.8rem;
-  background: rgba(255,255,255,0.02);
+  background: rgba(255, 255, 255, 0.02);
   transition: background 0.25s, border-left-color 0.25s;
 }
-.order-card:hover { background: rgba(201,168,76,0.04); border-left-color: var(--gold); }
+
+.order-card:hover {
+  background: rgba(201, 168, 76, 0.04);
+  border-left-color: var(--gold);
+}
+
 .order-card__header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: 1rem;
 }
+
 .order-card__id {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1.3rem;
   letter-spacing: 0.05em;
   color: var(--text);
 }
+
 .order-card__meta {
   font-family: 'DM Mono', monospace;
   font-size: 0.58rem;
@@ -99,6 +128,7 @@
   color: var(--muted);
   margin-top: 0.3rem;
 }
+
 .order-card__total {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.2rem;
@@ -106,6 +136,7 @@
   color: var(--gold);
   white-space: nowrap;
 }
+
 .order-card__footer {
   display: flex;
   justify-content: space-between;
@@ -114,6 +145,7 @@
   padding-top: 0.7rem;
   border-top: 1px solid var(--border2);
 }
+
 .btn-detail {
   font-family: 'DM Mono', monospace;
   font-size: 0.58rem;
@@ -125,7 +157,12 @@
   padding: 0.3rem 0.8rem;
   transition: color 0.2s, border-color 0.2s;
 }
-.btn-detail:hover { color: var(--text); border-color: rgba(201,168,76,0.4); }
+
+.btn-detail:hover {
+  color: var(--text);
+  border-color: rgba(201, 168, 76, 0.4);
+}
+
 .empty-msg {
   text-align: center;
   padding: 4rem 0;
@@ -142,14 +179,16 @@
   padding: 0 2rem;
   animation: fadeUp 0.5s ease both;
 }
+
 .detail-eyebrow {
   font-family: 'DM Mono', monospace;
   font-size: 0.58rem;
   letter-spacing: 0.45em;
   text-transform: uppercase;
-  color: rgba(201,168,76,0.6);
+  color: rgba(201, 168, 76, 0.6);
   margin-bottom: 0.6rem;
 }
+
 .detail-title {
   font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(2rem, 4vw, 3.2rem);
@@ -158,6 +197,7 @@
   color: var(--text);
   margin-bottom: 1rem;
 }
+
 .detail-meta {
   font-family: 'DM Mono', monospace;
   font-size: 0.6rem;
@@ -168,22 +208,25 @@
   padding-bottom: 1rem;
   border-bottom: 1px solid var(--border2);
 }
+
 .ticket-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0.9rem 1.2rem;
   border: 1px solid var(--border2);
-  border-left: 3px solid rgba(201,168,76,0.2);
+  border-left: 3px solid rgba(201, 168, 76, 0.2);
   margin-bottom: 0.5rem;
-  background: rgba(255,255,255,0.02);
+  background: rgba(255, 255, 255, 0.02);
 }
+
 .ticket-info {
   font-family: 'DM Mono', monospace;
   font-size: 0.65rem;
   letter-spacing: 0.08em;
   color: var(--text);
 }
+
 .ticket-info .movie {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1.1rem;
@@ -191,10 +234,12 @@
   display: block;
   margin-bottom: 0.2rem;
 }
+
 .ticket-info .meta {
   color: var(--muted);
   font-size: 0.58rem;
 }
+
 .ticket-seat {
   font-family: 'DM Mono', monospace;
   font-size: 0.65rem;
@@ -202,8 +247,15 @@
   color: var(--muted);
   text-align: right;
 }
-.ticket-seat .seat-type.Premium { color: var(--gold); }
-.ticket-seat .seat-type.Adapted { color: rgba(100,220,160,0.8); }
+
+.ticket-seat .seat-type.Premium {
+  color: var(--gold);
+}
+
+.ticket-seat .seat-type.Adapted {
+  color: rgba(100, 220, 160, 0.8);
+}
+
 .ticket-price {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.1rem;
@@ -212,6 +264,7 @@
   min-width: 60px;
   text-align: right;
 }
+
 .order-total-row {
   display: flex;
   justify-content: space-between;
@@ -220,6 +273,7 @@
   border-top: 1px solid var(--border);
   margin-top: 0.6rem;
 }
+
 .order-total-label {
   font-family: 'DM Mono', monospace;
   font-size: 0.65rem;
@@ -227,12 +281,14 @@
   text-transform: uppercase;
   color: var(--muted);
 }
+
 .order-total-price {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.8rem;
   font-weight: 600;
   color: var(--gold);
 }
+
 .btn-back-orders {
   font-family: 'DM Mono', monospace;
   font-size: 0.62rem;
@@ -246,7 +302,12 @@
   margin-top: 1.8rem;
   transition: color 0.25s, border-color 0.25s;
 }
-.btn-back-orders:hover { color: var(--text); border-color: rgba(201,168,76,0.3); }
+
+.btn-back-orders:hover {
+  color: var(--text);
+  border-color: rgba(201, 168, 76, 0.3);
+}
+
 .empty-tickets-msg {
   color: var(--muted);
   font-family: 'DM Mono', monospace;

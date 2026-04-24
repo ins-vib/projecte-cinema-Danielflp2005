@@ -30,6 +30,7 @@ import com.daw.cinemadaw.domain.cinema.Movie;
 import com.daw.cinemadaw.domain.cinema.Order;
 import com.daw.cinemadaw.domain.cinema.Screening;
 import com.daw.cinemadaw.domain.cinema.Seat;
+import com.daw.cinemadaw.repository.CinemaRepository;
 import com.daw.cinemadaw.repository.MovieRepository;
 import com.daw.cinemadaw.repository.OrderRepository;
 import com.daw.cinemadaw.repository.ScreeningRepository;
@@ -46,6 +47,7 @@ public class ClientController {
     private final SeatRepository seatRepository;
     private final SeatBookingRepository seatBookingRepository;
     private final MovieRepository movieRepository;
+    private final CinemaRepository cinemaRepository;
     private final CartService cartService;
     private final OrderService orderService;
     private final OrderRepository orderRepository;
@@ -55,6 +57,7 @@ public class ClientController {
             SeatRepository seatRepository,
             SeatBookingRepository seatBookingRepository,
             MovieRepository movieRepository,
+            CinemaRepository cinemaRepository,
             CartService cartService,
             OrderService orderService,
             OrderRepository orderRepository,
@@ -63,6 +66,7 @@ public class ClientController {
         this.seatRepository = seatRepository;
         this.seatBookingRepository = seatBookingRepository;
         this.movieRepository = movieRepository;
+        this.cinemaRepository = cinemaRepository;
         this.cartService = cartService;
         this.orderService = orderService;
         this.orderRepository = orderRepository;
@@ -267,9 +271,32 @@ public class ClientController {
     // ── Cartelera y sesiones ─────────────────────────────────────────────────
 
     @GetMapping("/client/billboard")
-    public String billboard(Model model) {
-        List<Movie> movies = movieRepository.findMoviesWithFuturesScreenings();
+    public String billboard(
+            @RequestParam(required = false) String searchName,
+            @RequestParam(required = false) String city,
+            @RequestParam(required = false) Long cinemaId,
+            Model model) {
+
+        List<Movie> movies;
+        if (cinemaId != null) {
+            movies = screeningRepository.findDistinctMovieByRoomCinemaId(cinemaId);
+        } else {
+            movies = movieRepository.findMoviesWithFuturesScreenings();
+        }
+
+        if (searchName != null && !searchName.isBlank()) {
+            String lower = searchName.toLowerCase();
+            movies = movies.stream()
+                    .filter(m -> m.getTitle().toLowerCase().contains(lower))
+                    .collect(Collectors.toList());
+        }
+
         model.addAttribute("movies", movies);
+        model.addAttribute("cities", cinemaRepository.findDistinctCities());
+        model.addAttribute("cinemas", cinemaRepository.findAll());
+        model.addAttribute("selectedCity", city);
+        model.addAttribute("selectedCinemaId", cinemaId);
+        model.addAttribute("searchName", searchName != null ? searchName : "");
         return "client/billboard";
     }
 

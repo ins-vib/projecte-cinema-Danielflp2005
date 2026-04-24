@@ -76,6 +76,30 @@
     </div>
   </section>
 
+  <!-- CINEMA LOCATOR -->
+  <section class="news-section" th:if="${cinemas != null and not #lists.isEmpty(cinemas)}">
+    <div class="news-inner">
+      <div class="news-header">
+        <div class="news-eyebrow">// Nuestros Cines</div>
+        <h3 class="news-title">Localizador</h3>
+      </div>
+      <div class="cinema-cards">
+        <a class="cinema-card" th:each="cinema : ${cinemas}"
+           th:href="@{/client/billboard(cinemaId=${cinema.id})}">
+          <div class="cinema-card__bg"
+               th:style="${not #strings.isEmpty(cinema.imageUrl)} ? 'background-image: url(' + ${cinema.imageUrl} + ')' : ''">
+          </div>
+          <div class="cinema-card__overlay"></div>
+          <div class="cinema-card__info">
+            <span class="cinema-card__city" th:text="${cinema.city}">Ciudad</span>
+            <h4 class="cinema-card__name" th:text="${cinema.cinemaName}">Nombre</h4>
+            <span class="cinema-card__address" th:text="${cinema.address}">Dirección</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- LOYALTY SECTION -->
   <section class="news-section">
     <div class="news-inner">

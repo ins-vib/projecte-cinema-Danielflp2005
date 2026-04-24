@@ -446,6 +446,125 @@ nav .logout-btn:hover {
 }
 
 /* ══════════════════════════════════════════
+   CINEMA LOCATOR CARDS
+══════════════════════════════════════════ */
+.cinema-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1px;
+  background: var(--border2);
+}
+
+.cinema-card {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: #0d0d0d;
+}
+
+.cinema-card__bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-color: #111;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cinema-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top,
+    rgba(8, 8, 8, 0.93) 0%,
+    rgba(8, 8, 8, 0.4) 50%,
+    rgba(8, 8, 8, 0.08) 100%);
+  transition: background 0.35s ease;
+}
+
+.cinema-card:hover .cinema-card__bg {
+  transform: scale(1.06);
+}
+
+.cinema-card:hover .cinema-card__overlay {
+  background: linear-gradient(to top,
+    rgba(8, 8, 8, 1) 0%,
+    rgba(8, 8, 8, 0.65) 50%,
+    rgba(8, 8, 8, 0.3) 100%);
+}
+
+.cinema-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
+  z-index: 10;
+}
+
+.cinema-card:hover::before {
+  transform: scaleX(1);
+}
+
+.cinema-card__info {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 1rem 1rem 1.1rem;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+}
+
+.cinema-card__city {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.48rem;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: rgba(201, 168, 76, 0.65);
+}
+
+.cinema-card__name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.25rem;
+  letter-spacing: 0.04em;
+  line-height: 1.05;
+  color: var(--text);
+  transition: color 0.3s ease;
+}
+
+.cinema-card:hover .cinema-card__name {
+  color: var(--gold2);
+}
+
+.cinema-card__address {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--muted);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.cinema-card:hover .cinema-card__address {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .cinema-cards { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .cinema-cards { grid-template-columns: 1fr; }
+}
+
+/* ══════════════════════════════════════════
    FOOTER
 ══════════════════════════════════════════ */
 footer {

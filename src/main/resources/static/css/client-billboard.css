@@ -51,6 +51,129 @@
   animation: fadeUp 0.6s 0.3s ease both;
 }
 
+/* ── Filter bar ─────────────────────────────────────────────── */
+.bill-filters {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.4rem 3rem;
+  border-bottom: 1px solid var(--border2);
+}
+
+.bill-filters__inner {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.bill-filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1;
+  min-width: 160px;
+}
+
+.bill-filter-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.48rem;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: rgba(201, 168, 76, 0.5);
+}
+
+.bill-filter-input,
+.bill-filter-select {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border2);
+  border-bottom-color: rgba(201, 168, 76, 0.2);
+  color: var(--text);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  padding: 0.6rem 0.9rem;
+  outline: none;
+  transition: border-color var(--ease), background var(--ease);
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+}
+
+.bill-filter-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath stroke='%23c9a84c' stroke-opacity='.45' stroke-width='1.2' d='M1 1l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.8rem center;
+  background-color: rgba(255, 255, 255, 0.03);
+  padding-right: 2.2rem;
+  cursor: pointer;
+}
+
+.bill-filter-select option {
+  background: #111;
+  color: var(--text);
+}
+
+.bill-filter-input:focus,
+.bill-filter-select:focus {
+  border-color: var(--gold);
+  background: rgba(201, 168, 76, 0.04);
+}
+
+.bill-filter-input::placeholder {
+  color: var(--muted2);
+}
+
+.bill-filter-btn {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #080808;
+  background: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 0.6rem 1.6rem;
+  cursor: pointer;
+  transition: background var(--ease), box-shadow var(--ease);
+  white-space: nowrap;
+  align-self: flex-end;
+}
+
+.bill-filter-btn:hover {
+  background: var(--gold2);
+  border-color: var(--gold2);
+  box-shadow: 0 2px 16px rgba(201, 168, 76, 0.25);
+}
+
+.bill-filter-clear {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 0.6rem 0.4rem;
+  align-self: flex-end;
+  border-bottom: 1px solid transparent;
+  transition: color var(--ease), border-color var(--ease);
+  white-space: nowrap;
+}
+
+.bill-filter-clear:hover {
+  color: var(--gold);
+  border-bottom-color: rgba(201, 168, 76, 0.4);
+}
+
+@media (max-width: 900px) {
+  .bill-filters { padding: 1.2rem 1.5rem; }
+  .bill-filter-group { min-width: 130px; }
+}
+
+@media (max-width: 600px) {
+  .bill-filters__inner { flex-direction: column; align-items: stretch; }
+  .bill-filter-group { min-width: unset; }
+  .bill-filter-btn, .bill-filter-clear { align-self: stretch; text-align: center; }
+}
+
 /* ── Grid de películas ──────────────────────────────────────── */
 .billboard-grid {
   max-width: 1200px;

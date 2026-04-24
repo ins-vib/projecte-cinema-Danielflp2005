@@ -34,6 +34,43 @@
     <p class="billboard-hero__sub">Películas disponibles con sesiones próximas</p>
   </section>
 
+  <!-- FILTER BAR -->
+  <form class="bill-filters" method="get" th:action="@{/client/billboard}">
+    <div class="bill-filters__inner">
+
+      <div class="bill-filter-group">
+        <label class="bill-filter-label" for="searchInput">Buscar</label>
+        <input id="searchInput" type="text" class="bill-filter-input" name="searchName"
+               th:value="${searchName}" placeholder="Título de la película..." />
+      </div>
+
+      <div class="bill-filter-group">
+        <label class="bill-filter-label" for="citySelect">Ciudad</label>
+        <select id="citySelect" class="bill-filter-select" name="city">
+          <option value="" th:selected="${selectedCity == null or selectedCity == ''}">Todas las ciudades</option>
+          <option th:each="c : ${cities}" th:value="${c}" th:text="${c}"
+                  th:selected="${c == selectedCity}"></option>
+        </select>
+      </div>
+
+      <div class="bill-filter-group">
+        <label class="bill-filter-label" for="cinemaSelect">Cine</label>
+        <select id="cinemaSelect" class="bill-filter-select" name="cinemaId">
+          <option value="" th:selected="${selectedCinemaId == null}">Todos los cines</option>
+          <option th:each="cinema : ${cinemas}"
+                  th:value="${cinema.id}"
+                  th:text="${cinema.cinemaName}"
+                  th:attr="data-city=${cinema.city}"
+                  th:selected="${cinema.id == selectedCinemaId}"></option>
+        </select>
+      </div>
+
+      <button type="submit" class="bill-filter-btn">Filtrar</button>
+      <a th:href="@{/client/billboard}" class="bill-filter-clear">Limpiar</a>
+
+    </div>
+  </form>
+
   <!-- GRID DE PELÍCULAS -->
   <section class="billboard-grid" th:if="${not #lists.isEmpty(movies)}">
     <a class="movie-card" th:each="movie : ${movies}" th:href="@{/client/movie/{id}(id=${movie.id})}">
@@ -59,14 +96,44 @@
   <!-- EMPTY STATE -->
   <section class="billboard-empty" th:if="${#lists.isEmpty(movies)}">
     <div class="billboard-empty__icon">🎬</div>
-    <p class="billboard-empty__title">Sin sesiones próximas</p>
-    <p class="billboard-empty__sub">No hay películas programadas en este momento. Vuelve pronto.</p>
+    <p class="billboard-empty__title">Sin resultados</p>
+    <p class="billboard-empty__sub">No hay películas que coincidan con los filtros aplicados.</p>
   </section>
 
   <!-- FOOTER -->
   <footer>
     <p>DAW1 2026 · IMPERIAL</p>
   </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var citySelect = document.getElementById('citySelect');
+      var cinemaSelect = document.getElementById('cinemaSelect');
+      var allCinemaOpts = Array.from(cinemaSelect.querySelectorAll('option[data-city]'));
+
+      function filterCinemas() {
+        var city = citySelect.value;
+        var current = cinemaSelect.value;
+        while (cinemaSelect.options.length > 1) cinemaSelect.remove(1);
+        allCinemaOpts.forEach(function (opt) {
+          if (!city || opt.getAttribute('data-city') === city) {
+            var clone = opt.cloneNode(true);
+            if (clone.value === current) clone.selected = true;
+            cinemaSelect.add(clone);
+          }
+        });
+      }
+
+      // If a cinema is pre-selected (e.g. from home page card click), auto-set its city
+      var preSelected = allCinemaOpts.find(function (o) { return o.hasAttribute('selected'); });
+      if (preSelected) {
+        citySelect.value = preSelected.getAttribute('data-city') || '';
+      }
+
+      citySelect.addEventListener('change', filterCinemas);
+      filterCinemas(); // initial render
+    });
+  </script>
 
 </body>
 

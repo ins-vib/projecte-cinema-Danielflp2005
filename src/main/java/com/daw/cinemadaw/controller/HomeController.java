@@ -8,15 +8,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.daw.cinemadaw.domain.cinema.News;
+import com.daw.cinemadaw.repository.CinemaRepository;
 import com.daw.cinemadaw.service.NewsService;
 
 @Controller
 public class HomeController {
 
     private NewsService newsService;
+    private CinemaRepository cinemaRepository;
 
-    public HomeController(NewsService newsService) {
+    public HomeController(NewsService newsService, CinemaRepository cinemaRepository) {
         this.newsService = newsService;
+        this.cinemaRepository = cinemaRepository;
     }
 
     @GetMapping("/")
@@ -49,7 +52,7 @@ public class HomeController {
     // Pàgina de client
     @GetMapping("/client")
     public String client(Model model) {
-
+        model.addAttribute("cinemas", cinemaRepository.findAll());
         return "client/home";
     }
 

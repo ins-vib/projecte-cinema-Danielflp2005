@@ -38,6 +38,9 @@ public class Cinema {
     @Column
     private String postalCode;
 
+    @Column
+    private String imageUrl;
+
     @OneToMany(mappedBy = "cinema", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Room> rooms = new ArrayList<>();
 
@@ -89,6 +92,14 @@ public class Cinema {
 
     public String getAddress() {
         return address;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public List<Room> getRooms() {

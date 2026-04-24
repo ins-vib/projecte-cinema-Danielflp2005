@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import jakarta.validation.Valid;
 
 import com.daw.cinemadaw.domain.cinema.Movie;
 import com.daw.cinemadaw.domain.cinema.Room;
@@ -113,25 +116,36 @@ public class ScreeningController {
     }
 
     @PostMapping("/admin/screening/new/{movieId}")
-    public String save(@PathVariable Long movieId, @ModelAttribute Screening screening,
-            RedirectAttributes attrs) {
+    public String save(@PathVariable Long movieId, @Valid @ModelAttribute Screening screening,
+            BindingResult result, Model model) {
         movieRepository.findById(movieId).ifPresent(screening::setMovie);
         resolveRoom(screening);
         if (screening.getRoom() == null) {
-            attrs.addFlashAttribute("error", "Debes seleccionar una sala.");
-            return "redirect:/admin/screening/create/" + movieId;
+            model.addAttribute("roomError", "Debes seleccionar una sala.");
+        }
+        if (result.hasErrors() || screening.getRoom() == null) {
+            model.addAttribute("rooms", roomRepository.findAll());
+            return "admin/screenings/screening-create";
         }
         screeningRepository.save(screening);
         return "redirect:/admin/screenings/movie/" + movieId;
     }
 
     @PostMapping("/admin/screening/new")
-    public String saveFull(@ModelAttribute Screening screening, RedirectAttributes attrs) {
+    public String saveFull(@Valid @ModelAttribute Screening screening, BindingResult result,
+            Model model) {
         resolveMovie(screening);
         resolveRoom(screening);
-        if (screening.getMovie() == null || screening.getRoom() == null) {
-            attrs.addFlashAttribute("error", "Debes seleccionar una película y una sala.");
-            return "redirect:/admin/screening/create";
+        if (screening.getMovie() == null) {
+            model.addAttribute("movieError", "Debes seleccionar una película.");
+        }
+        if (screening.getRoom() == null) {
+            model.addAttribute("roomError", "Debes seleccionar una sala.");
+        }
+        if (result.hasErrors() || screening.getMovie() == null || screening.getRoom() == null) {
+            model.addAttribute("rooms", roomRepository.findAll());
+            model.addAttribute("movies", movieRepository.findAll());
+            return "admin/screenings/screening-createfull";
         }
         screeningRepository.save(screening);
         return "redirect:/admin/screenings";
@@ -155,10 +169,22 @@ public class ScreeningController {
     }
 
     @PostMapping("/admin/screening/edit")
-    public String edit(@ModelAttribute Screening screening,
-            @RequestParam(required = false) String returnUrl) {
+    public String edit(@Valid @ModelAttribute Screening screening, BindingResult result,
+            @RequestParam(required = false) String returnUrl, Model model) {
         resolveMovie(screening);
         resolveRoom(screening);
+        if (screening.getMovie() == null) {
+            model.addAttribute("movieError", "Debes seleccionar una película.");
+        }
+        if (screening.getRoom() == null) {
+            model.addAttribute("roomError", "Debes seleccionar una sala.");
+        }
+        if (result.hasErrors() || screening.getMovie() == null || screening.getRoom() == null) {
+            model.addAttribute("rooms", roomRepository.findAll());
+            model.addAttribute("movies", movieRepository.findAll());
+            model.addAttribute("returnUrl", returnUrl != null ? returnUrl : "/admin/screenings");
+            return "admin/screenings/screening-update";
+        }
         screeningRepository.save(screening);
         String redirect = (returnUrl != null && !returnUrl.isBlank()) ? returnUrl : "/admin/screenings";
         return "redirect:" + redirect;

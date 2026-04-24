@@ -4,10 +4,13 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import jakarta.validation.Valid;
 
 import com.daw.cinemadaw.domain.cinema.Room;
 import com.daw.cinemadaw.domain.cinema.Seat;
@@ -80,23 +83,26 @@ public class SeatController {
     }
 
     @PostMapping("/admin/seats/new/{id}")
-    public String createSeat(@PathVariable Long id, @ModelAttribute Seat seat) {
-        Optional<Room> room = roomRepository.findById(id);
-        if (room.isPresent()) {
-            seat.setRoom(room.get());
+    public String createSeat(@PathVariable Long id, @Valid @ModelAttribute Seat seat, BindingResult result, Model model) {
+        roomRepository.findById(id).ifPresent(seat::setRoom);
+        if (result.hasErrors()) {
+            model.addAttribute("types", SeatType.values());
+            return "admin/seats/seats-create";
         }
         seatRepository.save(seat);
         return "redirect:/admin/seats/room/" + id;
     }
 
     @PostMapping("/admin/seats/edit/{id}")
-    public String editSeatPost(@PathVariable Long id, @ModelAttribute Seat seat) {
-        // Resolve room from DB to avoid NPE if form field is missing/tampered
-        Seat existing = seatRepository.findById(seat.getId() != null ? seat.getId() : id)
-                .orElse(null);
+    public String editSeatPost(@PathVariable Long id, @Valid @ModelAttribute Seat seat, BindingResult result, Model model) {
+        Seat existing = seatRepository.findById(seat.getId() != null ? seat.getId() : id).orElse(null);
         if (existing == null) return "redirect:/admin/cinemes";
         Long roomId = existing.getRoom().getId();
         roomRepository.findById(roomId).ifPresent(seat::setRoom);
+        if (result.hasErrors()) {
+            model.addAttribute("types", SeatType.values());
+            return "admin/seats/seats-editar";
+        }
         seatRepository.save(seat);
         return "redirect:/admin/seats/room/" + roomId;
     }

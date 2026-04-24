@@ -30,6 +30,7 @@
             <option th:each="movie : ${movies}" th:value="${movie.id}" th:text="${movie.title}"
               th:selected="${movie.id == screening.movie.id}">Película</option>
           </select>
+          <div class="field-error" th:if="${movieError}" th:text="${movieError}"></div>
         </div>
 
         <!-- Sala -->
@@ -40,18 +41,21 @@
               th:text="${room.name} + ' — ' + ${room.cinema.cinemaName}" th:selected="${room.id == screening.room.id}">
               Sala</option>
           </select>
+          <div class="field-error" th:if="${roomError}" th:text="${roomError}"></div>
         </div>
 
         <!-- Fecha y hora -->
         <div class="field-group">
           <label>Fecha y hora</label>
           <input type="datetime-local" th:field="*{screeningDateTime}" />
+          <div class="field-error" th:if="${#fields.hasErrors('screeningDateTime')}" th:errors="*{screeningDateTime}"></div>
         </div>
 
         <!-- Precio -->
         <div class="field-group">
           <label>Precio (€)</label>
-          <input type="number" step="0.50" min="0" th:field="*{precio}" />
+          <input type="number" step="0.50" min="0.50" th:field="*{precio}" />
+          <div class="field-error" th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></div>
         </div>
 
         <button type="submit"><span>Guardar cambios</span></button>

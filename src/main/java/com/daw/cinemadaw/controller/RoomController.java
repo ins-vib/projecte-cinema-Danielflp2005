@@ -1,5 +1,8 @@
 package com.daw.cinemadaw.controller;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
@@ -87,20 +90,26 @@ public class RoomController {
             roomToUpdate.setCinema(cinema.get());
 
             if (newCapacity != oldCapacity) {
-                roomToUpdate.getSeat().clear();          // orphanRemoval deletes old seats
-                roomRepository.saveAndFlush(roomToUpdate);
-
                 int cols = 10;
-                for (int i = 0; i < newCapacity; i++) {
-                    Seat seat = new Seat();
-                    seat.setSeatNumber(i + 1);
-                    seat.setSeatrow(String.valueOf((char) ('A' + i / cols)));
-                    seat.setX(i % cols);
-                    seat.setY(i / cols);
-                    seat.setType(SeatType.Standard);
-                    seat.setEstado(false);
-                    seat.setRoom(roomToUpdate);
-                    roomToUpdate.getSeat().add(seat);
+                if (newCapacity < oldCapacity) {
+                    // Keep the first newCapacity seats (preserving their types), delete the rest
+                    List<Seat> sorted = new ArrayList<>(roomToUpdate.getSeat());
+                    sorted.sort(Comparator.comparingInt(Seat::getSeatNumber));
+                    List<Seat> toRemove = sorted.subList(newCapacity, sorted.size());
+                    roomToUpdate.getSeat().removeAll(toRemove);
+                } else {
+                    // Keep all existing seats and append new Standard seats for the added capacity
+                    for (int i = oldCapacity; i < newCapacity; i++) {
+                        Seat seat = new Seat();
+                        seat.setSeatNumber((i % cols) + 1);
+                        seat.setSeatrow(String.valueOf((char) ('A' + i / cols)));
+                        seat.setX(i % cols);
+                        seat.setY(i / cols);
+                        seat.setType(SeatType.Standard);
+                        seat.setEstado(false);
+                        seat.setRoom(roomToUpdate);
+                        roomToUpdate.getSeat().add(seat);
+                    }
                 }
             }
 
@@ -136,7 +145,7 @@ public class RoomController {
         int cols = 10;
         for (int i = 0; i < room.getCapacity(); i++) {
             Seat seat = new Seat();
-            seat.setSeatNumber(i + 1);
+            seat.setSeatNumber((i % cols) + 1);
             seat.setSeatrow(String.valueOf((char) ('A' + i / cols)));
             seat.setX(i % cols);
             seat.setY(i / cols);

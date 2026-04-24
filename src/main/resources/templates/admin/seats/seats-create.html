@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -15,39 +15,46 @@
 
         <input type="hidden" name="id" th:value="${seat.id}">
         <input type="hidden" name="room.id" th:value="${seat.room.id}">
+
         <div class="field-group">
             <label>Fila:</label>
             <input type="text" th:field="*{seatrow}" />
+            <div class="field-error" th:if="${#fields.hasErrors('seatrow')}" th:errors="*{seatrow}"></div>
         </div>
 
         <div class="field-group">
             <label>Número de Asiento:</label>
             <input type="number" th:field="*{seatNumber}" />
+            <div class="field-error" th:if="${#fields.hasErrors('seatNumber')}" th:errors="*{seatNumber}"></div>
         </div>
 
         <div class="field-group">
             <label>Posición X:</label>
             <input type="number" th:field="*{x}" />
+            <div class="field-error" th:if="${#fields.hasErrors('x')}" th:errors="*{x}"></div>
         </div>
 
         <div class="field-group">
             <label>Posición Y:</label>
             <input type="number" th:field="*{y}" />
+            <div class="field-error" th:if="${#fields.hasErrors('y')}" th:errors="*{y}"></div>
         </div>
 
         <div class="field-group">
             <label>Tipo:</label>
             <select th:field="*{type}">
-                <option th:each="t : ${types}"
-                        th:value="${t}"
-                        th:text="${t}">
+                <option th:each="t : ${types}" th:value="${t}" th:text="${t}">
                 </option>
             </select>
+            <div class="field-error" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></div>
         </div>
 
-        <div class="field-group field-group--checkbox">
-            <label>Ocupado:</label>
-            <input type="checkbox" th:field="*{estado}" />
+        <div class="field-group">
+            <label>Estado del asiento:</label>
+            <select th:field="*{estado}">
+                <option th:value="true" th:selected="${estado == true}">Libre</option>
+                <option th:value="false" th:selected="${estado == false}">Ocupado</option>
+            </select>
         </div>
 
         <button type="submit"><span>Guardar</span></button>

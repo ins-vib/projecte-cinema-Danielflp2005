@@ -8,6 +8,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Seat {
@@ -16,17 +21,29 @@ public class Seat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "La fila es obligatoria")
+    @Size(min = 1, max = 5, message = "La fila debe tener entre 1 y 5 caracteres")
     @Column
     private String seatrow;
+
+    @Min(value = 1, message = "El número de asiento debe ser al menos 1")
+    @Max(value = 500, message = "El número de asiento no puede superar 500")
     @Column
     private int seatNumber;
+
+    @NotNull(message = "El tipo de asiento es obligatorio")
     @Column
     @Enumerated(EnumType.STRING)
     private SeatType type = SeatType.Standard;
+
+    @Min(value = 0, message = "La posición X no puede ser negativa")
     @Column
     private int x;
+
+    @Min(value = 0, message = "La posición Y no puede ser negativa")
     @Column
     private int y;
+
     @Column
     private boolean estado;
 

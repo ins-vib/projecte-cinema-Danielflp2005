@@ -32,6 +32,7 @@ public class SecurityConfig {
             .requestMatchers("/cookies/**").permitAll()
             .requestMatchers("/css/**", "/images/**", "/favicon.svg").permitAll()
             .requestMatchers("/").permitAll()
+            .requestMatchers("/client/billboard", "/client/movie/**").permitAll()
             .requestMatchers("/admin/**").hasRole("ADMIN")
             .requestMatchers("/client/**", "/session/**").hasAnyRole("CLIENT", "ADMIN")
         

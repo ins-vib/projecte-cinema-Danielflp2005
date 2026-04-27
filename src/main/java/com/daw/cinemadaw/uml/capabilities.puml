@@ -1,0 +1,45 @@
+@startuml UseCaseDiagram
+left to right direction
+skinparam actorStyle awesome
+
+' ---------- Actors ----------
+actor "Guest\n(Anonymous)" as Guest
+actor "Client\n(ROLE_CLIENT)"  as Client
+actor "Admin\n(ROLE_ADMIN)"    as Admin
+
+' Herencia: El Admin puede hacer todo lo que hace el Cliente
+Client <|-- Admin
+
+' ---------- Use Cases ----------
+package "Imperial Cinema System" {
+    
+    rectangle "Public Area" {
+        usecase "View Billboard" as UC_View
+        usecase "Register/Login" as UC_Auth
+    }
+
+    rectangle "Client Area" {
+        usecase "Select Seats" as UC_Seats
+        usecase "Purchase Tickets" as UC_Buy
+        usecase "View Loyalty Card" as UC_Loyalty
+    }
+
+    rectangle "Admin Area" {
+        usecase "Manage Movies" as UC_Movies
+        usecase "Manage Sessions" as UC_Sessions
+        usecase "Database Access (H2)" as UC_H2
+    }
+}
+
+' ---------- Associations ----------
+Guest --> UC_View
+Guest --> UC_Auth
+
+Client --> UC_Seats
+Client --> UC_Buy
+Client --> UC_Loyalty
+
+Admin --> UC_Movies
+Admin --> UC_Sessions
+Admin --> UC_H2
+@enduml

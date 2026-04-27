@@ -1,5 +1,7 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="es">
 
 <head>
   <meta charset="UTF-8" />
@@ -16,14 +18,17 @@
   <header>
     <h1><a th:href="@{/client}" style="text-decoration: none; color: inherit;">IMPERIAL</a></h1>
     <nav>
-      <a th:href="@{/client}">Inicio</a>
       <a th:href="@{/client/billboard}">Cartelera</a>
-      <a th:href="@{/client/my-orders}">Mis pedidos</a>
-      <a th:href="@{/client/cart}">Carrito (<span th:text="${@cartService.itemCount}">0</span>)</a>
-      <a th:href="@{/client/loyalty}">Mi Tarjeta</a>
-      <form th:action="@{/logout}" method="post" class="logout-form">
+      <a sec:authorize="isAuthenticated()" th:href="@{/client}">Inicio</a>
+      <a sec:authorize="isAuthenticated()" th:href="@{/client/my-orders}">Mis pedidos</a>
+      <a sec:authorize="isAuthenticated()" th:href="@{/client/cart}">
+        Carrito (<span th:text="${@cartService.itemCount}">0</span>)
+      </a>
+      <a sec:authorize="isAuthenticated()" th:href="@{/client/loyalty}">Mi Tarjeta</a>
+      <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post" class="logout-form">
         <button type="submit" class="logout-btn">Logout</button>
       </form>
+      <a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="logout-btn">Iniciar sesión</a>
     </nav>
   </header>
 

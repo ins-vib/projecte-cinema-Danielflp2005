@@ -1,5 +1,7 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="es">
 
 <head>
   <meta charset="UTF-8" />
@@ -122,12 +124,15 @@
     <a th:href="@{/client}" class="movie-footer__logo">IMPERIAL<span>/ CINE</span></a>
     <p class="movie-footer__copy">© DAW1 2026</p>
     <nav class="movie-footer__nav">
-      <a th:href="@{/client}">Inicio</a>
       <a th:href="@{/client/billboard}">Cartelera</a>
-      <a th:href="@{/client/cart}">Carrito (<span th:text="${@cartService.itemCount}">0</span>)</a>
-      <form th:action="@{/logout}" method="post" class="logout-form">
+      <a sec:authorize="isAuthenticated()" th:href="@{/client}">Inicio</a>
+      <a sec:authorize="isAuthenticated()" th:href="@{/client/cart}">
+        Carrito (<span th:text="${@cartService.itemCount}">0</span>)
+      </a>
+      <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post" class="logout-form">
         <button type="submit" class="logout-btn">Salir</button>
       </form>
+      <a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="logout-btn">Iniciar sesión</a>
     </nav>
   </footer>
 

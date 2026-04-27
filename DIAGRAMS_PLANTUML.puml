@@ -1,0 +1,246 @@
+' ============================================================
+'  CinemaDaw — PlantUML Diagrams
+' ============================================================
+
+
+' ============================================================
+'  1. CLASS DIAGRAM
+' ============================================================
+
+@startuml ClassDiagram
+skinparam classAttributeIconSize 0
+skinparam classFontStyle bold
+skinparam linetype ortho
+hide empty methods
+
+' ---------- Enumerations ----------
+
+enum SeatType {
+    Standard
+    Premium
+    Adapted
+}
+
+enum OrderStatus {
+    PENDING
+    CONFIRMED
+    CANCELLED
+}
+
+enum Role {
+    ADMIN
+    CLIENT
+}
+
+' ---------- Entities ----------
+
+class Cinema {
+    - Long id
+    - String cinemaName
+    - String address
+    - String city
+    - String postalCode
+    - String imageUrl
+}
+
+class Room {
+    - Long id
+    - String name
+    - int capacity
+}
+
+class Seat {
+    - Long id
+    - String seatrow
+    - int seatNumber
+    - SeatType type
+    - int x
+    - int y
+    - boolean estado
+}
+
+class Movie {
+    - Long id
+    - String title
+    - int min
+    - String gener
+    - String descripcion
+    - LocalDate date
+    - String posterUrl
+}
+
+class Screening {
+    - Long id
+    - LocalDateTime screeningDateTime
+    - Double precio
+}
+
+class SeatBooking {
+    - Long id
+}
+
+class Order {
+    - Long id
+    - LocalDateTime orderDateTime
+    - double totalAmount
+    - String clientName
+    - String clientEmail
+    - OrderStatus status
+}
+
+class Ticket {
+    - Long id
+    - double price
+}
+
+class User {
+    - Long id
+    - String username
+    - String password
+    - Role role
+}
+
+class LoyaltyCard {
+    - Long id
+    - String cardNumber
+    - int points
+    - LocalDate memberSince
+    + double getDiscountValue()
+}
+
+class News {
+    - String headline
+    - String body
+}
+
+' ---------- Relationships ----------
+
+' Cinema <-> Room  (bidirectional OneToMany / ManyToOne)
+Cinema "1" *-- "0..*" Room : has >
+
+' Room <-> Seat  (bidirectional OneToMany / ManyToOne)
+Room "1" *-- "0..*" Seat : contains >
+
+' Seat type
+Seat --> SeatType : typed as >
+
+' Screening -> Movie, Room
+Screening "0..*" --> "1" Movie  : screens >
+Screening "0..*" --> "1" Room   : held in >
+
+' Screening -> SeatBooking  (OneToMany)
+Screening "1" *-- "0..*" SeatBooking : tracks >
+
+' Screening -> Ticket  (OneToMany)
+Screening "1" *-- "0..*" Ticket : issues >
+
+' SeatBooking -> Seat, Screening  (ManyToOne each)
+SeatBooking "0..*" --> "1" Seat      : reserves >
+SeatBooking "0..*" --> "1" Screening : for >
+
+' Order -> Ticket  (OneToMany)
+Order "1" *-- "0..*" Ticket : contains >
+
+' Order status
+Order --> OrderStatus : has status >
+
+' Ticket -> Order, Screening, Seat  (ManyToOne each)
+Ticket "0..*" --> "1" Order     : part of >
+Ticket "0..*" --> "1" Screening : for >
+Ticket "0..*" --> "1" Seat      : occupies >
+
+' LoyaltyCard -> User  (OneToOne)
+LoyaltyCard "1" --> "1" User : belongs to >
+
+' User -> Role
+User --> Role : has role >
+
+@enduml
+
+
+' ============================================================
+'  2. USE CASE DIAGRAM
+'     Actors and permissions from SecurityConfig.java
+'     Use cases inferred from domain entities & URL routes
+' ============================================================
+
+@startuml UseCaseDiagram
+left to right direction
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+
+' ---------- Actors ----------
+
+actor "Guest\n(Anonymous)" as Guest
+actor "Client\n(ROLE_CLIENT)"  as Client
+actor "Admin\n(ROLE_ADMIN)"    as Admin
+
+' Admin extends Client (inherits all client permissions)
+Client <|-- Admin : extends
+
+' ---------- Public use cases (permitAll) ----------
+
+rectangle "Public Area\n(accessible by everyone)" {
+    usecase "View Home Page"       as UC_Home
+    usecase "Log In"               as UC_Login
+    usecase "Register"             as UC_Register
+    usecase "Log Out"              as UC_Logout
+    usecase "View Cookie Policy"   as UC_Cookies
+}
+
+' ---------- Client area (/client/**, /session/**) ----------
+
+rectangle "Client Area\n(ROLE_CLIENT or ROLE_ADMIN)" {
+    usecase "Browse Movies"        as UC_Movies
+    usecase "View Screenings"      as UC_Screenings
+    usecase "Select Seats"         as UC_Seats
+    usecase "Manage Cart"          as UC_Cart
+    usecase "Place Order"          as UC_Order
+    usecase "View Loyalty Card"    as UC_Loyalty
+    usecase "Manage Session"       as UC_Session
+}
+
+' ---------- Admin area (/admin/**, /h2-console/**) ----------
+
+rectangle "Admin Area\n(ROLE_ADMIN only)" {
+    usecase "Manage Cinemas"       as UC_Cinemas
+    usecase "Manage Rooms"         as UC_Rooms
+    usecase "Manage Seats"         as UC_MSeats
+    usecase "Manage Movies"        as UC_MMovies
+    usecase "Manage Screenings"    as UC_MScreenings
+    usecase "Manage Orders"        as UC_MOrders
+    usecase "Access H2 Console"    as UC_H2
+}
+
+' ---------- Guest associations ----------
+
+Guest --> UC_Home
+Guest --> UC_Login
+Guest --> UC_Register
+Guest --> UC_Logout
+Guest --> UC_Cookies
+
+' ---------- Client associations ----------
+
+Client --> UC_Home
+Client --> UC_Login
+Client --> UC_Logout
+Client --> UC_Movies
+Client --> UC_Screenings
+Client --> UC_Seats
+Client --> UC_Cart
+Client --> UC_Order
+Client --> UC_Loyalty
+Client --> UC_Session
+
+' ---------- Admin associations ----------
+
+Admin --> UC_Cinemas
+Admin --> UC_Rooms
+Admin --> UC_MSeats
+Admin --> UC_MMovies
+Admin --> UC_MScreenings
+Admin --> UC_MOrders
+Admin --> UC_H2
+
+@enduml

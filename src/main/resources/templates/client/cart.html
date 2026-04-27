@@ -116,7 +116,9 @@
       </div>
 
       <!-- Confirmar compra -->
-      <form th:action="@{/client/cart/checkout}" method="post" class="checkout-form">
+      <form th:action="@{/client/cart/checkout}" method="post" class="checkout-form"
+            th:data-total="${cartTotal}"
+            th:data-discount="${loyaltyDiscount != null ? loyaltyDiscount : 0}">
         <!-- Loyalty checkbox -->
         <div class="loyalty-checkbox-row"
           th:if="${loyaltyCard != null and loyaltyDiscount != null and loyaltyDiscount > 0}">
@@ -129,8 +131,32 @@
             </strong>
           </label>
         </div>
+
+        <!-- Total final a pagar -->
+        <div class="cart-final-row">
+          <span class="cart-final-label">Total a pagar</span>
+          <span class="cart-final-price" id="finalPrice"
+            th:text="${#numbers.formatDecimal(cartTotal, 1, 'POINT', 2, 'COMMA') + ' €'}">
+          </span>
+        </div>
+
         <button type="submit" class="btn-checkout">Confirmar compra</button>
       </form>
+
+      <script>
+        function updateTotal(checkbox) {
+          var form = checkbox.closest('form');
+          var total = parseFloat(form.dataset.total);
+          var discount = parseFloat(form.dataset.discount);
+          var finalPrice = document.getElementById('finalPrice');
+          var amount = checkbox.checked ? Math.max(0, total - discount) : total;
+          finalPrice.textContent = amount.toLocaleString('es-ES', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+          }) + ' €';
+          finalPrice.classList.toggle('cart-final-price--discounted', checkbox.checked);
+        }
+      </script>
 
     </div>
 

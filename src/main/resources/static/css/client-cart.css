@@ -216,6 +216,36 @@
   color: var(--gold);
 }
 
+/* ── Total final a pagar ────────────────────────────────────── */
+.cart-final-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 1rem 0 0.4rem;
+  border-top: 1px solid var(--border);
+  margin-top: 0.8rem;
+}
+
+.cart-final-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.cart-final-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--gold);
+  transition: color 0.25s;
+}
+
+.cart-final-price--discounted {
+  color: #4caf7d;
+}
+
 /* ── Acciones ───────────────────────────────────────────────── */
 .cart-actions {
   display: flex;

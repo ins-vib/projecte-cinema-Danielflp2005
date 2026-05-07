@@ -34,9 +34,15 @@
         </div>
 
         <div class="field-group">
-          <label>Género:</label>
-          <input type="text" th:field="*{gener}" />
-          <div class="field-error" th:if="${#fields.hasErrors('gener')}" th:errors="*{gener}"></div>
+          <label>Géneros:</label>
+          <div class="genre-picker">
+            <label class="genre-pill" th:each="genre : ${allGenres}">
+              <input type="checkbox" name="genres" th:value="${genre.id}"
+                     th:checked="${movie.genres != null and #lists.contains(movie.genres, genre)}" />
+              <span th:text="${genre.name}">Genre</span>
+            </label>
+          </div>
+          <div class="field-error" th:if="${#fields.hasErrors('genres')}" th:errors="*{genres}"></div>
         </div>
 
         <div class="field-group">

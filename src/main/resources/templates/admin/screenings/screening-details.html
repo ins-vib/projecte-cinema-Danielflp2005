@@ -59,7 +59,7 @@
               </div>
               <div class="sd-item">
                 <span class="sd-item__label">Género</span>
-                <span class="sd-item__value" th:text="${screening.movie.gener}">—</span>
+                <span class="sd-item__value" th:text="${#strings.listJoin(screening.movie.genres, ', ')}">—</span>
               </div>
             </div>
 

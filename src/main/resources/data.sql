@@ -45,10 +45,19 @@ INSERT INTO CINEMA (ADDRESS, CITY, CINEMA_NAME, POSTAL_CODE)
 VALUES ('C.C. Los Arcos, Avenida de Andalucía', 'SEVILLA', 'IMPERIAL LOS ARCOS', '41007');
 
 
+-- ═══ GENRES ═══
+INSERT INTO GENRE (NAME) VALUES ('Action');
+INSERT INTO GENRE (NAME) VALUES ('Adventure');
+INSERT INTO GENRE (NAME) VALUES ('Comedy');
+INSERT INTO GENRE (NAME) VALUES ('Drama');
+INSERT INTO GENRE (NAME) VALUES ('Sci-Fi');
+INSERT INTO GENRE (NAME) VALUES ('Thriller');
+INSERT INTO GENRE (NAME) VALUES ('Horror');
+INSERT INTO GENRE (NAME) VALUES ('Romance');
+
 INSERT INTO MOVIE (
         TITLE,
         duration_minutes,
-        GENER,
         DESCRIPCION,
         release_date,
         POSTER_URL
@@ -56,7 +65,6 @@ INSERT INTO MOVIE (
 VALUES (
         'Dune: Part Two',
         166,
-        'Sci-Fi',
         'Paul Atreides une fuerzas con los Fremen para vengar la destrucción de su familia.',
         '2024-03-01',
         'dune.webp'
@@ -64,7 +72,6 @@ VALUES (
 INSERT INTO MOVIE (
         TITLE,
         duration_minutes,
-        GENER,
         DESCRIPCION,
         release_date,
         POSTER_URL
@@ -72,7 +79,6 @@ INSERT INTO MOVIE (
 VALUES (
         'Blade Runner',
         117,
-        'Sci-Fi',
         'Un blade runner debe retirar replicantes ilegales que regresan a la Tierra.',
         '1982-06-25',
         'blade.webp'
@@ -80,7 +86,6 @@ VALUES (
 INSERT INTO MOVIE (
         TITLE,
         duration_minutes,
-        GENER,
         DESCRIPCION,
         release_date,
         POSTER_URL
@@ -88,7 +93,6 @@ INSERT INTO MOVIE (
 VALUES (
         'Interstellar',
         169,
-        'Sci-Fi',
         'Un grupo de astronautas viaja a través de un agujero de gusano para salvar a la humanidad.',
         '2014-11-07',
         'interestellar.webp'
@@ -96,7 +100,6 @@ VALUES (
 INSERT INTO MOVIE (
         TITLE,
         duration_minutes,
-        GENER,
         DESCRIPCION,
         release_date,
         POSTER_URL
@@ -104,7 +107,6 @@ INSERT INTO MOVIE (
 VALUES (
         'Inception',
         148,
-        'Sci-Fi',
         'Un ladrón roba secretos infiltrándose en los sueños de las personas.',
         '2010-07-16',
         'inception.webp'
@@ -112,7 +114,6 @@ VALUES (
 INSERT INTO MOVIE (
         TITLE,
         duration_minutes,
-        GENER,
         DESCRIPCION,
         release_date,
         POSTER_URL
@@ -120,7 +121,6 @@ INSERT INTO MOVIE (
 VALUES (
         'The Dark Knight',
         152,
-        'Action',
         'Batman se enfrenta al Joker, un criminal que busca sembrar el caos en Gotham.',
         '2008-07-18',
         'batman.webp'
@@ -128,7 +128,6 @@ VALUES (
 INSERT INTO MOVIE (
         TITLE,
         duration_minutes,
-        GENER,
         DESCRIPCION,
         release_date,
         POSTER_URL
@@ -136,7 +135,6 @@ INSERT INTO MOVIE (
 VALUES (
         'The Matrix',
         136,
-        'Sci-Fi',
         'Un hacker descubre que la realidad es una simulación creada por máquinas.',
         '1999-03-31',
         'matrix.webp'
@@ -145,7 +143,6 @@ VALUES (
     INSERT INTO MOVIE (
         TITLE,
         duration_minutes,
-        GENER,
         DESCRIPCION,
         release_date,
         POSTER_URL
@@ -153,21 +150,40 @@ VALUES (
 VALUES (
         'Dune: Part Three',
         170,
-        'Sci-Fi',
         'Doce años después de su victoria, Paul se enfrenta a una conspiración que pretende derrocarlo y acabar con su dinastía, con un atentado con una bomba atómica, que lo deja gravemente herido. ',
         '2026-12-18',
         'dune3.webp'
     );
 
-INSERT INTO MOVIE (TITLE, duration_minutes, GENER, DESCRIPCION, release_date, POSTER_URL)
-VALUES 
-('The Avengers', 143, 'Action', 'Earth mightiest heroes must come together to fight a threat that no single hero could withstand.', '2012-05-04', 'vengadores.webp'),
-('Spider-Man', 121, 'Action', 'After being bitten by a genetically modified spider, Peter Parker uses his new powers to fight crime.', '2002-05-03', 'spider-man.webp'),
-('Spider-Man 2', 127, 'Action', 'Peter Parker struggles to balance his life as a hero with his personal life while facing Doctor Octopus.', '2004-06-30', 'spider-man2.webp'),
-('Project Hail Mary', 135, 'Sci-Fi', 'A lone astronaut must save the Earth from an extinction-level event with the help of an unexpected ally.', '2026-03-20', 'obradearte.webp'),
-('Deadpool & Wolverine', 127, 'Action', 'The merc with a mouth and the mutant with claws team up in a multiversal mission.', '2024-07-26', 'deadpool.webp'),
-('Avengers: Endgame', 181, 'Action', 'The remaining Avengers must gather their allies and travel through time to undo Thanos actions.', '2019-04-26', 'endgame.webp');
-    
+INSERT INTO MOVIE (TITLE, duration_minutes, DESCRIPCION, release_date, POSTER_URL)
+VALUES
+('The Avengers', 143, 'Earth mightiest heroes must come together to fight a threat that no single hero could withstand.', '2012-05-04', 'vengadores.webp'),
+('Spider-Man', 121, 'After being bitten by a genetically modified spider, Peter Parker uses his new powers to fight crime.', '2002-05-03', 'spider-man.webp'),
+('Spider-Man 2', 127, 'Peter Parker struggles to balance his life as a hero with his personal life while facing Doctor Octopus.', '2004-06-30', 'spider-man2.webp'),
+('Project Hail Mary', 135, 'A lone astronaut must save the Earth from an extinction-level event with the help of an unexpected ally.', '2026-03-20', 'obradearte.webp'),
+('Deadpool & Wolverine', 127, 'The merc with a mouth and the mutant with claws team up in a multiversal mission.', '2024-07-26', 'deadpool.webp'),
+('Avengers: Endgame', 181, 'The remaining Avengers must gather their allies and travel through time to undo Thanos actions.', '2019-04-26', 'endgame.webp');
+
+-- ═══ MOVIE_GENRE (movie ↔ genre links) ═══
+INSERT INTO MOVIE_GENRE (movie_id, genre_id) VALUES ((SELECT ID FROM MOVIE WHERE TITLE = 'Dune: Part Two'), (SELECT ID FROM GENRE WHERE NAME = 'Sci-Fi'));
+INSERT INTO MOVIE_GENRE (movie_id, genre_id) VALUES ((SELECT ID FROM MOVIE WHERE TITLE = 'Blade Runner'), (SELECT ID FROM GENRE WHERE NAME = 'Sci-Fi'));
+INSERT INTO MOVIE_GENRE (movie_id, genre_id) VALUES ((SELECT ID FROM MOVIE WHERE TITLE = 'Interstellar'), (SELECT ID FROM GENRE WHERE NAME = 'Sci-Fi'));
+INSERT INTO MOVIE_GENRE (movie_id, genre_id) VALUES ((SELECT ID FROM MOVIE WHERE TITLE = 'Interstellar'), (SELECT ID FROM GENRE WHERE NAME = 'Drama'));
+INSERT INTO MOVIE_GENRE (movie_id, genre_id) VALUES ((SELECT ID FROM MOVIE WHERE TITLE = 'Inception'), (SELECT ID FROM GENRE WHERE NAME = 'Sci-Fi'));
+INSERT INTO MOVIE_GENRE (movie_id, genre_id) VALUES ((SELECT ID FROM MOVIE WHERE TITLE = 'Inception'), (SELECT ID FROM GENRE WHERE NAME = 'Thriller'));
+INSERT INTO MOVIE_GENRE (movie_id, genre_id) VALUES ((SELECT ID FROM MOVIE WHERE TITLE = 'The Dark Knight'), (SELECT ID FROM GENRE WHERE NAME = 'Action'));
+INSERT INTO MOVIE_GENRE (movie_id, genre_id) VALUES ((SELECT ID FROM MOVIE WHERE TITLE = 'The Dark Knight'), (SELECT ID FROM GENRE WHERE NAME = 'Thriller'));
+INSERT INTO MOVIE_GENRE (movie_id, genre_id) VALUES ((SELECT ID FROM MOVIE WHERE TITLE = 'The Matrix'), (SELECT ID FROM GENRE WHERE NAME = 'Sci-Fi'));
+INSERT INTO MOVIE_GENRE (movie_id, genre_id) VALUES ((SELECT ID FROM MOVIE WHERE TITLE = 'The Matrix'), (SELECT ID FROM GENRE WHERE NAME = 'Action'));
+INSERT INTO MOVIE_GENRE (movie_id, genre_id) VALUES ((SELECT ID FROM MOVIE WHERE TITLE = 'Dune: Part Three'), (SELECT ID FROM GENRE WHERE NAME = 'Sci-Fi'));
+INSERT INTO MOVIE_GENRE (movie_id, genre_id) VALUES ((SELECT ID FROM MOVIE WHERE TITLE = 'The Avengers'), (SELECT ID FROM GENRE WHERE NAME = 'Action'));
+INSERT INTO MOVIE_GENRE (movie_id, genre_id) VALUES ((SELECT ID FROM MOVIE WHERE TITLE = 'Spider-Man'), (SELECT ID FROM GENRE WHERE NAME = 'Action'));
+INSERT INTO MOVIE_GENRE (movie_id, genre_id) VALUES ((SELECT ID FROM MOVIE WHERE TITLE = 'Spider-Man 2'), (SELECT ID FROM GENRE WHERE NAME = 'Action'));
+INSERT INTO MOVIE_GENRE (movie_id, genre_id) VALUES ((SELECT ID FROM MOVIE WHERE TITLE = 'Project Hail Mary'), (SELECT ID FROM GENRE WHERE NAME = 'Sci-Fi'));
+INSERT INTO MOVIE_GENRE (movie_id, genre_id) VALUES ((SELECT ID FROM MOVIE WHERE TITLE = 'Deadpool & Wolverine'), (SELECT ID FROM GENRE WHERE NAME = 'Action'));
+INSERT INTO MOVIE_GENRE (movie_id, genre_id) VALUES ((SELECT ID FROM MOVIE WHERE TITLE = 'Deadpool & Wolverine'), (SELECT ID FROM GENRE WHERE NAME = 'Comedy'));
+INSERT INTO MOVIE_GENRE (movie_id, genre_id) VALUES ((SELECT ID FROM MOVIE WHERE TITLE = 'Avengers: Endgame'), (SELECT ID FROM GENRE WHERE NAME = 'Action'));
+
 -- ═══ ROOMS (All cinemas) ═══
 INSERT INTO ROOM (NAME, CAPACITY, CINEMA_ID) VALUES ('Sala 1', 80, (SELECT ID FROM CINEMA WHERE CINEMA_NAME = 'IMPERIAL TARRAGONA'));
 INSERT INTO ROOM (NAME, CAPACITY, CINEMA_ID) VALUES ('Sala 2', 80, (SELECT ID FROM CINEMA WHERE CINEMA_NAME = 'IMPERIAL TARRAGONA'));

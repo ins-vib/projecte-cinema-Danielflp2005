@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.daw.cinemadaw.domain.cinema.Movie;
+import com.daw.cinemadaw.repository.GenreRepository;
 import com.daw.cinemadaw.repository.MovieRepository;
 import com.daw.cinemadaw.repository.ScreeningRepository;
 
@@ -20,12 +21,14 @@ import jakarta.validation.Valid;
 @Controller
 public class MovieController {
 
-    private MovieRepository movieRepository;
-    private ScreeningRepository screeningRepository;
+    private final MovieRepository movieRepository;
+    private final ScreeningRepository screeningRepository;
+    private final GenreRepository genreRepository;
 
-    public MovieController(MovieRepository movieRepository, ScreeningRepository screeningRepository) {
+    public MovieController(MovieRepository movieRepository, ScreeningRepository screeningRepository, GenreRepository genreRepository) {
         this.movieRepository = movieRepository;
         this.screeningRepository = screeningRepository;
+        this.genreRepository = genreRepository;
     }
 
     @GetMapping("/admin/movies/billboard")
@@ -57,12 +60,14 @@ public class MovieController {
     @GetMapping("/admin/movie/create")
     public String newMovie(Model model) {
         model.addAttribute("movie", new Movie());
+        model.addAttribute("allGenres", genreRepository.findAll());
         return "admin/movies/movie-create";
     }
 
     @PostMapping("/admin/movie/new")
-    public String altaPelicula(@Valid @ModelAttribute Movie movie, BindingResult result) {
+    public String altaPelicula(@Valid @ModelAttribute Movie movie, BindingResult result, Model model) {
         if (result.hasErrors()) {
+            model.addAttribute("allGenres", genreRepository.findAll());
             return "admin/movies/movie-create";
         }
         movieRepository.save(movie);
@@ -74,19 +79,19 @@ public class MovieController {
         Optional<Movie> optional = movieRepository.findById(id);
         if (optional.isPresent()) {
             model.addAttribute("movie", optional.get());
+            model.addAttribute("allGenres", genreRepository.findAll());
             return "admin/movies/movie-update";
         }
         return "redirect:/admin/movies/billboard";
     }
 
     @PostMapping("/admin/movie/editar")
-    public String editPelicula(@Valid @ModelAttribute Movie movie, BindingResult result) {
+    public String editPelicula(@Valid @ModelAttribute Movie movie, BindingResult result, Model model) {
         if (result.hasErrors()) {
+            model.addAttribute("allGenres", genreRepository.findAll());
             return "admin/movies/movie-update";
         }
         movieRepository.save(movie);
         return "redirect:/admin/movies/billboard";
     }
-
-  
 }

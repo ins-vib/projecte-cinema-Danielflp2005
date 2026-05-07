@@ -38,6 +38,18 @@ public class Pruebas implements CommandLineRunner {
         client.setRole(Role.CLIENT);
         userRepository.save(client);
 
+        User admin2 = new User();
+        admin2.setUsername("adminexam");
+        admin2.setPassword(encoder.encode("exam"));
+        admin2.setRole(Role.ADMIN);
+        userRepository.save(admin2);
+
+        User client2 = new User();
+        client2.setUsername("clientexam");
+        client2.setPassword(encoder.encode("exam"));
+        client2.setRole(Role.CLIENT);
+        userRepository.save(client2);
+
     }
 
 }

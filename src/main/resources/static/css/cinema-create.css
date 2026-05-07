@@ -427,7 +427,7 @@ select option {
   color: var(--text);
 }
 
-/* Checkbox */
+/* Checkbox (generic) */
 .field-group--checkbox {
   flex-direction: row;
   align-items: center;
@@ -443,6 +443,57 @@ input[type="checkbox"] {
   height: 1.1rem;
   accent-color: var(--gold);
   cursor: pointer;
+}
+
+/* ── Genre pill picker ───────────────────────────────────────── */
+.genre-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.genre-pill {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 0.38rem 0.9rem;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: border-color var(--transition), color var(--transition),
+              background var(--transition), box-shadow var(--transition);
+  user-select: none;
+  /* override the flex-direction:column from .field-group label */
+  flex-direction: row;
+  gap: 0;
+  margin-bottom: 0;
+}
+
+.genre-pill input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.genre-pill:hover {
+  border-color: rgba(201, 168, 76, 0.35);
+  color: var(--text);
+  background: var(--bg4);
+}
+
+.genre-pill:has(input:checked) {
+  background: rgba(201, 168, 76, 0.1);
+  border-color: var(--gold);
+  color: var(--gold);
+  box-shadow: 0 0 10px rgba(201, 168, 76, 0.18);
 }
 
 button[type="submit"] span {

@@ -30,7 +30,7 @@
       <div class="movie-strip" th:style="'background-image: url(/images/' + ${movie.posterUrl} + ')'">
         <div class="movie-strip__overlay"></div>
         <div class="movie-strip__meta">
-          <span th:text="${movie.gener}">Género</span>
+          <span th:each="genre : ${movie.genres}" th:text="${genre.name}" class="me-1">Género</span>
           <span>·</span>
           <span th:text="${movie.min} + ' min'">— min</span>
         </div>

@@ -85,7 +85,7 @@
       </div>
 
       <div class="movie-card__info">
-        <span class="movie-card__genre" th:text="${movie.gener}">Género</span>
+        <span th:each="genre : ${movie.genres}" class="movie-card__genre me-1" th:text="${genre.name}">Género</span>
         <h3 class="movie-card__title" th:text="${movie.title}">Título</h3>
         <div class="movie-card__meta">
           <span th:text="${movie.min} + ' min'">— min</span>

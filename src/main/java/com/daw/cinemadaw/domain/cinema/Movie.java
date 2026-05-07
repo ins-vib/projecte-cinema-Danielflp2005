@@ -1,17 +1,24 @@
 package com.daw.cinemadaw.domain.cinema;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -32,10 +39,14 @@ public class Movie {
     @Column(name = "duration_minutes", nullable = false)
     private int min;
 
-    @NotBlank(message = "El género es obligatorio")
-    @Size(min = 2, max = 50, message = "El género ha de tener entre 2 y 50 caracteres")
-    @Column(length = 50)
-    private String gener;
+    @NotEmpty(message = "Selecciona al menos un género")
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "movie_genre",
+        joinColumns = @JoinColumn(name = "movie_id"),
+        inverseJoinColumns = @JoinColumn(name = "genre_id")
+    )
+    private List<Genre> genres = new ArrayList<>();
 
     @NotBlank(message = "La descripción es obligatoria")
     @Size(min = 2, max = 1000, message = "La descripción ha de tener entre 2 y 1000 caracteres")
@@ -53,9 +64,9 @@ public class Movie {
     public Movie() {
     }
 
-    public Movie(String descripcion, String gener, int min, String title) {
+    public Movie(String descripcion, List<Genre> genres, int min, String title) {
         this.descripcion = descripcion;
-        this.gener = gener;
+        this.genres = genres;
         this.min = min;
         this.title = title;
     }
@@ -84,12 +95,12 @@ public class Movie {
         this.min = min;
     }
 
-    public String getGener() {
-        return gener;
+    public List<Genre> getGenres() {
+        return genres;
     }
 
-    public void setGener(String gener) {
-        this.gener = gener;
+    public void setGenres(List<Genre> genres) {
+        this.genres = genres;
     }
 
     public String getDescripcion() {
@@ -108,20 +119,6 @@ public class Movie {
         this.date = date;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Movie{");
-        sb.append("id=").append(id);
-        sb.append(", title=").append(title);
-        sb.append(", min=").append(min);
-        sb.append(", gener=").append(gener);
-        sb.append(", descripcion=").append(descripcion);
-        sb.append(", date=").append(date);
-        sb.append('}');
-        return sb.toString();
-    }
-
     public String getPosterUrl() {
         return posterUrl;
     }
@@ -130,4 +127,8 @@ public class Movie {
         this.posterUrl = posterUrl;
     }
 
+    @Override
+    public String toString() {
+        return "Movie{id=" + id + ", title=" + title + ", min=" + min + ", genres=" + genres + ", descripcion=" + descripcion + ", date=" + date + '}';
+    }
 }

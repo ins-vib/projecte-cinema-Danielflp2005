@@ -27,7 +27,7 @@
     <!-- Main content left -->
     <div class="hero-content">
       <div class="movie-genre-tags">
-        <span class="genre-tag" th:text="${movie.gener}">Género</span>
+        <span class="genre-tag" th:each="genre : ${movie.genres}" th:text="${genre.name}">Género</span>
       </div>
       <h1 class="movie-title" th:text="${movie.title}">Título</h1>
       <p class="movie-desc" th:text="${movie.descripcion}">Descripción.</p>
@@ -42,7 +42,7 @@
     <div class="hero-meta">
       <div class="meta-row">
         <span class="meta-key">Género</span>
-        <span class="meta-pill" th:text="${movie.gener}">—</span>
+        <span th:each="genre : ${movie.genres}" class="meta-pill me-1" th:text="${genre.name}">—</span>
       </div>
       <div class="meta-row">
         <span class="meta-key">Duración</span>
@@ -73,7 +73,7 @@
         </div>
         <div class="sidebar-item">
           <span class="sidebar-key">Género</span>
-          <span class="sidebar-val" th:text="${movie.gener}">—</span>
+          <span class="sidebar-val" th:text="${#strings.listJoin(movie.genres, ', ')}">—</span>
         </div>
         <div class="sidebar-item">
           <span class="sidebar-key">Duración</span>
